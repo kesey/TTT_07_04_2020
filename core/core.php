@@ -9,7 +9,7 @@
 
 session_start();
 try{
-    $db = new PDO("mysql:host=mysql.1;port=3306;dbname=thirdtypetapes_c", "thirdtypetapes_c", "7qq3jL*5", array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION));
+    $db = new PDO("mysql:host=localhost;port=3306;dbname=thirdtypetapes_c", "root", "", array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION));
     $db->exec('SET sql_mode=""');
 }
 catch(Exception $e){
