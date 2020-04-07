@@ -1,6 +1,6 @@
 <?php
 
-/* 
+/*
  * AUTEUR: Fabien Meunier
  * PROJECT: Third_Type_Tapes
  * PATH: Third_Type_Tapes/model/
@@ -10,14 +10,17 @@
 class Artiste extends Model{
     public $id;
     var $table = "artiste";
-    
+
     //utile pour ne pas prendre en compte les lignes archivées
     var $notArchive = "suppr != 1";
-    
+
+    //utile pour ne pas prendre en compte les releases depubliées
+    var $publish = "publier = 1";
+
    /**
     *  récupération infos cassette(s) et artiste(s)
     *  @param array $data contient les conditions, le group by, l'ordre et la limitation
-    **/  
+    **/
     public function getAllInfos($data = array()) {
         global $db;
         $conditions = "1 = 1";
@@ -42,7 +45,7 @@ class Artiste extends Model{
             $limit = $this->securite_bdd($data['limit']);
             $limit = " LIMIT ".$limit;
         }
-        $sql = "SELECT * FROM ".$this->table." INNER JOIN produire ON ".$this->table.".id_".$this->table." = produire.id_".$this->table." INNER JOIN cassette ON produire.id_cassette = cassette.id_cassette WHERE ".$this->table.".".$this->notArchive." AND cassette.".$this->notArchive." AND ".$conditions.$group.$order.$limit;
+        $sql = "SELECT * FROM ".$this->table." INNER JOIN produire ON ".$this->table.".id_".$this->table." = produire.id_".$this->table." INNER JOIN cassette ON produire.id_cassette = cassette.id_cassette WHERE ".$this->table.".".$this->notArchive." AND cassette.".$this->notArchive." AND cassette.".$this->publish." AND ".$conditions.$group.$order.$limit;
         $pdoObj = $db->prepare($sql);
         if(isset($id)){
             $pdoObj->bindParam(':id', $id, PDO::PARAM_INT);
@@ -53,13 +56,13 @@ class Artiste extends Model{
             while ($infos = $pdoObj->fetch()){
                 $tabFind[] = $infos;
             }
-            $pdoObj->closeCursor();           
+            $pdoObj->closeCursor();
             return $this->securiteHtml($tabFind);
         } else {
             return FALSE;
         }
     }
-    
+
     /**
     *  vérifie la/les donnée(s) passée(s) en argument
     *  @param array $data donnée(s) à vérifier
@@ -76,7 +79,7 @@ class Artiste extends Model{
                 $isOk = FALSE;
             }
         }
-        if(empty($data["lien_artiste"])){            
+        if(empty($data["lien_artiste"])){
             $_SESSION["info"] = "Veuillez renseigner un lien";
             $isOk = FALSE;
         } else if(!$this->isValidUrl($data["lien_artiste"])){
@@ -91,15 +94,15 @@ class Artiste extends Model{
             $_SESSION["info"] = "Veuillez selectionner une image";
             $isOk = FALSE;
         }
-        return $isOk;    
+        return $isOk;
     }
-    
+
     /**
     *  vérifie le fichier passé en argument
     *  @param array $fichier fichier à vérifier
     **/
     public function verifFile($fichier) {
-        $isOk = TRUE;        
+        $isOk = TRUE;
         if(empty($fichier["name"])){
             $isOk = FALSE;
         } else {
@@ -114,13 +117,12 @@ class Artiste extends Model{
                 $isOk = FALSE;
             } else if(!$this->extImgOk($fichier["name"])){
                 $_SESSION["info"] = "les extensions valides pour l'image sont jpg, jpeg, png";
-                $isOk = FALSE;           
+                $isOk = FALSE;
             } else if(!$this->isImage($fichier['tmp_name'])){
                 $_SESSION["info"] = "le fichier n'est pas une image";
                 $isOk = FALSE;
-            }            
+            }
         }
-        return $isOk;    
+        return $isOk;
     }
 }
-

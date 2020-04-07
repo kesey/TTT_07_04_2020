@@ -1,6 +1,6 @@
  <?php
 
-/* 
+/*
  * AUTEUR: Fabien Meunier
  * PROJECT: Third_Type_Tapes
  * PATH: Third_Type_Tapes/controller/
@@ -8,9 +8,9 @@
  */
 
 class Exemplaires extends Controller{
-    
+
     var $models = array('exemplaire', 'admin', 'cassette', 'etat_exemplaire', 'client');
-    
+
     // effectue une recherche dans un champ
     public function search(){
         $modelCass = $this->models[2];
@@ -27,10 +27,10 @@ class Exemplaires extends Controller{
                     $d['searchResults'][$key]['date_sortie'] = $this->$modelCass->dateFr($value['date_sortie']);
                 }
             }
-            $this->set($d);           
+            $this->set($d);
         }
     }
-    
+
     // reorganise l'ordre d'affichage des infos
     public function order(){
         $acceptOrd = array('ASC', 'DESC');
@@ -38,7 +38,7 @@ class Exemplaires extends Controller{
         if(in_array($this->data['order'], $acceptOrd) && in_array($this->data['field'], $acceptFld)){
             $ordre = $this->data['field'].' '.$this->data['order'];
             $this->details($ordre);
-        }        
+        }
     }
 
     private function getAdmins(){
@@ -63,14 +63,14 @@ class Exemplaires extends Controller{
 
         /*$d['compta'][$who]['doit'] = $this->$model->findAll(array("fields" => "SUM(prix_vente_euros) AS somme",
                                                               "conditions" => "id_vendeur = ".$id." AND vente_remboursee = 0 AND (montant_frais_de_port = 0 OR montant_frais_de_port IS NULL) AND id_cassette = ".$this->data['id_cassette']));*/
-                                                              
+
         $d['compta'][$who]['doit'] = $this->$model->findAll(array("fields" => "SUM(3) AS somme",
                                                               "conditions" => "id_vendeur = ".$id." AND vente_remboursee = 0 AND (montant_frais_de_port = 0 OR montant_frais_de_port IS NULL) AND id_cassette = ".$this->data['id_cassette']));
 
         $d['compta'][$who]['doit'] = $d['compta'][$who]['doit'][0];
         return $d['compta'][$who];
     }
-    
+
     // récupère les infos d'un élément
     public function details($ord = "numero_exemplaire ASC"){
         $model = $this->models[0];
@@ -79,6 +79,9 @@ class Exemplaires extends Controller{
         $modelClient = $this->models[4];
         if($this->$model->exist('id_'.$modelCass,$this->data['id_cassette'])){
             $admins = $this->getAdmins();
+            $d['infosCassette'] = $this->$modelCass->findAll(array("fields" => "id_cassette, titre, code, nombre_de_download, nombre_exemplaire",
+                                                               "conditions" => "id_cassette = ".$this->data['id_cassette']));
+            $d['infosCassette'] = $d['infosCassette'][0];
             foreach ($admins as $key => $value){
                 $d['ventes'][$value['nom']] = [];
                 $d['compta'][$value['nom']] = [];
@@ -100,16 +103,18 @@ class Exemplaires extends Controller{
             $d['noStock'] = $this->$model->findAll(array("fields" => "COUNT(id_etat) AS horsStock",
                                                  "conditions" => "id_etat = 3 AND id_cassette = ".$this->data['id_cassette']));
             $d['noStock'] = $d['noStock'][0];
-            $d['vendus'] = NBRE_EX - ($d['stock']['enStock'] + $d['depot']['enDepot'] + $d['don']['donnes'] + $d['noStock']['horsStock']);
-        /*----------------------------------------------------------------------compta general---------------------------------------------------------------------------------------------------------------*/        
+            $d['vendus'] = (int)$d['infosCassette']['nombre_exemplaire'] - ($d['stock']['enStock'] + $d['depot']['enDepot'] + $d['don']['donnes'] + $d['noStock']['horsStock']);
+        /*----------------------------------------------------------------------compta general---------------------------------------------------------------------------------------------------------------*/
             $d['total'] = $this->$model->findAll(array("fields" => "SUM(prix_vente_euros) AS somme",
                                                    "conditions" => "id_etat = 2 AND id_cassette = ".$this->data['id_cassette']));
             $d['total'] = $d['total'][0];
             $d['due'] = $this->$model->findAll(array("fields" => "SUM(montant_frais_de_port) AS somme",
                                                  "conditions" => "id_cassette = ".$this->data['id_cassette']));
             $d['due'] = $d['due'][0];
+            if (!$d['total']['somme']) { $d['total']['somme'] = 0; };
+            if (!$d['due']['somme']) { $d['due']['somme'] = 0; };
             $d['gainReel'] = $d['total']['somme'] - $d['due']['somme'];
-        /*----------------------------------------------------------------------infos------------------------------------------------------------------------------------------------------------------------*/        
+        /*----------------------------------------------------------------------infos------------------------------------------------------------------------------------------------------------------------*/
             $d['exemplaires'] = $this->$model->findAll(array("order" => $ord,
                                                         "conditions" => "id_cassette = ".$this->data['id_cassette']));
             foreach ($d['exemplaires'] as $key => $value){
@@ -118,15 +123,13 @@ class Exemplaires extends Controller{
                 }
             }
             $d['vendeurs'] = $this->getAdmins();
-            $d['infosCassette'] = $this->$modelCass->findAll(array("fields" => "id_cassette, titre, code, nombre_de_download",
-                                                               "conditions" => "id_cassette = ".$this->data['id_cassette']));
-            $d['infosCassette'] = $d['infosCassette'][0];
+
             $d['etats'] = $this->$modelEtat->findAll(array("order" => "id_etat_exemplaire ASC"));
-            $d['clients'] = $this->$modelClient->findAll(array("order" => "nom_client ASC"));            
+            $d['clients'] = $this->$modelClient->findAll(array("order" => "nom_client ASC"));
         }
         $this->set($d);
     }
-    
+
     // sauvegarde les informations
     public function save(){
         $model = $this->models[0];
@@ -138,7 +141,7 @@ class Exemplaires extends Controller{
             unset($this->data['paste']);
         }
         $idCass = $this->data['id_cassette'];
-        unset($this->data['id_cassette']);        
+        unset($this->data['id_cassette']);
         foreach($this->data as $key => $value){
             $decompName = explode('-', $key);
             $keyOk = $decompName[0];
@@ -161,16 +164,16 @@ class Exemplaires extends Controller{
             if($nbreExDispo[0]['dispo'] != 0){
                 $dispo = array("id_cassette" => $idCass,
                                   "sold_out" => 0);
-                $this->$modelCass->save($dispo);   
+                $this->$modelCass->save($dispo);
             } else {
                 $soldOut = array("id_cassette" => $idCass,
                                     "sold_out" => 1);
                 $this->$modelCass->save($soldOut);
-            }            
-        }    
+            }
+        }
     }
-    
-    // affiche tous les éléments 
+
+    // affiche tous les éléments
     public function index(){
         $modelCass = $this->models[2];
         $d['admins'] = $this->getAdmins();
@@ -178,11 +181,8 @@ class Exemplaires extends Controller{
             $d['admins'][$key] = $value['nom'];
         }
         $d['cassettes'] = $this->$modelCass->findAll(array("fields" => "id_cassette, code, titre",
-                                                            "order" => "date_sortie DESC"));        
+                                                            "order" => "date_sortie DESC"));
         $this->set($d);
         $this->render('index');
     }
 }
-
-
-

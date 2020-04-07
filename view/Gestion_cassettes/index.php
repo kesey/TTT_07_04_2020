@@ -1,6 +1,6 @@
 <?php
 
-/* 
+/*
  * AUTEUR: Fabien Meunier
  * PROJECT: Third_Type_Tapes
  * PATH: Third_Type_Tapes/view/Gestion_cassettes/
@@ -14,7 +14,7 @@
     <br/>
     <?php if(isset($_SESSION['info'])){ ?>
         <div class="alert alert-danger informations" role="alert" ><img class="closeInfo closeInformations" src="<?php echo WEBROOT; ?>images/supprimer.png" title="fermeture" alt="crossIcon" ><?php echo $_SESSION['info']; unset($_SESSION['info']); if(isset($_SESSION['infoSave'])){ unset($_SESSION['infoSave']); } ?></div>
-    <?php } else if(isset($_SESSION['infoSave'])){ ?>    
+    <?php } else if(isset($_SESSION['infoSave'])){ ?>
         <div class="alert alert-info informations" role="alert" ><img class="closeInfo closeInformations" src="<?php echo WEBROOT; ?>images/supprimer.png" title="fermeture" alt="crossIcon" ><?php echo $_SESSION['infoSave']; unset($_SESSION['infoSave']); if(isset($_SESSION['info'])){ unset($_SESSION['info']); } ?></div>
     <?php } ?>
     <div class="alert alert-danger informations" id="jqInfos" role="alert" ><img class="closeInfo closeInformations" src="<?php echo WEBROOT; ?>images/supprimer.png" title="fermeture" alt="crossIcon" ><span></span></div>
@@ -22,7 +22,7 @@
 <!------------------------------------------------------------------------------formulaire gestionCassettes-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------->
     <div class="container" >
         <form class="saveForm" id="saveFormCass" action="#" method="POST" enctype="multipart/form-data" >
-            <?php                       
+            <?php
             if(isset($detailsCass)) {
                 $id = $detailsCass["id_cassette"];
                 $titre = $detailsCass["titre"];
@@ -30,6 +30,7 @@
                 $code = $detailsCass["code"];
                 $longueur = $detailsCass["longueur"];
                 $prix = $detailsCass["prix"];
+                $nbreEx = $detailsCass["nombre_exemplaire"];
                 $lienBandcamp = $detailsCass["lien_bandcamp"];
                 $lienSoundcloud = $detailsCass["lien_soundcloud"];
                 $lienYoutube = $detailsCass["lien_youtube"];
@@ -37,8 +38,9 @@
                 $download = $detailsCass["download"];
                 $image = $detailsCass["image_pochette"];
                 $nbreDownload = $detailsCass["nombre_de_download"];
+                $publish = $detailsCass["publier"];
             } else {
-                $id = $titre = $dateSortie = $code = $longueur = $prix = $lienBandcamp = $lienSoundcloud = $lienYoutube = $description = $download = $image = "";
+                $id = $titre = $dateSortie = $code = $longueur = $prix = $nbreEx = $lienBandcamp = $lienSoundcloud = $lienYoutube = $description = $download = $image = $publish = "";
                 $nbreDownload = 0;
             }
             ?>
@@ -58,6 +60,9 @@
             </div><br/>
             <div class="row" >
                 <label class="col-md-2" for="idPrix" >Prix:&nbsp;</label><div class="col-md-10" ><input type="text" class="form-control" id="idPrix" name="prix" placeholder="5.00" value="<?php echo $prix; ?>" ></div>
+            </div><br/>
+            <div class="row" >
+                <label class="col-md-2" for="idNbreEx" >Nombre:&nbsp;d'exemplaires:&nbsp;</label><div class="col-md-10" ><input type="text" class="form-control" id="idNbreEx" name="nombre_exemplaire" placeholder="75" value="<?php echo $nbreEx; ?>" ></div>
             </div><br/>
             <div class="row" >
                 <label class="col-md-2" for="idBandcamp" >Lien bandcamp:&nbsp;</label><div class="col-md-10" ><input type="url" class="form-control" id="idBandcamp" name="lien_bandcamp" placeholder="http(s)://xxx" value="<?php echo $lienBandcamp; ?>" ></div>
@@ -84,7 +89,7 @@
                     <div class="col-md-4" >
                         <input type="button" class="clear_file" value="clear" >
                     </div>
-                </div><br/>             
+                </div><br/>
             </div>
             <br/><br/>
             <div class="imageGesEvt labImg" ><label>Image:&nbsp;</label></div>
@@ -98,11 +103,22 @@
                         <input type="file" class="parcourir" id ="idNew_image_pochette" name="new_image_pochette" >
                     </div>
                     <div class="col-md-4" >
-                        <input type="button" class="clear_file" value="clear" >
+                        <input type="button" class="clear_file" value="clear">
                     </div>
                 </div>
             </div>
-            <br/><br/>            
+            <br/><br/>
+            <div class="row" >
+                <div class="col-md-2" ></div>
+                <div class="col-md-10 custom-control custom-checkbox">
+                    <input type="radio" class="custom-control-input" id="idPublier" name="publier" value="1" <?php if($publish) { ?> checked <?php } ?>>
+                    <label class="custom-control-label" for="idPublier">Publier</label>
+                    <br/>
+                    <input type="radio" class="custom-control-input" id="idDePublier" name="publier" value="0" <?php if(!$publish) { ?> checked <?php } ?>>
+                    <label class="custom-control-label" for="idDePublier">Depublier</label>
+                </div>
+            </div>
+            <br/>
             <div class="row" >
                 <div class="col-md-2" ></div>
                 <div class="col-md-10" >
@@ -110,7 +126,7 @@
                     <img class="loader" src="<?php echo WEBROOT; ?>images/discret.gif" title="load" alt="loader" >
                 </div>
             </div>
-        </form>    
+        </form>
         <br/>
 <!------------------------------------------------------------------------------affichage nombre de download------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------->
         <div>Cette cassette a été téléchargée <?php echo $nbreDownload; ?> fois.</div>
@@ -130,7 +146,7 @@
                     <input type="hidden" name="action" value="search" >
                     <div class="row" >
                         <div class="col-md-2" >
-                            <select class="form-control fieldSel" name="field" >                                
+                            <select class="form-control fieldSel" name="field" >
                                 <option value="titre">par titre</option>
                                 <option value="date_sortie">par date de sortie</option>
                                 <option value="code">par code</option>
@@ -140,7 +156,7 @@
                             </select>
                         </div>
                         <div class="col-md-10" >
-                            <input type="search" class="form-control" name="recherche" > 
+                            <input type="search" class="form-control" name="recherche" >
                             <br/>
                             <input class="btn btn-sm btn-primary" type="submit" value="Rechercher" >
                         </div>
@@ -165,12 +181,12 @@
                             <input class="logIn adm" type="submit" value="supprimer" >&nbsp;<span class="glyphicon glyphicon-trash trash" aria-hidden="true" ></span>
                         </form>
                     </div>
-                </li>                               
-            <?php } ?>                
+                </li>
+            <?php } ?>
                 <hr><br/>
         <?php } ?>
 <!------------------------------------------------------------------------------liste cassettes-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------->
-        <?php foreach ($cassettes as $cassette){ ?>          
+        <?php foreach ($cassettes as $cassette){ ?>
             <li>
                 <div class="row" >
                     <form class="col-md-4" action="#" method="POST" enctype="multipart/form-data" >
@@ -184,14 +200,11 @@
                         <input class="logIn adm" type="submit" value="supprimer" >&nbsp;<span class="glyphicon glyphicon-trash trash" aria-hidden="true" ></span>
                     </form>
                 </div>
-            </li> 
-        <?php } ?>               
+            </li>
+        <?php } ?>
         </ul>
     </div>
 <!------------------------------------------------------------------------------access denied---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------->
 <?php } else { ?>
-        <META HTTP-EQUIV="Refresh" Content="0; URL=<?php echo WEBROOT; ?>cassettes">  
+        <META HTTP-EQUIV="Refresh" Content="0; URL=<?php echo WEBROOT; ?>cassettes">
 <?php }
-    
-
-

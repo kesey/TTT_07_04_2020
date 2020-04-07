@@ -1,4 +1,4 @@
-/* 
+/*
  * AUTEUR: Fabien Meunier
  * PROJECT: Third_Type_Tapes
  * PATH: Third_Type_Tapes/js/
@@ -6,16 +6,16 @@
  */
 
 $(document).ready(function(){
-    
+
 /*///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////*/
 /*------------------------------------------------------------------------------FRONT--------------------------------------------------------------------*/
 /*///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////*/
     $("body").queryLoader2({ // preloader pour le chargement des images
         percentage: false,
         barHeight: 0,
-        maxTime: 30000 
+        maxTime: 30000
     });
-/*------------------------------------------------------------------------------souligne un élément du menu (chemin de fer)------------------------------*/    
+/*------------------------------------------------------------------------------souligne un élément du menu (chemin de fer)------------------------------*/
     var loc = window.location.pathname;
     var controller = loc.split('/');
     // en local dossier intermédiaire
@@ -34,31 +34,31 @@ $(document).ready(function(){
     $("#id_"+controller).attr("class", "menu location");
 /*------------------------------------------------------------------------------fait apparaitre la fenêtre de log----------------------------------------*/
     $("#logView").hide();
-    
+
     $("#logIn").click(function(){
         $("#logView").toggle("slow");
     });
-    
+
     $("#closeIcon").click(function(){
         $("#infoLog").hide("slow");
     });
-/*------------------------------------------------------------------------------annule/retablit le redimensionnement d'une image-------------------------*/    
+/*------------------------------------------------------------------------------annule/retablit le redimensionnement d'une image-------------------------*/
     $(".zoom").click(function(){
-        var cl = $(this).attr("class"); 
+        var cl = $(this).attr("class");
         if(cl === "detailImg zoom"){
             $(this).attr("class", "vAlign zoom");
         } else if(cl === "vAlign zoom") {
             $(this).attr("class", "detailImg zoom");
         }
     });
-/*------------------------------------------------------------------------------ancre--------------------------------------------------------------------*/    
+/*------------------------------------------------------------------------------ancre--------------------------------------------------------------------*/
     $("#icoAimant").hide();
     $(window).scroll(function(){
         if ($(window).scrollTop() > 200) {
             $("#icoAimant").fadeIn();
         } else {
             $("#icoAimant").fadeOut();
-        }        
+        }
     });
 /*------------------------------------------------------------------------------fonctions----------------------------------------------------------------*/
    /**
@@ -106,7 +106,7 @@ $(document).ready(function(){
     */
     function addEvent(obj, event, fct){
         if (obj.attachEvent){ // pour IE
-            obj.attachEvent("on" + event, fct); 
+            obj.attachEvent("on" + event, fct);
         } else {
             obj.addEventListener(event, fct, true);
         }
@@ -122,11 +122,11 @@ $(document).ready(function(){
 /*------------------------------------------------------------------------------general------------------------------------------------------------------*/
     $("#jqInfos").hide();
     $("#jqInfoLog").hide();
-       
+
     $(".closeInformations").click(function(){
         $(".informations").hide("slow");
     });
-    
+
     $(".saveForm input:not([type=submit]), .saveForm select, textarea").on("keypress click", function(){
         $(this).css("border", "1px solid #ccc");
     });
@@ -134,7 +134,7 @@ $(document).ready(function(){
     $(".saveForm input[type=file]").on("click", function(){
         $(this).css("border", "0px solid #ccc");
     });
-    
+
     $(".clear_file").click(function(){
         var isIE10 = false;
         var isIE9 = false;
@@ -148,9 +148,9 @@ $(document).ready(function(){
             $(this).closest("div").prev().children(".parcourir").innerHTML = '';// pour IE 9 et 10
         } else {
             $(this).closest("div").prev().children(".parcourir").val('');
-        }        
+        }
     });
-/*------------------------------------------------------------------------------wysiwyg------------------------------------------------------------------*/    
+/*------------------------------------------------------------------------------wysiwyg------------------------------------------------------------------*/
    /**
     *  transform les textarea selectionnés en editeur wysiwyg
     */
@@ -163,10 +163,10 @@ $(document).ready(function(){
                 "advlist autolink link lists charmap hr",
                 "code fullscreen",
                 "textcolor colorpicker"
-            ],            
+            ],
             toolbar_items_size: 'small',
             toolbar1: "fullscreen | bold italic underline strikethrough | hr | charmap | bullist numlist | link unlink | alignleft aligncenter alignright alignjustify outdent indent | code",
-            toolbar2: "forecolor backcolor | formatselect fontselect fontsizeselect | removeformat | undo redo",           
+            toolbar2: "forecolor backcolor | formatselect fontselect fontsizeselect | removeformat | undo redo",
             setup : function(ed) {
                 ed.on('keypress click', function() {
                     $("#mceu_26").css("border", "1px solid #ccc");
@@ -175,7 +175,7 @@ $(document).ready(function(){
         });
     }
     addEvent(window , "load", createWys);
-/*------------------------------------------------------------------------------fonctions de vérifications-----------------------------------------------*/    
+/*------------------------------------------------------------------------------fonctions de vérifications-----------------------------------------------*/
    /**
     *  vérifie la validité d'une date
     *  @param {string} date date à vérifier
@@ -201,10 +201,10 @@ $(document).ready(function(){
         var fileName = fileName.toLowerCase();
         var extensionsOk = 'jpg,jpeg,png';
         var fileArray = fileName.split('.');
-	var fileExtension = fileArray[fileArray.length-1]; 
-	if(extensionsOk.indexOf(fileExtension) === -1) { 
+	var fileExtension = fileArray[fileArray.length-1];
+	if(extensionsOk.indexOf(fileExtension) === -1) {
             return false;
-	} else { 
+	} else {
             return true;
 	}
     }
@@ -217,10 +217,10 @@ $(document).ready(function(){
         var fileName = fileName.toLowerCase();
         var extensionsOk = 'rar';
         var fileArray = fileName.split('.');
-	var fileExtension = fileArray[fileArray.length-1]; 
-	if(extensionsOk.indexOf(fileExtension) === -1) { 
+	var fileExtension = fileArray[fileArray.length-1];
+	if(extensionsOk.indexOf(fileExtension) === -1) {
             return false;
-	} else { 
+	} else {
             return true;
 	}
     }
@@ -232,11 +232,11 @@ $(document).ready(function(){
     function isImage(objectFile){
         var validTypes = "image/jpeg,image/pjpeg,image/png";
         var type = objectFile.type;
-        if(validTypes.indexOf(type) === -1) { 
+        if(validTypes.indexOf(type) === -1) {
             return false;
-	} else { 
+	} else {
             return true;
-	}       
+	}
     }
    /**
     *  vérifie le type mime du fichier rar
@@ -246,11 +246,11 @@ $(document).ready(function(){
     function isRar(objectFile){
         var validTypes = "application/x-rar-compressed,application/octet-stream";
         var type = objectFile.type;
-        if(validTypes.indexOf(type) === -1) { 
+        if(validTypes.indexOf(type) === -1) {
             return false;
-	} else { 
+	} else {
             return true;
-	}       
+	}
     }
    /**
     *  détecte un caractère sensible dans une chaine
@@ -329,7 +329,7 @@ $(document).ready(function(){
                 break;
         }
     }
-/*------------------------------------------------------------------------------verifications des infos du formulaire logIn------------------------------*/      
+/*------------------------------------------------------------------------------verifications des infos du formulaire logIn------------------------------*/
     $("#logView").submit(function(event){
         var isOk = true;
         if($("#idIdentifiant").val() === ""){
@@ -339,7 +339,7 @@ $(document).ready(function(){
         }
         if($("#idMot_de_passe").val() === ""){
             $("#idMot_de_passe").css("border", "3px solid #d9534f");
-            $("#jqInfoLog > span").html("Veuillez renseigner le champ Password");        
+            $("#jqInfoLog > span").html("Veuillez renseigner le champ Password");
             isOk = false;
         }
         if(!isOk){
@@ -349,9 +349,9 @@ $(document).ready(function(){
     });
 /*------------------------------------------------------------------------------verifications des infos du formulaire gestionCassettes-------------------*/
     $(".loader").hide();
-    
+
     $("#saveFormCass").submit(function(event){
-        var isOk = true;        
+        var isOk = true;
         tinymce.triggerSave(true, true);
         var objFileImg = document.getElementById("idNew_image_pochette").files[0];
         var objFileRar = document.getElementById("idNew_download").files[0];
@@ -362,7 +362,7 @@ $(document).ready(function(){
         }
         if($("#idDateSortie").val() === ""){
             $("#idDateSortie").css("border", "3px solid #d9534f");
-            $("#jqInfos > span").html("Veuillez renseigner une date de sortie");        
+            $("#jqInfos > span").html("Veuillez renseigner une date de sortie");
             isOk = false;
         } else if(!isDate($("#idDateSortie").val())){
             $("#idDateSortie").css("border", "3px solid #d9534f");
@@ -394,6 +394,11 @@ $(document).ready(function(){
                 isOk = false;
             }
         }
+        if($("#idNbreEx").val() !== ""){
+            $("#idNbreEx").css("border", "3px solid #d9534f");
+            $("#jqInfos > span").html("Le nombre d'exemplaire est invalide");
+            isOk = false;
+        }
         if($("#idSoundcloud").val() !== ""){
             if(!isUrl($("#idSoundcloud").val())){
                 $("#idSoundcloud").css("border", "3px solid #d9534f");
@@ -413,7 +418,7 @@ $(document).ready(function(){
             $("#jqInfos > span").html("Veuillez renseigner une description");
             isOk = false;
         }
-        if($("#idNew_image_pochette").val() === ""){ 
+        if($("#idNew_image_pochette").val() === ""){
             if(!$("#idImage_pochette").length){
                 $("#idNew_image_pochette").css("border", "3px solid #d9534f");
                 $("#jqInfos > span").html("Veuillez selectionner une image");
@@ -434,11 +439,11 @@ $(document).ready(function(){
         } else if(!isImage(objFileImg)){
             $("#idNew_image_pochette").css("border", "3px solid #d9534f");
             $("#jqInfos > span").html("le fichier n'est pas une image");
-            isOk = false;        
+            isOk = false;
         } else if(objFileImg.size > max_img_size){
             $("#idNew_image_pochette").css("border", "3px solid #d9534f");
             $("#jqInfos > span").html("l'image est trop lourde");
-            isOk = false;  
+            isOk = false;
         }
         if($("#idNew_download").val() !== ""){
             if(contSensChars($("#idNew_download").val())){
@@ -456,11 +461,11 @@ $(document).ready(function(){
             } else if(!isRar(objFileRar)){
                 $("#idNew_download").css("border", "3px solid #d9534f");
                 $("#jqInfos > span").html("le fichier n'est pas un .rar");
-                isOk = false;        
+                isOk = false;
             } else if(objFileRar.size > max_rar_size){
                 $("#idNew_download").css("border", "3px solid #d9534f");
                 $("#jqInfos > span").html("le fichier rar est trop lourd");
-                isOk = false;  
+                isOk = false;
             }
         }
         $(".loader").show("slow");
@@ -471,7 +476,7 @@ $(document).ready(function(){
             $("#jqInfos").show("slow");
         }
     });
-/*------------------------------------------------------------------------------verifications des infos du formulaire gestionArtistes--------------------*/              
+/*------------------------------------------------------------------------------verifications des infos du formulaire gestionArtistes--------------------*/
     $("#saveFormArt").submit(function(event){
         var isOk = true;
         tinymce.triggerSave(true, true);
@@ -483,7 +488,7 @@ $(document).ready(function(){
         }
         if($("#idLien").val() === ""){
             $("#idLien").css("border", "3px solid #d9534f");
-            $("#jqInfos > span").html("Veuillez renseigner un lien");        
+            $("#jqInfos > span").html("Veuillez renseigner un lien");
             isOk = false;
         } else if(!isUrl($("#idLien").val())){
             $("#idLien").css("border", "3px solid #d9534f");
@@ -495,7 +500,7 @@ $(document).ready(function(){
             $("#jqInfos > span").html("Veuillez renseigner une bio");
             isOk = false;
         }
-        if($("#idNew_image_artiste").val() === ""){ 
+        if($("#idNew_image_artiste").val() === ""){
             if(!$("#idImage_artiste").length){
                 $("#idNew_image_artiste").css("border", "3px solid #d9534f");
                 $("#jqInfos > span").html("Veuillez selectionner une image");
@@ -516,11 +521,11 @@ $(document).ready(function(){
         } else if(!isImage(objFile)){
             $("#idNew_image_artiste").css("border", "3px solid #d9534f");
             $("#jqInfos > span").html("le fichier n'est pas une image");
-            isOk = false;        
+            isOk = false;
         } else if(objFile.size > max_img_size){
             $("#idNew_image_artiste").css("border", "3px solid #d9534f");
             $("#jqInfos > span").html("le fichier est trop lourd");
-            isOk = false;  
+            isOk = false;
         }
         if($("#idProd").val() == 0){
             $("#idProd").css("border", "3px solid #d9534f");
@@ -531,9 +536,9 @@ $(document).ready(function(){
             event.preventDefault();
             $("html, body").animate({scrollTop:0}, "slow");
             $("#jqInfos").show("slow");
-        }        
+        }
     });
-/*------------------------------------------------------------------------------verifications des infos du formulaire gestionEvents----------------------*/              
+/*------------------------------------------------------------------------------verifications des infos du formulaire gestionEvents----------------------*/
     $("#saveFormEvt").submit(function(event){
         var isOk = true;
         tinymce.triggerSave(true, true);
@@ -545,7 +550,7 @@ $(document).ready(function(){
         }
         if($("#idDate").val() === ""){
             $("#idDate").css("border", "3px solid #d9534f");
-            $("#jqInfos > span").html("Veuillez renseigner une date");        
+            $("#jqInfos > span").html("Veuillez renseigner une date");
             isOk = false;
         } else if(!isDate($("#idDate").val())){
             $("#idDate").css("border", "3px solid #d9534f");
@@ -557,7 +562,7 @@ $(document).ready(function(){
             $("#jqInfos > span").html("Veuillez renseigner une description");
             isOk = false;
         }
-        if($("#idNew_image_event").val() === ""){ 
+        if($("#idNew_image_event").val() === ""){
             if(!$("#idImage_event").length){
                 $("#idNew_image_event").css("border", "3px solid #d9534f");
                 $("#jqInfos > span").html("Veuillez selectionner une image");
@@ -578,17 +583,17 @@ $(document).ready(function(){
         } else if(!isImage(objFile)){
             $("#idNew_image_event").css("border", "3px solid #d9534f");
             $("#jqInfos > span").html("le fichier n'est pas une image");
-            isOk = false;        
+            isOk = false;
         } else if(objFile.size > max_img_size){
             $("#idNew_image_event").css("border", "3px solid #d9534f");
             $("#jqInfos > span").html("le fichier est trop lourd");
-            isOk = false;  
+            isOk = false;
         }
         if(!isOk){
             event.preventDefault();
             $("html, body").animate({scrollTop:0}, "slow");
             $("#jqInfos").show("slow");
-        }        
+        }
     });
 /*------------------------------------------------------------------------------verifications des infos du formulaire clients----------------------------*/
     $("#saveFormClient").submit(function(event){
@@ -609,43 +614,43 @@ $(document).ready(function(){
             event.preventDefault();
             $("html, body").animate({scrollTop:0}, "slow");
             $("#jqInfos").show("slow");
-        } 
+        }
     });
 /*------------------------------------------------------------------------------exemplaires--------------------------------------------------------------*/
     $(".etatExpl").each(function(){
         var value = parseInt($(this).val());
         colorTr(value, $(this));
     });
-    
+
     $(".etatExpl").change(function(){
         var value = parseInt($(this).val());
         colorTr(value, $(this));
     });
-    
+
     $(".tabExpl tbody tr").focusin(function(){
         $(this).css("border", "2px solid #337ab7");
     });
-        
+
     $(".tabExpl tbody tr").focusout(function(){
         $(this).css("border", "1px solid whitesmoke");
     });
-    
+
     $("#printButt").click(function(){
         window.print();
-        $(this).css({border: "none", width: "48px", height: '30px'});        
+        $(this).css({border: "none", width: "48px", height: '30px'});
     });
-    
+
     copyBuffer = new Array();
-    $("#copyButt").click(function(){       
+    $("#copyButt").click(function(){
         $("input[name=copy]:checked").closest("tr")
                                      .find("input:not(.num), select, textarea")
                                      .each(function(){
-                                        var name = $(this).attr("name").split("-"); 
+                                        var name = $(this).attr("name").split("-");
                                         copyBuffer[name[0]] = $(this).val();
                                      });
         $("input[name=copy]:checked").attr('checked', false);
         $("input[name=copy]").attr({type: 'checkbox',
-                                    name: 'paste'});                                                                      
+                                    name: 'paste'});
     });
 
     $("#pasteButt").click(function(){
@@ -662,7 +667,7 @@ $(document).ready(function(){
         $("input[name=paste]").attr({type: 'radio',
                                      name: 'copy'});
     });
-    
+
     $(".boutonFixed").hide();
     $(window).scroll(function(){
         var valShow = (parseInt($(".infosGestion").css("height")) + parseInt($(".research").css("height")) + parseInt($("header").css("height")) + (parseInt($(".menuGeneral").css("height")) * 2)) - 300;
@@ -670,7 +675,7 @@ $(document).ready(function(){
             $(".boutonFixed").fadeIn();
         } else {
             $(".boutonFixed").fadeOut();
-        }        
+        }
     });
 /*------------------------------------------------------------------------------verifications des infos du formulaire exemplaires------------------------*/
     $("#saveFormEx").submit(function(event){
@@ -680,7 +685,7 @@ $(document).ready(function(){
             if($(this).val() !== ""){
                 if(!validPrice($(this).val())){
                     $(this).css("border", "3px solid #d9534f");
-                    $("#jqInfos > span").html("Le prix de l'exemplaire numéro " + numExPrix + " est invalide");        
+                    $("#jqInfos > span").html("Le prix de l'exemplaire numéro " + numExPrix + " est invalide");
                     isOk = false;
                 }
             }
@@ -690,7 +695,7 @@ $(document).ready(function(){
             if($(this).val() !== ""){
                 if(!validPrice($(this).val())){
                     $(this).css("border", "3px solid #d9534f");
-                    $("#jqInfos > span").html("Le montant des frais de port de l'exemplaire numéro " + numExMontFdp + " est invalide");        
+                    $("#jqInfos > span").html("Le montant des frais de port de l'exemplaire numéro " + numExMontFdp + " est invalide");
                     isOk = false;
                 }
             }
@@ -700,7 +705,7 @@ $(document).ready(function(){
                 if(!isDate($(this).val())){
                     var numExDate = $(this).closest("tr").find(".num").val();
                     $(this).css("border", "3px solid #d9534f");
-                    $("#jqInfos > span").html("La date de l'exemplaire numéro " + numExDate + " est invalide");        
+                    $("#jqInfos > span").html("La date de l'exemplaire numéro " + numExDate + " est invalide");
                     isOk = false;
                 }
             }
@@ -711,9 +716,9 @@ $(document).ready(function(){
             $("#jqInfos").show("slow");
         }
     });
-/*------------------------------------------------------------------------------verifications des infos du formulaire admins-----------------------------*/      
+/*------------------------------------------------------------------------------verifications des infos du formulaire admins-----------------------------*/
     $("#saveFormAdm").submit(function(event){
-        var isOk = true;        
+        var isOk = true;
         if($("#idNom").val() === ""){
             $("#idNom").css("border", "3px solid #d9534f");
             $("#jqInfos > span").html("Veuillez renseigner un nom");
@@ -721,10 +726,10 @@ $(document).ready(function(){
         }
         if($("#idIdent").val() === ""){
             $("#idIdent").css("border", "3px solid #d9534f");
-            $("#jqInfos > span").html("Veuillez renseigner un identifiant");        
+            $("#jqInfos > span").html("Veuillez renseigner un identifiant");
             isOk = false;
         }
-        if($("#idMdp").val() === ""){  
+        if($("#idMdp").val() === ""){
             $("#idMdp").css("border", "3px solid #d9534f");
             $("#jqInfos > span").html("Veuillez renseigner un mot de passe");
             isOk = false;
@@ -733,8 +738,6 @@ $(document).ready(function(){
             event.preventDefault();
             $("html, body").animate({scrollTop:0}, "slow");
             $("#jqInfos").show("slow");
-        }        
+        }
     });
 });
-
-

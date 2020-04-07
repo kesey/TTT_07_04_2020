@@ -1,6 +1,6 @@
 <?php
 
-/* 
+/*
  * AUTEUR: Fabien Meunier
  * PROJECT: Third_Type_Tapes
  * PATH: Third_Type_Tapes/model/
@@ -10,14 +10,17 @@
 class Cassette extends Model{
     public $id;
     var $table = "cassette";
-    
+
     //utile pour ne pas prendre en compte les lignes archivées
     var $notArchive = "suppr != 1";
-    
+
+    //utile pour ne pas prendre en compte les releases depubliées
+    var $publish = "publier = 1";
+
    /**
     *  récupération infos cassette et artiste(s)
     *  @param array $data contient les champs, les conditions, le group by, l'ordre et la limitation
-    **/  
+    **/
     public function getAllInfos($data = array()){
         global $db;
         $fields = "*";
@@ -46,7 +49,7 @@ class Cassette extends Model{
             $limit = $this->securite_bdd($data['limit']);
             $limit = " LIMIT ".$limit;
         }
-        $sql = "SELECT ".$fields." FROM ".$this->table." INNER JOIN produire ON ".$this->table.".id_".$this->table." = produire.id_".$this->table." INNER JOIN artiste ON produire.id_artiste = artiste.id_artiste WHERE ".$this->table.".".$this->notArchive." AND artiste.".$this->notArchive." AND ".$conditions.$group.$order.$limit;
+        $sql = "SELECT ".$fields." FROM ".$this->table." INNER JOIN produire ON ".$this->table.".id_".$this->table." = produire.id_".$this->table." INNER JOIN artiste ON produire.id_artiste = artiste.id_artiste WHERE ".$this->table.".".$this->notArchive." AND ".$this->table.".".$this->publish." AND artiste.".$this->notArchive." AND ".$conditions.$group.$order.$limit;
         $pdoObj = $db->prepare($sql);
         if(isset($id)){
             $pdoObj->bindParam(':id', $id, PDO::PARAM_INT);
@@ -57,13 +60,13 @@ class Cassette extends Model{
             while ($infos = $pdoObj->fetch()){
                 $tabFind[] = $infos;
             }
-            $pdoObj->closeCursor();           
+            $pdoObj->closeCursor();
             return $this->securiteHtml($tabFind);
         } else {
             return FALSE;
         }
     }
-    
+
    /**
     *  vérifie la/les donnée(s) passée(s) en argument
     *  @param array $data donnée(s) à vérifier
@@ -101,7 +104,7 @@ class Cassette extends Model{
         }
         if(empty($data["longueur"])){
             $_SESSION["info"] = "Veuillez renseigner une longueur";
-            $isOk = FALSE;           
+            $isOk = FALSE;
         } else if(!$this->longueurOk($data["longueur"])){
             $_SESSION["info"] = "Le format de la longueur est invalide";
             $isOk = FALSE;
@@ -109,6 +112,12 @@ class Cassette extends Model{
         if(!empty($data["prix"])){
             if(!$this->isPosDec($data["prix"])){
                 $_SESSION["info"] = "Le prix est invalide";
+                $isOk = FALSE;
+            }
+        }
+        if(!empty($data["nombre_exemplaire"])){
+            if(!$this->isPosDec($data["nombre_exemplaire"])){
+                $_SESSION["info"] = "Le nombre d'exemplaire est invalide";
                 $isOk = FALSE;
             }
         }
@@ -132,15 +141,15 @@ class Cassette extends Model{
             $_SESSION["info"] = "Veuillez selectionner une image";
             $isOk = FALSE;
         }
-        return $isOk;    
+        return $isOk;
     }
-    
+
    /**
     *  vérifie le fichier passé en argument
     *  @param array $fichier fichier à vérifier
     **/
     public function verifFile($fichier){
-        $isOk = TRUE;        
+        $isOk = TRUE;
         if(empty($fichier["name"])){
             $isOk = FALSE;
         } else {
@@ -155,15 +164,15 @@ class Cassette extends Model{
                 $isOk = FALSE;
             } else if(!$this->extImgOk($fichier["name"])){
                 $_SESSION["info"] = "les extensions valides pour l'image sont jpg, jpeg, png";
-                $isOk = FALSE;           
+                $isOk = FALSE;
             } else if(!$this->isImage($fichier['tmp_name'])){
                 $_SESSION["info"] = "le fichier n'est pas une image";
                 $isOk = FALSE;
-            }             
+            }
         }
-        return $isOk;    
+        return $isOk;
     }
-    
+
     /**
     *  vérifie le fichier (.rar) passé en argument
     *  @param array $fichier fichier à vérifier
@@ -184,11 +193,11 @@ class Cassette extends Model{
                 $isOk = FALSE;
             } else if(!$this->extRarOk($fichier["name"])){
                 $_SESSION["info"] = "l'extension valide pour le fichier est rar";
-                $isOk = FALSE;           
+                $isOk = FALSE;
             } else if(!$this->isRar($fichier['type'])){
                 $_SESSION["info"] = "le fichier n'est pas un .rar";
                 $isOk = FALSE;
-            }            
+            }
         }
         return $isOk;
     }

@@ -1,6 +1,6 @@
 <?php
 
-/* 
+/*
  * AUTEUR: Fabien Meunier
  * PROJECT: Third_Type_Tapes
  * PATH: Third_Type_Tapes/controller/
@@ -8,9 +8,9 @@
  */
 
 class Gestion_cassettes extends Controller{
-    
+
     var $models = array('cassette', 'admin', 'exemplaire');
-    
+
     // effectue une recherche dans un champ
     public function search(){
         $model = $this->models[0];
@@ -27,10 +27,10 @@ class Gestion_cassettes extends Controller{
                     $d['searchResults'][$key]['date_sortie'] = $this->$model->dateFr($value['date_sortie']);
                 }
             }
-            $this->set($d);           
+            $this->set($d);
         }
     }
-    
+
     // récupère les infos d'un élément
     public function details(){
         $model = $this->models[0];
@@ -43,6 +43,7 @@ class Gestion_cassettes extends Controller{
             $d['detailsCass']['code'] = $this->$model->code;
             $d['detailsCass']['longueur'] = $this->$model->longueur;
             $d['detailsCass']['prix'] = $this->$model->prix;
+            $d['detailsCass']['nombre_exemplaire'] = $this->$model->nombre_exemplaire;
             $d['detailsCass']['lien_bandcamp'] = $this->$model->lien_bandcamp;
             $d['detailsCass']['lien_soundcloud'] = $this->$model->lien_soundcloud;
             $d['detailsCass']['lien_youtube'] = $this->$model->lien_youtube;
@@ -50,10 +51,11 @@ class Gestion_cassettes extends Controller{
             $d['detailsCass']['download'] = $this->$model->download;
             $d['detailsCass']['image_pochette'] = $this->$model->image_pochette;
             $d['detailsCass']['nombre_de_download'] = $this->$model->nombre_de_download;
+            $d['detailsCass']['publier'] = $this->$model->publier;
             $this->set($d);
         }
     }
-    
+
     // archive l'élément séléctionné
     public function archive(){
         $model = $this->models[0];
@@ -61,12 +63,12 @@ class Gestion_cassettes extends Controller{
             $this->$model->archive($this->data['id_cassette']);
         }
     }
-    
+
     // sauvegarde les informations
     public function save() {
         $model = $this->models[0];
         $modelEx = $this->models[2];
-        unset($this->data['action']);        
+        unset($this->data['action']);
         if($this->$model->verifications($this->data, $this->files['new_image_pochette'])){
             $this->data['date_sortie'] = $this->$model->dateUs($this->data['date_sortie']);
             $this->data['titre'] = $this->$model->noSensChars($this->data['titre']);
@@ -93,21 +95,21 @@ class Gestion_cassettes extends Controller{
             }
             if($actualImg || $uploadImgOk){
                 $success = $this->$model->save($this->data);
-                if($success && empty($this->data['id_cassette'])){           
+                if($success && empty($this->data['id_cassette'])){
                     $creaEx = array("id_cassette" => $this->$model->id,
                                         "id_etat" => 1,
-                                      "id_client" => 32);                              
-                    for($i = 1; $i <= 75; $i++){
+                                      "id_client" => 32);
+                    for($i = 1; $i <= $this->data['nombre_exemplaire']; $i++){
                         $addTab = array("numero_exemplaire" => $i);
                         $dataCreaEx = array_merge($creaEx, $addTab);
-                        $this->$modelEx->save($dataCreaEx);    
+                        $this->$modelEx->save($dataCreaEx);
                     }
-                }                
+                }
             }
         }
     }
-    
-    // affiche tous les éléments 
+
+    // affiche tous les éléments
     public function index(){
         $model = $this->models[0];
         $modelAdm = $this->models[1];
@@ -118,9 +120,8 @@ class Gestion_cassettes extends Controller{
         $d['cassettes'] = $this->$model->findAll(array('order' => 'date_sortie DESC'));
         foreach ($d['cassettes'] as $key => $value){
             $d['cassettes'][$key]['date_sortie'] = $this->$model->dateFr($value['date_sortie']);
-        } 
+        }
         $this->set($d);
         $this->render('index');
-    }    
+    }
 }
-
