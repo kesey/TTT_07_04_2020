@@ -10,9 +10,14 @@
 ?>
 <link href="<?php echo WEBROOT; ?>css/comptes/index.min.css" rel="stylesheet" type="text/css">
 <link rel="stylesheet" href="<?php echo WEBROOT; ?>css/comptes/print.min.css" type="text/css" media="print">
-    <!------------------------------------------------------------------------------infos comptes------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------>
+<!------------------------------------------------------------------------------infos comptes------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------->
 <?php if(isset($_SESSION['mais qui cela peut-il bien être ?']) && in_array($_SESSION['mais qui cela peut-il bien être ?'], $admins, TRUE)){ ?>
-    <br/>
+    <?php if(isset($_SESSION['info'])){ ?>
+        <div class="alert alert-danger informations" role="alert" ><img class="closeInfo closeInformations" src="<?php echo WEBROOT; ?>images/supprimer.png" title="fermeture" alt="crossIcon" ><?php echo $_SESSION['info']; unset($_SESSION['info']); if(isset($_SESSION['infoSave'])){ unset($_SESSION['infoSave']); } ?></div>
+    <?php } else if(isset($_SESSION['infoSave'])){ ?>
+        <div class="alert alert-info informations" role="alert" ><img class="closeInfo closeInformations" src="<?php echo WEBROOT; ?>images/supprimer.png" title="fermeture" alt="crossIcon" ><?php echo $_SESSION['infoSave']; unset($_SESSION['infoSave']); if(isset($_SESSION['info'])){ unset($_SESSION['info']); } ?></div>
+    <?php } ?>
+    <div class="alert alert-danger informations" id="jqInfos" role="alert" ><img class="closeInfo closeInformations" src="<?php echo WEBROOT; ?>images/supprimer.png" title="fermeture" alt="crossIcon" ><span></span></div>
     <article class="comptesContain">
         <span class="infoDate" ><?php echo $dateTime; ?></span>
         <h3 class="intitule" >TTT résumé comptes:</h3>
@@ -46,9 +51,26 @@
             <li>Gains réels (total des ventes - montant fdp total): <?php echo $gainReel; ?>&nbsp;&euro;</li>
         </ul>
         <br/><br/>
-        <div class="comptesPrint" >
-            <input type="button" class="btn btn-sm btn-success" id="printButt" value="print" >
-        </div>
+        <form class="saveForm comptesPrint" id="saveFormCompta" action="#" method="POST" enctype="multipart/form-data" >
+            <input type="hidden" name="action" value="updateCompta" >
+            <div class="row">
+                <select class="form-control form-compta col-md-2" name="id_admin" >
+                    <?php foreach($adminInfos as $admin){ ?>
+                        <option value="<?php echo $admin['id_admin']; ?>"><?php echo $admin['nom']; ?></option>
+                    <?php } ?>
+                </select>
+                <select class="form-control form-compta col-md-2" name="rembRec" >
+                        <option value="a_recupere">récupère</option>
+                        <option value="a_rembourse">rembourse</option>
+                </select>
+                <input type="text" class="form-control form-compta col-md-2" id="idCombien" name="combien" placeholder="100.00" required>
+            </div>
+            </br>
+            <div class="row comptesPrint">
+                <input type="submit" class="btn btn-sm btn-danger btn-compta col-md-4" value="update Compta" >
+                <input type="button" class="btn btn-sm btn-success btn-compta col-md-4" id="printButt" value="print" >
+            </div>
+        </form>
     </article>
     <!------------------------------------------------------------------------------access denied------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------>
 <?php } else { ?>

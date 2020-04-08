@@ -62,7 +62,7 @@
                 <label class="col-md-2" for="idPrix" >Prix:&nbsp;</label><div class="col-md-10" ><input type="text" class="form-control" id="idPrix" name="prix" placeholder="5.00" value="<?php echo $prix; ?>" ></div>
             </div><br/>
             <div class="row" >
-                <label class="col-md-2" for="idNbreEx" >Nombre:&nbsp;d'exemplaires:&nbsp;</label><div class="col-md-10" ><input type="text" class="form-control" id="idNbreEx" name="nombre_exemplaire" placeholder="75" value="<?php echo $nbreEx; ?>" ></div>
+                <label class="col-md-2" for="idNbreEx" >Nombre&nbsp;d'exemplaires:&nbsp;</label><div class="col-md-10" ><input type="text" class="form-control" id="idNbreEx" name="nombre_exemplaire" placeholder="75" value="<?php echo $nbreEx; ?>" ></div>
             </div><br/>
             <div class="row" >
                 <label class="col-md-2" for="idBandcamp" >Lien bandcamp:&nbsp;</label><div class="col-md-10" ><input type="url" class="form-control" id="idBandcamp" name="lien_bandcamp" placeholder="http(s)://xxx" value="<?php echo $lienBandcamp; ?>" ></div>

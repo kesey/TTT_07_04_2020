@@ -117,7 +117,7 @@ $(document).ready(function(){
 /*///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////*/
     var max_img_size = 2097152;
     var max_rar_size = 524288000;
-    var max_str_len = 40;
+    var max_str_len = 200;
     var sensChars = [' ','#','&','é','è','ê','ë','í','ì','î','ï','ú','ù','û','ü','ý','ÿ','ç','ñ','Á','À','Â','Ä','Ã','Å','Ó','Ò','Ô','Ö','Õ','É','È','Ê','Ë','Í','Ì','Î','Ï','Ú','Ù','Û','Ü','Ý','Ÿ','Ç','Ñ'];
 /*------------------------------------------------------------------------------general------------------------------------------------------------------*/
     $("#jqInfos").hide();
@@ -289,7 +289,7 @@ $(document).ready(function(){
         return regEx.test(code);
     }
     /**
-    *  vérifie si une chaine est est un format de longueur de K7 valide
+    *  vérifie si une chaine est un format de longueur de K7 valide
     *  @param {string} string chaine à vérifier
     */
     function longueurOk(string){
@@ -297,12 +297,27 @@ $(document).ready(function(){
         return regEx.test(string);
     }
     /**
-    *  vérifie si une chaine est est un prix valide
+    *  vérifie si une chaine est un prix valide
     *  @param {string|int|dec} string chaine à vérifier
     */
     function validPrice(string){
         var regEx = new RegExp('^[0-9]{1,2}\.[0-9]{2}$');
         return regEx.test(string);
+    }
+    /**
+    *  vérifie si une chaine est un nombre entier positif
+    *  @param {string|int|dec} string chaine à vérifier
+    */
+    function isNormalInteger(string) {
+        var regEx = new RegExp('^\+?(0|[1-9]\d*)$');
+        return regEx.test(string);
+    }
+    /**
+    *  vérifie si une chaine est un nombre entier ou decimal positif
+    *  @param {string|int|dec} string chaine à vérifier
+    */
+    function isPositiveFloat(string) {
+        return !isNaN(string) && Number(string) > 0;
     }
     /**
     *  assigne une couleur à toute la ligne en fonction de l'état de l'exemplaire
@@ -395,9 +410,11 @@ $(document).ready(function(){
             }
         }
         if($("#idNbreEx").val() !== ""){
-            $("#idNbreEx").css("border", "3px solid #d9534f");
-            $("#jqInfos > span").html("Le nombre d'exemplaire est invalide");
-            isOk = false;
+            if (!isNormalInteger($("#idNbreEx").val())) {
+                $("#idNbreEx").css("border", "3px solid #d9534f");
+                $("#jqInfos > span").html("Le nombre d'exemplaire est invalide");
+                isOk = false;
+            }
         }
         if($("#idSoundcloud").val() !== ""){
             if(!isUrl($("#idSoundcloud").val())){
@@ -714,6 +731,18 @@ $(document).ready(function(){
             event.preventDefault();
             $("html, body").animate({scrollTop:0}, "slow");
             $("#jqInfos").show("slow");
+        }
+    });
+/*------------------------------------------------------------------------------verifications comptes-----------------------------*/
+    $("#saveFormCompta").submit(function(event){
+        if($("#idCombien").val() !== ""){
+            if (!isPositiveFloat($("#idCombien").val())) {
+                $("#idCombien").css("border", "3px solid #d9534f");
+                $("#jqInfos > span").html("Le montant renseigné est invalide");
+                event.preventDefault();
+                $("html, body").animate({scrollTop:0}, "slow");
+                $("#jqInfos").show("slow");
+            }
         }
     });
 /*------------------------------------------------------------------------------verifications des infos du formulaire admins-----------------------------*/

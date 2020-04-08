@@ -70,6 +70,7 @@ class Gestion_cassettes extends Controller{
         $modelEx = $this->models[2];
         unset($this->data['action']);
         if($this->$model->verifications($this->data, $this->files['new_image_pochette'])){
+            $this->data['nombre_exemplaire'] = abs(round($this->data['nombre_exemplaire']));
             $this->data['date_sortie'] = $this->$model->dateUs($this->data['date_sortie']);
             $this->data['titre'] = $this->$model->noSensChars($this->data['titre']);
             if(empty($this->data['prix'])){ unset($this->data['prix']); }

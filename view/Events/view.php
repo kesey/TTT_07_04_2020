@@ -1,6 +1,6 @@
 <?php
 
-/* 
+/*
  * AUTEUR: Fabien Meunier
  * PROJECT: Third_Type_Tapes
  * PATH: Third_Type_Tapes/view/Events/
@@ -14,9 +14,9 @@
     <img class="detailImg zoom" src="<?php echo WEBROOT; ?>images/event/<?php echo $event['image_event']; ?>" title="image_event" alt="<?php echo $event['titre_event']; ?>" >
     <span class="detail" ><?php echo $event['description_event']; ?></span>
 <br/><br/>
-<!------------------------------------------------------------------------------API google maps--------------------------------------------------------------------------------------------------------------------------------------------------->    
+<!------------------------------------------------------------------------------API google maps--------------------------------------------------------------------------------------------------------------------------------------------------->
 <?php if($event['lieu']){ ?>
-    <iframe width="280" height="220" frameborder="0" style="border:0" src="https://www.google.com/maps/embed/v1/place?q=<?php echo $event['lieu']; ?>&key=AIzaSyAZMwB9l5YQnbhyXvJbFx4fzKXnxf2HqYM" ></iframe>
+    <iframe width="280" height="220" frameborder="0" style="border:0" src="https://www.google.com/maps/embed/v1/place?q=<?php echo $event['lieu']; ?>&key=<?php echo API_KEY ?>" ></iframe>
     <br/><br/>
 <?php } ?>
 <!------------------------------------------------------------------------------navigation (previous/next)---------------------------------------------------------------------------------------------------------------------------------------->
@@ -28,7 +28,7 @@
 <?php } ?>
 <?php if($event['date_event'] < $date['max']){ ?>
     <a class="glyphicon glyphicon-menu-right noUnderL biggerText" aria-hidden="true" href="<?php echo WEBROOT; ?>events/view/<?php echo $eventNext['id_event']; ?>/<?php echo $eventNext['date_event_fr']; ?>/<?php echo $eventNext['titre_event']; ?>" >
-        <span class="glyphicon-class biggerText">next</span>       
+        <span class="glyphicon-class biggerText">next</span>
     </a>
     <br/><br/>
 <?php } ?>
@@ -36,4 +36,3 @@
 <?php if(!isset($_SESSION['mais qui cela peut-il bien être ?'])){ ?>
     <div id="socialNetwork"></div>
 <?php }
-

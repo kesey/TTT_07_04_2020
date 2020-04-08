@@ -1,6 +1,6 @@
 <?php
 
-/* 
+/*
  * AUTEUR: Fabien Meunier
  * PROJECT: Third_Type_Tapes
  * PATH: Third_Type_Tapes/view/
@@ -18,4 +18,3 @@
 <!--        <script src="--><?php //echo WEBROOT; ?><!--js/TTT.min.js" type="text/javascript"></script>-->
     </body>
 </html>
-

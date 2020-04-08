@@ -1,6 +1,6 @@
 <?php
 
-/* 
+/*
  * AUTEUR: Fabien Meunier
  * PROJECT: Third_Type_Tapes
  * PATH: Third_Type_Tapes/core/
@@ -9,24 +9,24 @@
 
 class Model{
     protected $table;
-    
+
     // utile si le model instancié peut être archivé
     protected $notArchive = "1 = 1";
-    
+
     // utile si le model instancié possède un champ mot de passe
     protected $psw = "";
-    
+
     // liste les caractères sensibles
     protected $sensChars = array(' ','#','&','é','è','ê','ë','í','ì','î','ï','ú','ù','û','ü','ý','ÿ','ç','ñ','Á','À','Â','Ä','Ã','Å','Ó','Ò','Ô','Ö','Õ','É','È','Ê','Ë','Í','Ì','Î','Ï','Ú','Ù','Û','Ü','Ý','Ÿ','Ç','Ñ');
-   
+
     // instancie le model $name
     static function load($name){
         require(ROOT."model/$name.php");
         return new $name();
     }
-/*------------------------------------------------------------------------------traitement mots de passe--------------------------------------------------------------------*/    
+/*------------------------------------------------------------------------------traitement mots de passe--------------------------------------------------------------------*/
    /**
-    *  hachage du mot de passe 
+    *  hachage du mot de passe
     *  @param string|int $mdp mot de passe à hacher
     */
     protected function hashPsw($mdp){
@@ -34,11 +34,11 @@ class Model{
         $mdpSecure = password_hash($mdp, PASSWORD_DEFAULT);
         return $db->quote($mdpSecure);
     }
-/*------------------------------------------------------------------------------verification connexion----------------------------------------------------------------------*/   
+/*------------------------------------------------------------------------------verification connexion----------------------------------------------------------------------*/
    /**
     *  vérifie si l'identifiant est présent en base de données et vérifie le mot de passe correspondant
     *  @param string $ident identifiant à vérifier
-    *  @param string $mdp mot de passe à vérifier 
+    *  @param string $mdp mot de passe à vérifier
     **/
     public function verifLog($ident,$mdp) {
         global $db;
@@ -58,11 +58,11 @@ class Model{
                 return TRUE;
             } else {
                 $_SESSION['infoLog'] = "mot de passe incorrect";
-                return FALSE;                
+                return FALSE;
             }
         } else {
             $_SESSION['infoLog'] = "identifiant incorrect";
-            return FALSE;            
+            return FALSE;
         }
     }
 /*------------------------------------------------------------------------------utilisation d'une adresse pour iframe google maps-------------------------------------------*/
@@ -72,7 +72,7 @@ class Model{
     */
     public function adresseGMaps($address){
         $formatAd = str_replace(' ','+',$address);
-        return $formatAd; 
+        return $formatAd;
     }
 /*------------------------------------------------------------------------------remplacement de caractères sensibles--------------------------------------------------------*/
    /**
@@ -100,19 +100,19 @@ class Model{
                            'Y' => array('Ý','Ÿ'),
                            'C' => array('Ç'),
                            'N' => array('Ñ'));
-        
+
         foreach ($sensChars as $key => $value){
             $chaine = str_replace($value,$key,$chaine);
-        }               
-        return $chaine; 
+        }
+        return $chaine;
     }
-/*------------------------------------------------------------------------------conversions date----------------------------------------------------------------------------*/    
+/*------------------------------------------------------------------------------conversions date----------------------------------------------------------------------------*/
    /**
     *  convertie une date au format français
     *  @param date $date la date à convertir
     */
-    public function dateFr($date){ 
-        setlocale (LC_TIME, 'fr_FR');  
+    public function dateFr($date){
+        setlocale (LC_TIME, 'fr_FR');
         date_default_timezone_set("Europe/Paris");
         mb_internal_encoding("UTF-8");
         return strftime('%d-%m-%Y',strtotime($date));
@@ -121,13 +121,13 @@ class Model{
     *  convertie une date au format americain
     *  @param date $date la date à convertir
     */
-    public function dateUs($date){ 
-        setlocale (LC_TIME, 'en_US');  
+    public function dateUs($date){
+        setlocale (LC_TIME, 'en_US');
         date_default_timezone_set("America/Los_Angeles");
         mb_internal_encoding("UTF-8");
         return strftime('%Y-%m-%d',strtotime($date));
     }
-/*------------------------------------------------------------------------------vérifications de données--------------------------------------------------------------------*/    
+/*------------------------------------------------------------------------------vérifications de données--------------------------------------------------------------------*/
     // vérifie si $data est un nombre entier positif
     public function isPosNum($data){
         if(ctype_digit($data) && $data >= 0){
@@ -151,7 +151,7 @@ class Model{
             return TRUE;
         } else {
             return FALSE;
-        }  
+        }
     }
     // vérifie si $url est une url valide
     public function isValidUrl($url){
@@ -225,7 +225,7 @@ class Model{
             return TRUE;
         } else {
             return FALSE;
-        } 
+        }
     }
     // vérifie si $longueur est un format de longueur de K7 valide
     public function longueurOk($longueur){
@@ -234,9 +234,9 @@ class Model{
             return TRUE;
         } else {
             return FALSE;
-        } 
+        }
     }
-/*------------------------------------------------------------------------------securiser les données à destination/en provenance de la base de données---------------------*/        
+/*------------------------------------------------------------------------------securiser les données à destination/en provenance de la base de données---------------------*/
    /**
     *  securise une donnée à destination de la base de données
     *  @param string|int|dec $data donnée à securiser
@@ -256,7 +256,7 @@ class Model{
    protected function securiteWys($value){
         include_once(ROOT."plugIn/htmLawed/htmLawed.php");
         $elements = 'a, b, strong, i, em, li, ol, ul, br, span, p, hr, h1, h2, h3, h4, h5, h6, pre';
-        return htmLawed($value, array('safe' => 1, 'elements' => $elements));   
+        return htmLawed($value, array('safe' => 1, 'elements' => $elements));
     }
    /**
     *  applique htmlentities aux éléments d'un tableau ou appelle $this->securiteWys() en fonction de la clef
@@ -265,18 +265,18 @@ class Model{
     public function securiteHtml($array) {
         $clefsWys = array('description_event', 'description', 'bio'); // les éléments correspondent aux noms des champs dont les données ont été insérées à l'aide d'un wysiwyg
             foreach ($array as $k => $v) {
-                foreach ($array[$k] as $key => &$value) {                    
-                    if(in_array($key, $clefsWys)){ 
+                foreach ($array[$k] as $key => &$value) {
+                    if(in_array($key, $clefsWys)){
                         $value = $this->securiteWys($value);
                     } else {
                         $value = htmlentities($value);
-                    }                                
+                    }
                 }
                 unset($value);
-            }           
+            }
             return $array;
     }
-/*------------------------------------------------------------------------------interactions base de données----------------------------------------------------------------*/    
+/*------------------------------------------------------------------------------interactions base de données----------------------------------------------------------------*/
    /**
     *  lit une ligne dans la base de données par rapport à l'id du model instancié
     *  @param string $fields liste des champs à récupérer
@@ -293,11 +293,11 @@ class Model{
             $pdoObj->closeCursor();
             $clefsWys = array('description_event', 'description', 'bio'); // les éléments correspondent aux noms des champs dont les données ont été insérées à l'aide d'un wysiwyg
             foreach ($infos as $key => $value){
-                if(in_array($key, $clefsWys)){ 
+                if(in_array($key, $clefsWys)){
                         $this->$key = $this->securiteWys($value);
                     } else {
                         $this->$key = htmlentities($value);
-                    }                                            
+                    }
             };
             return TRUE;
         } else {
@@ -311,7 +311,7 @@ class Model{
     public function findAll($data = array()){
         global $db;
         $fields = "*";
-        $conditions = "1 = 1";        
+        $conditions = "1 = 1";
         $order = "id_".$this->table." DESC";
         $limit = "";
         if(isset($data["fields"])){
@@ -326,7 +326,7 @@ class Model{
         if(isset($data["limit"])){
             $limit = $this->securite_bdd($data['limit']);
             $limit = " LIMIT ".$limit;
-        }        
+        }
         $sql = "SELECT ".$fields." FROM ".$this->table." WHERE ".$conditions." AND ".$this->notArchive." ORDER BY ".$order.$limit;
         $pdoObj = $db->prepare($sql);
         if($pdoObj->execute()){
@@ -334,7 +334,7 @@ class Model{
             while ($infos = $pdoObj->fetch()){
                 $tabFind[] = $infos;
             }
-            $pdoObj->closeCursor();           
+            $pdoObj->closeCursor();
             return $this->securiteHtml($tabFind);
         } else {
             return FALSE;
@@ -366,7 +366,7 @@ class Model{
                 return FALSE;
             } else {
                 return $this->securiteHtml($tabFind);
-            }            
+            }
         } else {
             return FALSE;
         }
@@ -383,14 +383,14 @@ class Model{
             foreach ($data as $key => $value){
                 $key = $this->securite_bdd($key);
                 $value = $this->securite_bdd($value);
-                // valable si il existe une colonne "$this->psw" dans la table 
+                // valable si il existe une colonne "$this->psw" dans la table
                 if($key === $this->psw){
                     $v = $this->hashPsw($value);
                 } else {
                 // dans les autres cas
                     $v = $db->quote($value);
-                } 
-                if($key != "id_$this->table") {                    
+                }
+                if($key != "id_$this->table") {
                     $sql .= " ".$key." = ".$v.",";
                 }
             };
@@ -419,7 +419,7 @@ class Model{
             $sql = substr($sql, 0,-1);
             $sql .= ")";
             $pdoObj = $db->prepare($sql);
-        }        
+        }
         if($pdoObj->execute()){
             if(!isset($data["id_".$this->table])){
                 $this->id = $db->lastInsertId();
@@ -431,7 +431,7 @@ class Model{
         } else {
             $_SESSION["infoSave"] = "La sauvegarde a échoué";
             return FALSE;
-        }       
+        }
     }
    /**
     *  efface une ligne dans la base de données correspondant à l'id du model instancié
@@ -447,7 +447,7 @@ class Model{
         $pdoObj = $db->prepare($sql);
         $pdoObj->bindParam(':id', $id, PDO::PARAM_INT);
         return $pdoObj->execute();
-    }    
+    }
    /**
     *  archive une ligne dans la base de données correspondant à l'id du model instancié
     *  @param string|int $id id de la ligne que l'on souhaite archiver
@@ -465,9 +465,9 @@ class Model{
     }
    /**
     *  vérifie l'existance d'une donnée dans un champ du model instancié
-    *  @param string $field le champ dans lequel on cherche la donnée 
-    *  @param string|int $data la donnée dont on veut vérifier la présence  
-    **/        
+    *  @param string $field le champ dans lequel on cherche la donnée
+    *  @param string|int $data la donnée dont on veut vérifier la présence
+    **/
     public function exist($field,$data){
         global $db;
         $field = $this->securite_bdd($field);
@@ -482,7 +482,7 @@ class Model{
         } else {
             return FALSE;
         }
-    }   
+    }
    /**
     *  récupére la valeur maximum/minimum pour la colonne choisie de la table instanciée
     *  @param string $col permet de spécifier la colonne désirée
@@ -632,13 +632,13 @@ class Model{
     *  @param string $fichier nom du fichier à telecharger
     *  @param string $sousDoss nom du sous-dossier contenant le fichier
     */
-    public function telecharger_fichier($fichier, $sousDoss = ""){ 
+    public function telecharger_fichier($fichier, $sousDoss = ""){
         if($sousDoss === ""){
             $chemin = ROOT.'fichiers/'.$fichier;
         } else {
             $chemin = ROOT.'fichiers/'.$sousDoss.'/'.$fichier;
-        }        
-        if($this->exist("download", $fichier) && file_exists($chemin) && strpos($fichier, '/') === FALSE && strpos($fichier, '.') !== 0){    
+        }
+        if($this->exist("download", $fichier) && file_exists($chemin) && strpos($fichier, '/') === FALSE && strpos($fichier, '.') !== 0){
             header('Content-Description: File Transfer');
             header('Content-Type: application/octet-stream');
             header('Content-Disposition: attachment; filename='.basename($chemin));
@@ -650,14 +650,14 @@ class Model{
             readfile($chemin);
             $cassette = $this->findAll(array(
                                             "fields" => "id_".$this->table.", nombre_de_download",
-                                            "conditions" => "download = '".$fichier."'"                                            
+                                            "conditions" => "download = '".$fichier."'"
                                             ));
             $cassette = $cassette[0];
             $compteur = $cassette['nombre_de_download']+1;
             $tab["id_".$this->table] = $cassette["id_".$this->table];
             $tab['nombre_de_download'] = $compteur;
             $this->save($tab);
-            exit;  
+            exit;
         } else {
             return FALSE;
         }

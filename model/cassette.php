@@ -116,7 +116,7 @@ class Cassette extends Model{
             }
         }
         if(!empty($data["nombre_exemplaire"])){
-            if(!$this->isPosDec($data["nombre_exemplaire"])){
+            if(!$this->isPosNum($data["nombre_exemplaire"])){
                 $_SESSION["info"] = "Le nombre d'exemplaire est invalide";
                 $isOk = FALSE;
             }

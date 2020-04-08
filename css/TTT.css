@@ -1,4 +1,4 @@
-/* 
+/*
  * AUTEUR: Fabien Meunier
  * PROJECT: Third_Type_Tapes
  * PATH: Third_Type_Tapes/css/
@@ -311,7 +311,7 @@ p[class=detail]{
         margin-top: 5%;
         width: 100%;
     }
-    
+
     .detailImg{
         width: 100%;
     }
@@ -330,7 +330,7 @@ p[class=detail]{
     position: relative;
     display: inline-block;
 }
-         
+
 .showInfos img{
     -moz-transition: all 0.5s ease-in-out;
     -webkit-transition: all 0.5s ease-in-out;
@@ -341,7 +341,7 @@ p[class=detail]{
     top: 0px;
     left: 0px;
 }
-         
+
 .showInfos:hover img{
    -moz-transform: translate(0px, 145px);
    -webkit-transform: translate(0px, 145px);
@@ -450,5 +450,12 @@ input[value=Rechercher]{
     display: inline-block;
     vertical-align: top;
 }
+/*------------------------------------------------------------------------------compta------------------------------------------------------------------------------------*/
+.form-compta{
+    margin: 10px;
+}
 
-
+.btn-compta{
+    margin: 10px;
+    max-width: 233px;
+}
