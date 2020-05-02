@@ -1,6 +1,6 @@
 <?php
 
-/* 
+/*
  * AUTEUR: Fabien Meunier
  * PROJECT: Third_Type_Tapes
  * PATH: Third_Type_Tapes/view/
@@ -117,17 +117,17 @@
                     <h4><a id="id_gestion_events" href="<?php echo WEBROOT; ?>gestion_events" >gestion_events</a></h4>
                 </li>
                 <li>
-                    <h4><a id="id_clients" href="<?php echo WEBROOT; ?>clients" >gestion_clients</a></h4>	
+                    <h4><a id="id_clients" href="<?php echo WEBROOT; ?>clients" >gestion_clients</a></h4>
                 </li>
                 <li>
-                    <h4><a id="id_exemplaires" href="<?php echo WEBROOT; ?>exemplaires" >gestion_exemplaires</a></h4>	
+                    <h4><a id="id_exemplaires" href="<?php echo WEBROOT; ?>exemplaires" >gestion_exemplaires</a></h4>
                 </li>
                 <li>
                     <h4><a id="id_comptes" href="<?php echo WEBROOT; ?>comptes" >comptes</a></h4>
                 </li>
                 <?php if($_SESSION['mais qui cela peut-il bien être ?'] === "Fabien"){ ?>
                     <li>
-                        <h4><a class="menuGestionAdmin" id="id_admins" href="<?php echo WEBROOT; ?>admins" >gestion_admins</a></h4>	
+                        <h4><a class="menuGestionAdmin" id="id_admins" href="<?php echo WEBROOT; ?>admins" >gestion_admins</a></h4>
                     </li>
                 <?php } ?>
             </ul>
@@ -135,7 +135,7 @@
     <?php } ?>
 <!------------------------------------------------------------------------------menu general------------------------------------------------------------------------------------------------------------------------------>
     <nav class="menuGeneral" >
-        <ul class="list-inline" >		    	
+        <ul class="list-inline" >
             <li>
                 <h4><a class="menu" id="id_labels" href="<?php echo WEBROOT; ?>labels" >label</a></h4>
             </li>
@@ -149,11 +149,13 @@
                 <h4><a class="menu" id="id_events" href="<?php echo WEBROOT; ?>events">events</a></h4>
             </li>
             <li>
+                <h4><a class="menu" id="id_live_archives" href="<?php echo WEBROOT; ?>live_archives">live_archives</a></h4>
+            </li>
+            <li>
                 <h4><a class="menu" id="id_links" href="<?php echo WEBROOT; ?>links" >links</a></h4>
             </li>
             <li>
                 <h4><a class="menu" id="id_contacts" href="<?php echo WEBROOT; ?>contacts">contact</a></h4>
-            </li>		      
+            </li>
         </ul>
     </nav>
-
