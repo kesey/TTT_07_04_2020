@@ -11,6 +11,6 @@
 
 <br/><br/>
 <p>
-    <iframe scrolling="no" id="hearthis_at_user_third-type-tapes-live-archive" width="100%" height="450" src="https://hearthis.at/third-type-tapes-live-archive/embed/" frameborder="0" allowtransparency>
+    <iframe scrolling="no" id="hearthis_at_user_third-type-tapes-live-archive" width="100%" height="450" src="https://app.hearthis.at/third-type-tapes-live-archive/embed/?hcolor=1143b8" frameborder="0" allowtransparency>
     </iframe>
 </p>
