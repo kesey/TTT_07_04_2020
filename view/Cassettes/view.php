@@ -15,6 +15,11 @@
 <br/><br/>
 <?php if(!$cassette[0]['sold_out']){ ?>
 <!------------------------------------------------------------------------------bouton paiement paypal----------------------------------------------------------------------------------------------------------------------------------------------------------->
+<?php
+	foreach ($shipInfos as $shipInfo) {
+		$shipArr[$shipInfo['nom_destination']] = $shipInfo['montant_frais_de_port'];
+	}
+?>
     <form target="paypal" action="https://www.paypal.com/cgi-bin/webscr" method="post" >
         <input type="hidden" name="cmd" value="_cart">
         <input type="hidden" name="business" value="W5BGTPVHQ5A7S">
@@ -34,20 +39,20 @@
             <tr>
                 <td>
                     <select name="os0">
-                        <option value="France/Belgique">France/Belgique 6,50&euro;</option>
-                        <option value="Europe">Europe 9,50&euro;</option>
-                        <option value="World">World 10,50&euro;</option>
+                        <option value="France/Belgique">France/Belgique <?php echo $shipArr["France/Belgique"] + $cassette[0]["prix"]; ?>&euro;</option>
+                        <option value="Europe">Europe <?php echo $shipArr["Europe"] + $cassette[0]["prix"]; ?>&euro;</option>
+                        <option value="World">World <?php echo $shipArr["World"] + $cassette[0]["prix"]; ?>&euro;</option>
                     </select>    
                 </td>
             </tr>                        
         </table><br/>
         <input type="hidden" name="currency_code" value="EUR">
         <input type="hidden" name="option_select0" value="France/Belgique">
-        <input type="hidden" name="option_amount0" value="6.50">
+        <input type="hidden" name="option_amount0" value="<?php echo $shipArr["France/Belgique"] + $cassette[0]["prix"]; ?>">
         <input type="hidden" name="option_select1" value="Europe">
-        <input type="hidden" name="option_amount1" value="9.50">
+        <input type="hidden" name="option_amount1" value="<?php echo $shipArr["Europe"] + $cassette[0]["prix"]; ?>">
         <input type="hidden" name="option_select2" value="World">
-        <input type="hidden" name="option_amount2" value="10.50">
+        <input type="hidden" name="option_amount2" value="<?php echo $shipArr["World"] + $cassette[0]["prix"]; ?>">
         <input type="hidden" name="option_index" value="0">
         <input type="image" src="https://www.paypalobjects.com/en_US/i/btn/btn_cart_LG.gif" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!">
         <img alt="" border="0" src="https://www.paypalobjects.com/fr_XC/i/scr/pixel.gif" width="1" height="1">
