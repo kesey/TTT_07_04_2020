@@ -32,6 +32,31 @@
     <meta name="description" content="THIRD TYPE TAPES beats &amp; noise tape label">
     <meta name="keywords" content="thirdtypetapes, ThirdTypeTapes, Third Type Tapes, TTT, tape, cassette, label, beats, noise, breakcore, electronique, harsh, indus, C_C, Exoterrism, Terrificolor, CCCPu">
     <meta name="layout" content="front">
+    <?php
+        if (isset($cassette)) {
+          $artistesNames = array();
+          foreach($cassette as $value){ $artistesNames[] = $value['nom']; };
+          $ogTitle = $cassette[0]['code'] . " // " . implode(" ", $artistesNames) . " // " . $cassette[0]['titre'];
+          $ogDescription = strip_tags(html_entity_decode($cassette[0]['description']));
+          $ogImage = WEBROOT . "images/cassette/" . $cassette[0]['image_pochette'];
+        } else if (isset($artiste)) {
+          $ogTitle = $artiste[0]['nom'];
+          $ogDescription = strip_tags(html_entity_decode($artiste[0]['bio']));
+          $ogImage = WEBROOT . "images/artiste/" . $artiste[0]['image_artiste'];
+        } else if (isset($event)) {
+          $ogTitle = $event['date_event_fr'] . " " . $event['titre_event'];
+          $ogDescription = strip_tags(html_entity_decode($event['description_event']));
+          $ogImage = WEBROOT . "images/event/" . $event['image_event'];
+        }
+    ?>
+    <?php if (isset($ogTitle) && isset($ogImage)) { ?>
+        <meta property="og:title" content="<?php echo $ogTitle ?>" />
+        <?php if (isset($ogDescription)) { ?>
+          <meta property="og:description" content="<?php echo $ogDescription ?>" />
+        <?php } ?>
+        <meta property="og:image" content="<?php echo $ogImage ?>" />
+    <?php } ?>
+
 </head>
 <body id="top">
     <h1 class="ref">thirdtypetapes ThirdTypeTapes Third Type Tapes TTT tape label beats noise breakcore electronique harsh dark indus C_C Exoterrism Terrificolor CCCPu N'alov cassette DJ Die Soon Le Matin Yogidata ilill Holzkopf G4Z Nah Rough Americana Mutamassik Morgan Craft 6.R.M.E. Le Syndicat Sturqen</h1>

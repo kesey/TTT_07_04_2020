@@ -8,9 +8,13 @@
  */
 
 ?>
-
-<br/><br/>
-<p>
-    <iframe scrolling="no" id="hearthis_at_user_third-type-tapes-live-archive" width="100%" height="450" src="https://app.hearthis.at/third-type-tapes-live-archive/embed/?hcolor=1143b8" frameborder="0" allowtransparency>
-    </iframe>
-</p>
+<?php require(ROOT.'/view/header.php'); ?>
+<section class="centrer contenir">
+    <div class="wrapper">
+        <br/><br/>
+        <p>
+            <iframe scrolling="no" id="hearthis_at_user_third-type-tapes-live-archive" width="100%" height="450" src="https://app.hearthis.at/third-type-tapes-live-archive/embed/?hcolor=1143b8" frameborder="0" allowtransparency>
+            </iframe>
+        </p>
+    </div>
+</section>

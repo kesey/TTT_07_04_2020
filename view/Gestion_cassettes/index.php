@@ -8,9 +8,12 @@
  */
 
 ?>
-<link href="<?php echo WEBROOT; ?>css/gestionCassettes/index.min.css" rel="stylesheet" type="text/css">
 <!------------------------------------------------------------------------------infos gestionCassettes------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------->
 <?php if(isset($_SESSION['mais qui cela peut-il bien être ?']) && in_array($_SESSION['mais qui cela peut-il bien être ?'], $admins, TRUE)){ ?>
+  <?php require(ROOT.'/view/header.php'); ?>
+  <link href="<?php echo WEBROOT; ?>css/gestionCassettes/index.min.css" rel="stylesheet" type="text/css">
+  <section class="centrer contenir">
+      <div class="wrapper">
     <br/>
     <?php if(isset($_SESSION['info'])){ ?>
         <div class="alert alert-danger informations" role="alert" ><img class="closeInfo closeInformations" src="<?php echo WEBROOT; ?>images/supprimer.png" title="fermeture" alt="crossIcon" ><?php echo $_SESSION['info']; unset($_SESSION['info']); if(isset($_SESSION['infoSave'])){ unset($_SESSION['infoSave']); } ?></div>
@@ -204,6 +207,8 @@
         <?php } ?>
         </ul>
     </div>
+  </div>
+</section>
 <!------------------------------------------------------------------------------access denied---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------->
 <?php } else { ?>
         <META HTTP-EQUIV="Refresh" Content="0; URL=<?php echo WEBROOT; ?>cassettes">
