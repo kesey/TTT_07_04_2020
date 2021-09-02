@@ -9,7 +9,7 @@
 
 ?>
 <br/>
-<h4><?php echo $cassette[0]['code']; ?> // <?php foreach($cassette as $value){ echo $value['nom']." "; } ?> // <?php echo $cassette[0]['titre']; ?></h4>
+<h4 class="cassette_title"><?php echo $cassette[0]['code']; ?> // <?php foreach($cassette as $value){ echo $value['nom']." "; } ?> // <?php echo $cassette[0]['titre']; ?></h4>
     <img class="detailImg zoom" src="<?php echo WEBROOT; ?>images/cassette/<?php echo $cassette[0]['image_pochette']; ?>" title="image_pochette" alt="<?php echo $cassette[0]['titre']; ?>" >
     <span class="detail" ><?php echo nl2br($cassette[0]['description']); ?></span>
 <br/><br/>
@@ -143,5 +143,5 @@
 <?php } ?>
 <!------------------------------------------------------------------------------boutons partage------------------------------------------------------------------------------------------------------------------------------------------------------------------>
 <?php if(!isset($_SESSION['mais qui cela peut-il bien être ?'])){ ?>
-    <div id="socialNetwork"></div>
+    <!-- <div id="socialNetwork"></div> -->
 <?php }
