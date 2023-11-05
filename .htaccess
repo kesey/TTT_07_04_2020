@@ -1,2 +1,2 @@
 RewriteEngine on
-RewriteRule ^([\w\s\-\/\(\)\[\]\{\}\$\^\*\|\?\+\!\#'"&@$£%:;,]*)$ index.php?p=$1 [L]
+RewriteRule ^([\w\s\-\/\(\)\[\]\{\}\$\^\*\|\?\+\!\#'"&@$£%:;,]*)$ index.php?p=$1 [B,L]
