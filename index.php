@@ -19,7 +19,7 @@ define('ROOT', str_replace('index.php','',$_SERVER['SCRIPT_FILENAME']));
 define('MAX_IMG_SIZE', 2097152);
 define('MAX_RAR_SIZE', 524288000);
 define('MAX_STR_LEN', 40);
-define('API_KEY', "AIzaS..."); // replace it by a real key
+define('API_KEY', "AIzaSyAjeWvKPbraXn6DCD4tN7uwAaj_P-omRII"); // replace it by a real key
 
 require(ROOT."core/core.php");
 require(ROOT."core/controller.php");

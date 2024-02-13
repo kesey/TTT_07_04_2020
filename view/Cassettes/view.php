@@ -43,8 +43,7 @@
                       <td>
                           <select name="os0">
                               <option value="France/Belgique">France/Belgique <?php echo $shipArr["France/Belgique"] + $cassette[0]["prix"]; ?>&euro;</option>
-                              <option value="Europe">Europe <?php echo $shipArr["Europe"] + $cassette[0]["prix"]; ?>&euro;</option>
-                              <option value="World">World <?php echo $shipArr["World"] + $cassette[0]["prix"]; ?>&euro;</option>
+                              <option value="Europe/World">Europe/World <?php echo $shipArr["Europe/World"] + $cassette[0]["prix"]; ?>&euro;</option>
                           </select>
                       </td>
                   </tr>
@@ -52,10 +51,8 @@
               <input type="hidden" name="currency_code" value="EUR">
               <input type="hidden" name="option_select0" value="France/Belgique">
               <input type="hidden" name="option_amount0" value="<?php echo $shipArr["France/Belgique"] + $cassette[0]["prix"]; ?>">
-              <input type="hidden" name="option_select1" value="Europe">
-              <input type="hidden" name="option_amount1" value="<?php echo $shipArr["Europe"] + $cassette[0]["prix"]; ?>">
-              <input type="hidden" name="option_select2" value="World">
-              <input type="hidden" name="option_amount2" value="<?php echo $shipArr["World"] + $cassette[0]["prix"]; ?>">
+              <input type="hidden" name="option_select1" value="Europe/World">
+              <input type="hidden" name="option_amount1" value="<?php echo $shipArr["Europe/World"] + $cassette[0]["prix"]; ?>">
               <input type="hidden" name="option_index" value="0">
               <input type="image" src="https://www.paypalobjects.com/en_US/i/btn/btn_cart_LG.gif" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!">
               <img alt="" border="0" src="https://www.paypalobjects.com/fr_XC/i/scr/pixel.gif" width="1" height="1">
@@ -93,7 +90,7 @@
       </form>
       <br/>
       <!------------------------------------------------------------------------------bouton de telechargement--------------------------------------------------------------------------------------------------------------------------------------------------------->
-      <?php if($cassette[0]['download'] /*&& $cassette[0]['sold_out']*/){ ?>
+      <?php if($cassette[0]['download'] && $cassette[0]['sold_out']){ ?>
           <form action="#" method="POST" enctype="multipart/form-data" class="download" >
               <span aria-hidden="true" class="glyphicon glyphicon-download-alt biggerIcon"></span>
               <input type="submit" value="free download" class="downloadBtn biggerText" >

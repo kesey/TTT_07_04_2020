@@ -1,13 +1,14 @@
 -- phpMyAdmin SQL Dump
--- version 5.0.4deb2~bpo10+1
+-- version 4.9.2
 -- https://www.phpmyadmin.net/
 --
--- Hôte : 127.0.0.1
--- Généré le : jeu. 02 sep. 2021 à 18:19
--- Version du serveur :  10.3.29-MariaDB-0+deb10u1
--- Version de PHP : 7.3.29-1+0~20210701.86+debian10~1.gbp7ad6eb
+-- Hôte : 127.0.0.1:3306
+-- Généré le :  mer. 08 avr. 2020 à 18:44
+-- Version du serveur :  10.4.10-MariaDB
+-- Version de PHP :  7.3.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET AUTOCOMMIT = 0;
 START TRANSACTION;
 SET time_zone = "+00:00";
 
@@ -18,7 +19,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Base de données : `xmichaut2_thirdtypetapes`
+-- Base de données :  `thirdtypetapes_c`
 --
 
 -- --------------------------------------------------------
@@ -27,22 +28,24 @@ SET time_zone = "+00:00";
 -- Structure de la table `admin`
 --
 
-CREATE TABLE `admin` (
-  `id_admin` int(100) NOT NULL,
+DROP TABLE IF EXISTS `admin`;
+CREATE TABLE IF NOT EXISTS `admin` (
+  `id_admin` int(100) NOT NULL AUTO_INCREMENT,
   `nom` varchar(255) DEFAULT NULL,
   `identifiant` varchar(255) DEFAULT NULL,
   `mot_de_passe` varchar(255) DEFAULT NULL,
   `suppr` int(1) NOT NULL DEFAULT 0,
   `a_rembourse` decimal(6,2) DEFAULT 0.00,
-  `a_recupere` decimal(6,2) DEFAULT 0.00
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  `a_recupere` decimal(6,2) DEFAULT 0.00,
+  PRIMARY KEY (`id_admin`)
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
 
 --
 -- Déchargement des données de la table `admin`
 --
 
 INSERT INTO `admin` (`id_admin`, `nom`, `identifiant`, `mot_de_passe`, `suppr`, `a_rembourse`, `a_recupere`) VALUES
-(1, 'Fabien', 'kesey', '$2y$10$.NDPtidTuKMUDvVnXlmj..BaOxe2lOSxLDWSSAsCQ.oWh0eYTVf5O', 0, '0.00', '285.46'),
+(1, 'Fabien', 'kesey', '$2y$10$.NDPtidTuKMUDvVnXlmj..BaOxe2lOSxLDWSSAsCQ.oWh0eYTVf5O', 0, '0.00', '133.00'),
 (2, 'Yau', 'causette', '$2y$10$nuQKpeARbw4Y8vKvGyzgCudfK/GIqNNwrnr4C5INpLfeyZI8z1nhC', 1, '0.00', '0.00'),
 (3, 'Xavier', 'cccpu', '$2y$10$RCknuz.0xMcCg1DwGOmNoeqn5kxH7HIcneOWeQb40x7xKoqndkBsi', 0, '0.00', '0.00'),
 (4, 'Edouard', 'c_c', '$2y$10$xx5TG4.pagc7axu8DS/cz.cv8kfW4P/25JjSdd1TwjQ6zVbAtciX2', 0, '0.00', '0.00'),
@@ -54,14 +57,16 @@ INSERT INTO `admin` (`id_admin`, `nom`, `identifiant`, `mot_de_passe`, `suppr`, 
 -- Structure de la table `artiste`
 --
 
-CREATE TABLE `artiste` (
-  `id_artiste` int(11) NOT NULL,
+DROP TABLE IF EXISTS `artiste`;
+CREATE TABLE IF NOT EXISTS `artiste` (
+  `id_artiste` int(11) NOT NULL AUTO_INCREMENT,
   `nom` varchar(50) DEFAULT NULL,
   `image_artiste` varchar(50) DEFAULT NULL,
   `bio` longtext DEFAULT NULL,
   `lien_artiste` varchar(255) DEFAULT NULL,
-  `suppr` int(1) NOT NULL DEFAULT 0
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  `suppr` int(1) NOT NULL DEFAULT 0,
+  PRIMARY KEY (`id_artiste`)
+) ENGINE=InnoDB AUTO_INCREMENT=35 DEFAULT CHARSET=utf8;
 
 --
 -- Déchargement des données de la table `artiste`
@@ -100,9 +105,7 @@ INSERT INTO `artiste` (`id_artiste`, `nom`, `image_artiste`, `bio`, `lien_artist
 (30, 'Letal Ataraxia', 'letal_ataraxia_artist.jpg', '<p><span style=\"font-size: 10pt;\">D-phaz firstly express in a sound catharsis called \"mental agression\" Created in 2001, this project was conceived as a reaction against the surrounding ideological mediocrity. This razor-sharp beats was produced in order to rip up that f\'ing soft consensus governing the post-industrial society. A new project \"letal ataraxia\" rises with the cr&eacute;ation of OverClockHeadz label, more introspective but likewise experimental.</span></p>', 'https://soundcloud.com/overclockheadz/letal-ataraxia-iterative-micro-glitch', 0),
 (31, 'Terrine', 'claire_gapenne.jpg', '<p>\"Claire Gapenne est une artiste musicienne qui performe dans Terrine et dans le duo Me Donner. Passionn&eacute;e de danse, d\'art et de performances elle se produit dans la sc&egrave;ne exp&eacute;rimentale depuis 2012 notamment dans le groupe rock industriel Headwar avec qui elle d&eacute;couvre d&rsquo;autres fa&ccedil;on d&rsquo;aborder la musique. Au sein de l&rsquo;Accueil Froid, elle d&eacute;veloppe de nouveaux projets et organise de nombreux concerts programm&eacute;s.<br /><br />A partir de 2013 elle monte son projet solo Terrine avec lequel elle tourne et d&eacute;veloppe une musique spontan&eacute;e et imm&eacute;diate. Entre no wave et musique improvis&eacute;e, c&rsquo;est &agrave; partir de 2014 qu\'elle forme avec Romain Simon Me Donner, avec lequel ils exp&eacute;rimentent une musique r&eacute;p&eacute;titive, transe, aux sonorit&eacute;s industrielles mais aussi &eacute;lectronique o&ugrave; l\'improvisation jazz n\'est jamais loin.\"</p>', 'http://dubruitetdescoups.blogspot.com/', 0),
 (32, 'Cancellled', 'avatars-Cancellled.jpg', '<p>Signaux &eacute;lectroniques non binaire sculpt&eacute;s en forme de silex.<br />Yann Leguay : &eacute;lectronique<br />Aymeric de Tapol : &eacute;lectronique</p>\r\n<p><a href=\"http://www.phonotopy.org\" target=\"_blank\">www.phonotopy.org</a></p>\r\n<p><a href=\"https://aymeridetapol.bandcamp.com/\" target=\"_blank\">aymeridetapol.bandcamp.com</a> </p>', 'https://soundcloud.com/cancelled404', 0),
-(33, 'The Angstromers', 'The_Angstromers_600.jpg', '<p>The &Aring;ngstromers (Fr&eacute;d&eacute;ric Alstadt &amp; Nico \'Ripit\' Esterle) return from their ritualistic collab with Haiti\'s Chouk Bwa to play with the spirits that continue to haunt the machinic wetware. The Path to Danach is the duo\'s Third Type Tapes debut, Ripit having released \'Lvnar Xtorxion\' in 2015. The release bends postindustrial timbres echo\'d out on rhythmic pulses that take time to settle in. The &Aring;ngstromers offer laser-precision sound design coated with a silver lining of distortion. These modular grooves burn slow.<br />-Lendl Barcelos</p>', 'https://choukbwa.bandcamp.com/', 0),
-(34, 'Pissasphalto', 'pissasphalto.jpg', '<p id=\"docs-internal-guid-ae925c3d-7fff-7844-552d-b2ddd69ff15e\" dir=\"ltr\" style=\"line-height: 1.38; margin-top: 0pt; margin-bottom: 0pt;\"><span style=\"font-size: 10pt; font-family: helvetica, arial, sans-serif; color: #ffffff; background-color: transparent; font-weight: 400; font-style: normal; font-variant: normal; text-decoration: none; vertical-align: baseline; white-space: pre-wrap;\">Pissasphalto is a project of Dimitrij Pugliese.</span></p>\r\n<p dir=\"ltr\" style=\"line-height: 1.38; margin-top: 0pt; margin-bottom: 0pt;\"><span style=\"font-size: 10pt; font-family: helvetica, arial, sans-serif; color: #ffffff; background-color: transparent; font-weight: 400; font-style: normal; font-variant: normal; text-decoration: none; vertical-align: baseline; white-space: pre-wrap;\">It is a product of city pollution and human waste. A soundtrack to dream of that comfort zone that are squats in post-industrial cities.&nbsp;</span></p>\r\n<p dir=\"ltr\" style=\"line-height: 1.38; margin-top: 0pt; margin-bottom: 0pt;\"><span style=\"font-size: 10pt; font-family: helvetica, arial, sans-serif; color: #ffffff; background-color: transparent; font-weight: 400; font-style: normal; font-variant: normal; text-decoration: none; vertical-align: baseline; white-space: pre-wrap;\">Bringing you back to the warmth and, sometimes, cold of that soft cocoon of piss and asphalt.</span></p>', 'https://pissasphalto.bandcamp.com/', 0),
-(35, '2Mo', '2Mo_PLS_2019_600.jpg', '<p><span id=\"docs-internal-guid-964f4daa-7fff-b6ff-7743-ab42fc807502\" style=\"font-size: 11pt; font-family: Arial; color: #ffffff; background-color: #000000; font-weight: 400; font-style: normal; font-variant: normal; text-decoration: none; vertical-align: baseline; white-space: pre-wrap;\">Les aventures de Pierre et Fabien, deux quadrag&eacute;naires paum&eacute;s et ivrognes qui errent dans une zone portuaire industrielle sans vie.</span></p>', 'https://2-mo.bandcamp.com/releases', 0);
+(33, 'The Angstromers', 'The_Angstromers_600.jpg', '<p>The &Aring;ngstromers (Fr&eacute;d&eacute;ric Alstadt &amp; Nico \'Ripit\' Esterle) return from their ritualistic collab with Haiti\'s Chouk Bwa to play with the spirits that continue to haunt the machinic wetware. The Path to Danach is the duo\'s Third Type Tapes debut, Ripit having released \'Lvnar Xtorxion\' in 2015. The release bends postindustrial timbres echo\'d out on rhythmic pulses that take time to settle in. The &Aring;ngstromers offer laser-precision sound design coated with a silver lining of distortion. These modular grooves burn slow.<br />-Lendl Barcelos</p>', 'https://choukbwa.bandcamp.com/', 0);
 
 -- --------------------------------------------------------
 
@@ -110,8 +113,9 @@ INSERT INTO `artiste` (`id_artiste`, `nom`, `image_artiste`, `bio`, `lien_artist
 -- Structure de la table `cassette`
 --
 
-CREATE TABLE `cassette` (
-  `id_cassette` int(11) NOT NULL,
+DROP TABLE IF EXISTS `cassette`;
+CREATE TABLE IF NOT EXISTS `cassette` (
+  `id_cassette` int(11) NOT NULL AUTO_INCREMENT,
   `titre` varchar(50) DEFAULT NULL,
   `code` varchar(20) DEFAULT NULL,
   `longueur` varchar(10) DEFAULT NULL,
@@ -127,51 +131,49 @@ CREATE TABLE `cassette` (
   `sold_out` int(1) NOT NULL DEFAULT 0,
   `suppr` int(1) NOT NULL DEFAULT 0,
   `publier` int(1) DEFAULT 0,
-  `nombre_exemplaire` int(255) DEFAULT 75
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  `nombre_exemplaire` int(255) DEFAULT 75,
+  PRIMARY KEY (`id_cassette`)
+) ENGINE=InnoDB AUTO_INCREMENT=37 DEFAULT CHARSET=utf8;
 
 --
 -- Déchargement des données de la table `cassette`
 --
 
 INSERT INTO `cassette` (`id_cassette`, `titre`, `code`, `longueur`, `description`, `lien_bandcamp`, `lien_soundcloud`, `lien_youtube`, `date_sortie`, `image_pochette`, `download`, `nombre_de_download`, `prix`, `sold_out`, `suppr`, `publier`, `nombre_exemplaire`) VALUES
-(1, ' 3Tc 00', 'TTT00', 'C60', '<p><strong>side ():</strong><br /> Falcon ///:: DeruXx<br /> G4z ///:: Zirconium<br /> Jere ///:: Angoisse &agrave; l\'a&eacute;oroport<br /> YogiData ///::OT2<br /> C_C ///::666Lines<br /> Terrificolor - C_C ///::tractopelle<br /> Exoterrism ///:: <span id=\"package_description_0\" class=\"peekaboo-text\">xtr_(8)</span></p>\r\n<p><span class=\"peekaboo-text\"><strong>side []:</strong><br /> Tomoaki Soma</span><span class=\"bcTruncateMore\"><span class=\"peekaboo-text\"> ///::tokage<br /> Orgasm Denial ///::OD-DCPR<br /> Sin:Ned ///:: multipoles_type01<br /> Zorei///::DRGA<br /> un escargot vide? /// :: d&eacute;j&agrave; vu<br /> Tomas Tello ///:: their way</span></span></p>\r\n<p><strong>3Tc#00</strong><br /> <span style=\"background-color: #000000; color: #ffffff;\">TTT\'s first tape compilation, a little selection of sounds from TTT\'s galaxy.<br style=\"clear: none;\" /> The very limited hand made tape edition is now sold-out, feel free to download and share the digital version with as much lifeforms as you can in universe.</span></p>', NULL, 'https://w.soundcloud.com/player/?url=https\\\\\\\\\\\\\\\\%3A//api.soundcloud.com/tracks/114202004&amp;color=0066cc&amp;auto_play=false&amp;hide_related=false&amp;show_comments=true&amp;show_user=true&amp;show_reposts=false', '', '2012-12-12', 'thirdtypetapes_3Tc00.jpg', 'ttt00_compil.rar', 74, '5.00', 1, 0, 1, 75),
+(1, ' 3Tc 00', 'TTT00', 'C60', '<p><strong>side ():</strong><br /> Falcon ///:: DeruXx<br /> G4z ///:: Zirconium<br /> Jere ///:: Angoisse &agrave; l\'a&eacute;oroport<br /> YogiData ///::OT2<br /> C_C ///::666Lines<br /> Terrificolor - C_C ///::tractopelle<br /> Exoterrism ///:: <span id=\"package_description_0\" class=\"peekaboo-text\">xtr_(8)</span></p>\r\n<p><span class=\"peekaboo-text\"><strong>side []:</strong><br /> Tomoaki Soma</span><span class=\"bcTruncateMore\"><span class=\"peekaboo-text\"> ///::tokage<br /> Orgasm Denial ///::OD-DCPR<br /> Sin:Ned ///:: multipoles_type01<br /> Zorei///::DRGA<br /> un escargot vide? /// :: d&eacute;j&agrave; vu<br /> Tomas Tello ///:: their way</span></span></p>\r\n<p><strong>3Tc#00</strong><br /> <span style=\"background-color: #000000; color: #ffffff;\">TTT\'s first tape compilation, a little selection of sounds from TTT\'s galaxy.<br style=\"clear: none;\" /> The very limited hand made tape edition is now sold-out, feel free to download and share the digital version with as much lifeforms as you can in universe.</span></p>', NULL, 'https://w.soundcloud.com/player/?url=https\\\\\\\\\\\\\\\\%3A//api.soundcloud.com/tracks/114202004&amp;color=0066cc&amp;auto_play=false&amp;hide_related=false&amp;show_comments=true&amp;show_user=true&amp;show_reposts=false', '', '2012-12-12', 'thirdtypetapes_3Tc00.jpg', 'ttt00_compil.rar', 57, '5.00', 1, 0, 1, 75),
 (2, 'Retro Action', 'TTT01', 'C60', '<p><strong>Side A</strong><br /> 1.0-0-1<br /> 2.D-Col&nbsp;&nbsp; &nbsp;<br /> 3.0-0-7 Dub&nbsp;&nbsp; &nbsp;<br /> 4.Cat Dance</p>\r\n<p><strong>Side B&nbsp;&nbsp;</strong> &nbsp;<br /> 5.So Devil&nbsp;&nbsp; &nbsp;<br /> 6.Ru-Nc-Ut&nbsp;&nbsp; &nbsp;<br /> 7.To S_3&nbsp;&nbsp; &nbsp;<br /> 8.0-0-6&nbsp;&nbsp; &nbsp;<br /> 9.NNNNN&nbsp;&nbsp; &nbsp;<br /> 10.0-0-2</p>\r\n<p><strong>C_C : Retro Action</strong><br /> <span id=\"yui_3_7_2_1_1381184761487_7332\" style=\"background-color: #000000; color: #ffffff;\">After releasing a couple of tunes on DJ Scotch Egg\'s Small But Hard label here is a mindblowing debut LP. A face metling, ear piercing, neuron breaking, full analog distortion based work from french artist Eduardo Ribuyo aka C_C. An incredible semi-improvised work on textures with pouding beats and deep progressive structures...</span></p>\r\n<p><span style=\"background-color: #000000; color: #ffffff;\"><br style=\"clear: none;\" /> Released 03 October 2013 in collaboration between the mighty Bedroom Research and TTT<br style=\"clear: none;\" /> Digital artwork by Piratio, silkprinted version by Arrache-toi-un-Oeil</span></p>', '', 'https://w.soundcloud.com/player/?url=https\\\\\\\\%3A//api.soundcloud.com/tracks/114204025&amp;color=0066cc&amp;auto_play=false&amp;hide_related=false&amp;show_comments=true&amp;show_user=true&amp;show_reposts=false', '', '2013-10-03', 'c_c_retro_action.jpg', NULL, 0, '5.00', 1, 0, 1, 75),
 (3, 'BeachBlock:CockBlock', 'TTT02', 'C60', '<p><strong>SIDE A : YOGI DATA</strong><br /> 30min-BeachBlock</p>\r\n<p><strong>SIDE B : EXOTERRISM</strong><br /> 30min-CockBlock</p>\r\n<p><span id=\"yui_3_7_2_1_1381184761487_7356\" style=\"background-color: #000000; color: #ffffff;\">Split release in ultra-limited edition, hand made duplication and cover art.</span></p>', '', '', '', '2013-10-06', 'beachblock_cockblock.jpg', NULL, 0, '5.00', 1, 0, 1, 75),
 (4, 'Nalov Cessange', 'TTT03', 'C60', '<p><strong>SIDE A</strong><br /> 1.unamed<br /> 2.unamed<br /> 3.unamed<br /> 4.unamed<br /> 5.unamed</p>\r\n<p><strong>SIDE B</strong><br /> live in Cessange for Yan Jung</p>\r\n<p><strong>SIDE A : Nalov : Nalov</strong><br /> This is the craziest album of the 21st century.Your grandfather would have been proud to hear that this trashed garage punk attitude still exists in 2013. Careless about commercialization Mathieu (BB) and Mathieu (YogiData) are two most talented and most imaginative artists of the moment. Nhalov is going to be as big as they sound. They are significantly against this whole trend of uniformed style off mass crap consumption.</p>\r\n<p><strong>SIDE B : Exoterrism+Mitraphreq : Cessange</strong><br /> live in Cessange for Yan Jung</p>\r\n<p><span id=\"yui_3_7_2_1_1381184761487_7360\" style=\"background-color: #000000; color: #ffffff;\">Split release in ultra-limited edition, hand made duplication and cover art.</span></p>', '', '', '', '2013-10-07', 'nalov_cessange.jpg', NULL, 0, '5.00', 1, 0, 1, 75),
-(5, 'the curse of yonoyon ( live at Budokan )', 'TTT04', 'C40', '<p><strong>SIDE A</strong></p>\r\n<p>1. Sabu Chan Ft. Ex-Dj Hotel<br /> 2. The Curse Of YONOYON (Extended Version)<br /> 3. Toxic Avenger II<br /> 4. Kichi Guy<br /> 5. Dancho Tatari 0<br /> 6. Dancho Tatari<br /> 7. Ultra Air Catch<br /> 8. United Forces<br /> 9. Aja vs Kill<br /> 10. Cockin\' On Heaven\'s Door</p>\r\n<p><strong>SIDE B</strong></p>\r\n<p>11. Keep Oreo<br /> 12. Rock\'n\'Roll Piero Part1/2 HD<br /> 13. Ja Ranti<br /> 14. Ja Ranti 2<br /> 15. Das Anesan Ft. Ex-Dj Hotel<br /> 16. Erison Pella<br /> 17. Hanayashiki<br /> 18. Techno Cut<br /> 19. Brother Kone Ft. Ex-Dj Hotel<br /> 20. Tousatu Dancho</p>\r\n<p><strong>Dj Die Soon - The Curse of Yonoyon ( live at Budokan )</strong></p>\r\n<p><span id=\"yui_3_7_2_1_1381184761487_7373\" style=\"background-color: #000000; color: #ffffff;\">A fantomatic and fantastic piece of matter cursed by Dj Die Soon. This piece of work is dommed by dirty distorted breaks, heavy wacking grooves and hidden messages which you would probably hear only if you are still alive until the end of the tape.<br style=\"clear: none;\" /> Dj Die Soon aka Dingy Dysu, is a hiphop and noisy dance DJ and beatmaker who lives in Berlin. Appart from his frequent DJ and live performances, he is also an active member of the Small But Hard label.<br style=\"clear: none;\" /> <br style=\"clear: none;\" /> Limited 75 hand-numbered tapes edition on Third Type Tapes, released on october 8, 2013.<br style=\"clear: none;\" /> Artwork by <a href=\"https://www.facebook.com/CCCPu/\" target=\"_blank\">CCCPu</a>, silkprinted by Bruce Silkscreen.</span></p>', 'https://bandcamp.com/EmbeddedPlayer/album=3389505988/size=large/bgcol=ffffff/linkcol=0687f5/tracklist=false/artwork=small/transparent=true/', 'https://w.soundcloud.com/player/?url=https\\\\\\\\\\\\\\\\\\%3A//api.soundcloud.com/tracks/113926340&amp;color=0066cc&amp;auto_play=false&amp;hide_related=false&amp;show_comments=true&amp;show_user=true&amp;show_reposts=false', '', '2013-10-08', 'djdiesoon_the_curse_of_yonoyon.jpg', 'die_soon_the_curse_of_yonoyon.rar', 64, '6.00', 1, 0, 1, 75),
-(6, 'N50', 'TTT05', 'C50', '<p><strong>SIDE A</strong><br /> Holiday on ice<br /> Money<br /> Cult Shock<br /> Schmckr<br /> Seth</p>\r\n<p><strong>SIDE B</strong><br /> Schmckr d (with C_C)<br /> Tulpa<br /> PLS (with G4Z)<br /> N&deg;50</p>\r\n<p><strong>Terrificolor - N50</strong></p>\r\n<p>N50 is Terrificolor\'s most experimental release. Juggling with elements of idm,breakcore, feedback distortion, and lots of noise, assembling all into a retro futuristic feel of high speed algorithmic complex patterns. It is one of the most rythmically complexed release ever found on tape. At the same time chaotic and martial, industrial and clean.<br /> <br /> <span id=\"yui_3_7_2_1_1381184761487_7373\" style=\"background-color: #000000; color: #ffffff;\">Limited 75 hand-numbered tapes edition on Third Type Tapes, released on december 10, 2013.<br style=\"clear: none;\" /> Artwork by <a href=\"https://www.facebook.com/CCCPu/\" target=\"_blank\">CCCPu</a>, silkprinted by Bruce Silkscreen</span></p>', 'https://bandcamp.com/EmbeddedPlayer/album=2708625614/size=large/bgcol=ffffff/linkcol=0687f5/tracklist=false/artwork=small/transparent=true/', 'https://w.soundcloud.com/player/?url=https\\\\\\\\\\\\\\\\\\%3A//api.soundcloud.com/tracks/124697413&amp;color=0066cc&amp;auto_play=false&amp;hide_related=false&amp;show_comments=true&amp;show_user=true&amp;show_reposts=false', '', '2013-12-10', 'terrificolor_numero_50.jpg', 'terrificolor_n50.rar', 48, '6.00', 1, 0, 1, 75),
-(7, 'Chnasons', 'TTT06', 'C80', '<p><strong>Side A</strong></p>\r\n<p>Allegiance to Cognet<br /> Carole Bouquet<br /> Puteaux en force<br /> Bambina<br /> A l&rsquo;emporte Pine<br /> Justin Bieber, tout simplement<br /> Manger (feat. Sainte Pop)<br /> Le Marathon de la Bible<br /> Message de d&eacute;tresse<br /> Mon Cheval<br /> No Justice<br /> Binoue</p>\r\n<p><strong>Side B</strong></p>\r\n<p>Domin8<br /> Useless<br /> Fog of War<br /> Rater sa Vie<br /> Night Morning<br /> Locker<br /> Brave Sir Robin<br /> Bavure polici&egrave;re<br /> City Funk<br /> Probl&egrave;mes d&rsquo;ob&eacute;sit&eacute;<br /> Saoul&eacute;<br /> Priv&eacute; de Joie</p>\r\n<p><strong>LE Matin : CHNASONS</strong><br /> Le Matin aka Error by his real name Charles Torris is a Berlin based french pioneer of the Bugcore movement during early millennium as Error.<br /> Chnasons is a 90 minutes masterpiece materialising his new alienating retro-electro revival, reminding 80\'s popular musical genre like synthpop or synthwave with a touch of&nbsp; lyrical and cynical humor and formant processed vocoder.</p>\r\n<p>Supported by crystal-clear production, Chnasons is definitely one of the most condensed work of the genre.<br /> <br /> <span id=\"yui_3_7_2_1_1381184761487_7373\" style=\"background-color: #000000; color: #ffffff;\">Limited 75 hand-numbered tapes edition on Third Type Tapes, released on January 15, 2014.<br style=\"clear: none;\" /> Artwork by <a href=\"https://www.facebook.com/CCCPu/\" target=\"_blank\">CCCPu</a>, silkprinted by Bruce Silkscreen.</span></p>', 'https://bandcamp.com/EmbeddedPlayer/album=3888322515/size=large/bgcol=ffffff/linkcol=0687f5/tracklist=false/artwork=small/transparent=true/', 'https://w.soundcloud.com/player/?url=https\\\\\\\\\\\\\\\\%3A//api.soundcloud.com/tracks/133690982&amp;color=0066cc&amp;auto_play=false&amp;hide_related=false&amp;show_comments=true&amp;show_user=true&amp;show_reposts=false', 'https://www.youtube.com/embed/BY64vKGIUtc', '2014-01-15', 'le_matin_chnasons.jpg', 'le_matin_chnasons.rar', 29, '6.00', 1, 0, 1, 75),
-(8, 'Rate - Beach Block', 'TTT07', 'C60', '<p><strong>Side A / N\'ALOV : Rate</strong><br /> <br /> We hypostatize information into objects. Rearrangement of objects is change in the content of the information ; the message has changed. This is a language which we have lost the ability to read. We ourselves are a part of this language ; changes in us are changes in the content of the information. We ourselves are information-rich ; information enters us, is processed and is then projected outward once more, now in an altered form. We are not aware that we are doing this, that in fact this is all we are doing.</p>\r\n<p><strong>Side B / YOGIDATA : Beach Block</strong><br /> <br /> Hectic nuclearized sonic environment with custom hardware and acid-coded software inspired by raw data.</p>\r\n<p><br /> <span id=\"yui_3_7_2_1_1381184761487_7373\" style=\"background-color: #000000; color: #ffffff;\">Limited 75 hand-numbered tapes edition on Third Type Tapes, released on February 19, 2014.<br style=\"clear: none;\" /> Artwork by <a href=\"https://www.facebook.com/CCCPu/\" target=\"_blank\">CCCPu</a></span></p>', 'https://bandcamp.com/EmbeddedPlayer/album=1837195674/size=large/bgcol=ffffff/linkcol=0687f5/tracklist=false/artwork=small/transparent=true/', 'https://w.soundcloud.com/player/?url=https\\\\\\\\%3A//api.soundcloud.com/tracks/138178399&amp;color=0066cc&amp;auto_play=false&amp;hide_related=false&amp;show_comments=true&amp;show_user=true&amp;show_reposts=false', '', '2014-02-19', 'nalov_yogidata_rate_beach_block.jpg', 'nalov_yogidata.rar', 24, '5.00', 1, 0, 1, 75),
-(9, 'Nalov - Cyclope', 'TTT08', 'C80', '<p><strong>Side A : N\'ALOV - Nalov</strong><br />nalov<br /><br /><strong>Side B : ilill - cyclope</strong><br />1.d&eacute;chets<br />2.collages<br />3.marelle<br />4.rayures<br />5.d&eacute;coll&eacute;<br />6.blop</p>\r\n<p><span id=\"yui_3_7_2_1_1381184761487_7373\" style=\"background-color: #000000; color: #ffffff;\">Limited 75 hand-numbered tapes edition on Third Type Tapes, released on April 06, 2014.<br style=\"clear: none;\" /> Artwork by <a href=\"https://www.facebook.com/CCCPu/\" target=\"_blank\">CCCpu</a></span></p>', '', 'https://w.soundcloud.com/player/?url=https\\\\\\\\%3A//api.soundcloud.com/tracks/143504183&amp;color=0066cc&amp;auto_play=false&amp;hide_related=false&amp;show_comments=true&amp;show_user=true&amp;show_reposts=false', '', '2014-04-06', 'nalov_ilill_nalov_cyclope.jpg', 'ilill_Nalov.rar', 47, '5.00', 1, 0, 1, 75),
-(10, 'Brutalist Mantras - Manner of Speaking', 'TTT09', 'C60', '<p><strong>SIDE A :</strong><br /><strong> Brutalist Mantras</strong></p>\r\n<p>a/etheric surgery<br /> b/the cumming of the cosmic christ<br /> c/fuck the rolling stones</p>\r\n<p><strong>SIDE B :</strong><br /><strong> Manner of Speaking</strong></p>\r\n<p>a/turkey cop <br />b/actual hard knocks&nbsp; <br />c/searching for a<br />license to have fun&nbsp; <br />d/off-duty cop</p>\r\n<p>Limited 75 hand-numbered tapes edition on Third Type Tapes, released on april 19, 2014.<br /> <span id=\"yui_3_7_2_1_1381184761487_7373\" style=\"background-color: #000000; color: #ffffff;\">Artwork by <a href=\"https://www.facebook.com/CCCPu/\" target=\"_blank\">CCCPu</a></span>.</p>', '', 'https://w.soundcloud.com/player/?url=https\\\\\\\\\\\\\\\\%3A//api.soundcloud.com/tracks/146049002&amp;color=0066cc&amp;auto_play=false&amp;hide_related=false&amp;show_comments=true&amp;show_user=true&amp;show_reposts=false', '', '2014-04-19', 'holzkopf_brutalist_mantras.jpg', 'holzkopf_brutalist_manner.rar', 35, '5.00', 1, 0, 1, 75),
-(11, 'Schizophrenia', 'TTT10', 'C60', '<p><strong>Side A :</strong><br /> Schizophrenia part1<br /> <br /> <strong>Side B :</strong><br /> Schizophrenia part2<br /> <br /> <br /> Limited 75 hand-numbered tapes edition on Third Type Tapes, released on june 10, 2014.<br /> Artwork by <a href=\"https://www.facebook.com/CCCPu/\" target=\"_blank\">CCCPu</a>.</p>', 'https://bandcamp.com/EmbeddedPlayer/album=2970894435/size=large/bgcol=ffffff/linkcol=0687f5/tracklist=false/artwork=small/transparent=true/', 'https://w.soundcloud.com/player/?url=https\\\\\\%3A//api.soundcloud.com/tracks/151636527&amp;color=0066cc&amp;auto_play=false&amp;hide_related=false&amp;show_comments=true&amp;show_user=true&amp;show_reposts=false', 'https://www.youtube.com/embed/PveN_7-Wl_g', '2014-06-10', 'g4z_schizophrenia.jpg', 'g4z_schizophrenia.rar', 23, '5.00', 1, 0, 1, 75),
-(12, 'EU Mixtape1', 'TTT11', 'C50', '<p><strong>Side A</strong><br /><strong> Side B</strong><br /> <br /> Limited 75 hand-numbered tapes edition on Third Type Tapes, released on oct 10, 2014.<br /> Artwork by <a href=\"https://www.facebook.com/CCCPu/\" target=\"_blank\">CCCPu</a>.</p>', 'https://bandcamp.com/EmbeddedPlayer/album=565850426/size=large/bgcol=ffffff/linkcol=0687f5/tracklist=false/artwork=small/transparent=true/', 'https://w.soundcloud.com/player/?url=https\\\\\\%3A//api.soundcloud.com/tracks/170303738&amp;color=0066cc&amp;auto_play=false&amp;hide_related=false&amp;show_comments=true&amp;show_user=true&amp;show_reposts=false', 'https://www.youtube.com/embed/FX8xp2eDMU0', '2014-10-10', 'nah_EU_mixtape1.jpg', 'nah_EU_mixtape1.rar', 65, '5.00', 1, 0, 1, 75),
-(13, 'RA DUE: Metallum Gravis', 'TTT12', 'C25', '<p><strong>Side A</strong><br /> 1. Annunciation<br /> 2. P. Melank<br /> 3. Mini Vamp<br /> 4. Sal Ammoniac</p>\r\n<p><strong>Side B</strong><br /> 5. BLX RX<br /> 6. Ape<br /> 7. Feriano<br /> 8. 25 cent</p>\r\n<p>Limited 75 hand-numbered tapes edition on Third Type Tapes, released on november 20, 2014.<br /> Artwork by <a href=\"http://www.cccpu.net\" target=\"_blank\">CCCPu</a>.</p>', 'https://bandcamp.com/EmbeddedPlayer/album=1280547571/size=large/bgcol=ffffff/linkcol=0687f5/tracklist=false/artwork=small/transparent=true/', 'https://w.soundcloud.com/player/?url=https\\\\%3A//api.soundcloud.com/tracks/177787577&amp;color=0066cc&amp;auto_play=false&amp;hide_related=false&amp;show_comments=true&amp;show_user=true&amp;show_reposts=false', 'https://www.youtube.com/embed/qt0BsZXdcRg', '2014-11-20', 'ra-due-metallum-gravis.jpg', 'ra-due-metallum-gravis.rar', 39, '5.00', 1, 0, 1, 75),
-(14, 'Les Voyages du Masque', 'TTT13', 'C30', '<p><strong>Side A:</strong></p>\r\n<p>1/GUIOTO<br /> 2/SAINT DEVIANT<br /> 3/POUSSIN AUX ENFERS<br /> 4/TEATRO DI MORTE<br /> 5/CHEVAL CRUCIFIE<br /> 6/UN SANTO OSCURO</p>\r\n<p><strong>Side B:</strong></p>\r\n<p>7/PENIS TRANCHES<br /> 8/ECARTEUR HURLANT<br /> 9/GOUIHT<br /> 10/AKHMATOVA<br /> 11/HUMOUR ET CRAINTE</p>\r\n<p>Les voyages du masque is a fantastic tale of distortion broken beats and violent feedbacks.<br /> <br /> Warm bass saturations, accompanied by hypnotic drones over an obscure and enigmatic wave, bursting detailed frequencies inside your mind, transcending the movements of Yann Lefeuvre. His infinite stream of live improvised flow betrays his past affinity with dub and hip hop .<br /> <br /> After releases on Nohmad, Government thirteen, and Stubenmusic, Thirdtypetapes is very proud and honoured to announce the release of a limited tapes edition of 6rme.<br /> <br /> Limited 75 hand-numbered tapes edition on Third Type Tapes, released on Mars 20, 2015.<br /> Artwork by <a href=\"https://www.facebook.com/CCCPu/\" target=\"_blank\">CCCPu</a>.</p>', 'https://bandcamp.com/EmbeddedPlayer/album=2983608040/size=large/bgcol=ffffff/linkcol=0687f5/tracklist=false/artwork=small/transparent=true/', 'https://w.soundcloud.com/player/?url=https\\\\\\\\\\%3A//api.soundcloud.com/tracks/194329177&amp;color=0066cc&amp;auto_play=false&amp;hide_related=false&amp;show_comments=true&amp;show_user=true&amp;show_reposts=false', 'https://www.youtube.com/embed/Zr5AIHv8-3I', '2015-03-20', '6-r-m-e_les_voyages_du_masque.jpg', '6RME_les_voyages_du_masque.rar', 49, '5.00', 1, 0, 1, 75),
+(5, 'the curse of yonoyon ( live at Budokan )', 'TTT04', 'C40', '<p><strong>SIDE A</strong></p>\r\n<p>1. Sabu Chan Ft. Ex-Dj Hotel<br /> 2. The Curse Of YONOYON (Extended Version)<br /> 3. Toxic Avenger II<br /> 4. Kichi Guy<br /> 5. Dancho Tatari 0<br /> 6. Dancho Tatari<br /> 7. Ultra Air Catch<br /> 8. United Forces<br /> 9. Aja vs Kill<br /> 10. Cockin\' On Heaven\'s Door</p>\r\n<p><strong>SIDE B</strong></p>\r\n<p>11. Keep Oreo<br /> 12. Rock\'n\'Roll Piero Part1/2 HD<br /> 13. Ja Ranti<br /> 14. Ja Ranti 2<br /> 15. Das Anesan Ft. Ex-Dj Hotel<br /> 16. Erison Pella<br /> 17. Hanayashiki<br /> 18. Techno Cut<br /> 19. Brother Kone Ft. Ex-Dj Hotel<br /> 20. Tousatu Dancho</p>\r\n<p><strong>Dj Die Soon - The Curse of Yonoyon ( live at Budokan )</strong></p>\r\n<p><span id=\"yui_3_7_2_1_1381184761487_7373\" style=\"background-color: #000000; color: #ffffff;\">A fantomatic and fantastic piece of matter cursed by Dj Die Soon. This piece of work is dommed by dirty distorted breaks, heavy wacking grooves and hidden messages which you would probably hear only if you are still alive until the end of the tape.<br style=\"clear: none;\" /> Dj Die Soon aka Dingy Dysu, is a hiphop and noisy dance DJ and beatmaker who lives in Berlin. Appart from his frequent DJ and live performances, he is also an active member of the Small But Hard label.<br style=\"clear: none;\" /> <br style=\"clear: none;\" /> Limited 75 hand-numbered tapes edition on Third Type Tapes, released on october 8, 2013.<br style=\"clear: none;\" /> Artwork by <a href=\"https://www.facebook.com/CCCPu/\" target=\"_blank\">CCCPu</a>, silkprinted by Bruce Silkscreen.</span></p>', 'https://bandcamp.com/EmbeddedPlayer/album=3389505988/size=large/bgcol=ffffff/linkcol=0687f5/tracklist=false/artwork=small/transparent=true/', 'https://w.soundcloud.com/player/?url=https\\\\\\\\\\\\\\\\\\%3A//api.soundcloud.com/tracks/113926340&amp;color=0066cc&amp;auto_play=false&amp;hide_related=false&amp;show_comments=true&amp;show_user=true&amp;show_reposts=false', '', '2013-10-08', 'djdiesoon_the_curse_of_yonoyon.jpg', 'die_soon_the_curse_of_yonoyon.rar', 53, '6.00', 1, 0, 1, 75),
+(6, 'N50', 'TTT05', 'C50', '<p><strong>SIDE A</strong><br /> Holiday on ice<br /> Money<br /> Cult Shock<br /> Schmckr<br /> Seth</p>\r\n<p><strong>SIDE B</strong><br /> Schmckr d (with C_C)<br /> Tulpa<br /> PLS (with G4Z)<br /> N&deg;50</p>\r\n<p><strong>Terrificolor - N50</strong></p>\r\n<p>N50 is Terrificolor\'s most experimental release. Juggling with elements of idm,breakcore, feedback distortion, and lots of noise, assembling all into a retro futuristic feel of high speed algorithmic complex patterns. It is one of the most rythmically complexed release ever found on tape. At the same time chaotic and martial, industrial and clean.<br /> <br /> <span id=\"yui_3_7_2_1_1381184761487_7373\" style=\"background-color: #000000; color: #ffffff;\">Limited 75 hand-numbered tapes edition on Third Type Tapes, released on december 10, 2013.<br style=\"clear: none;\" /> Artwork by <a href=\"https://www.facebook.com/CCCPu/\" target=\"_blank\">CCCPu</a>, silkprinted by Bruce Silkscreen</span></p>', 'https://bandcamp.com/EmbeddedPlayer/album=2708625614/size=large/bgcol=ffffff/linkcol=0687f5/tracklist=false/artwork=small/transparent=true/', 'https://w.soundcloud.com/player/?url=https\\\\\\\\\\\\\\\\\\%3A//api.soundcloud.com/tracks/124697413&amp;color=0066cc&amp;auto_play=false&amp;hide_related=false&amp;show_comments=true&amp;show_user=true&amp;show_reposts=false', '', '2013-12-10', 'terrificolor_numero_50.jpg', 'terrificolor_n50.rar', 36, '6.00', 1, 0, 1, 75),
+(7, 'Chnasons', 'TTT06', 'C80', '<p><strong>Side A</strong></p>\r\n<p>Allegiance to Cognet<br /> Carole Bouquet<br /> Puteaux en force<br /> Bambina<br /> A l&rsquo;emporte Pine<br /> Justin Bieber, tout simplement<br /> Manger (feat. Sainte Pop)<br /> Le Marathon de la Bible<br /> Message de d&eacute;tresse<br /> Mon Cheval<br /> No Justice<br /> Binoue</p>\r\n<p><strong>Side B</strong></p>\r\n<p>Domin8<br /> Useless<br /> Fog of War<br /> Rater sa Vie<br /> Night Morning<br /> Locker<br /> Brave Sir Robin<br /> Bavure polici&egrave;re<br /> City Funk<br /> Probl&egrave;mes d&rsquo;ob&eacute;sit&eacute;<br /> Saoul&eacute;<br /> Priv&eacute; de Joie</p>\r\n<p><strong>LE Matin : CHNASONS</strong><br /> Le Matin aka Error by his real name Charles Torris is a Berlin based french pioneer of the Bugcore movement during early millennium as Error.<br /> Chnasons is a 90 minutes masterpiece materialising his new alienating retro-electro revival, reminding 80\'s popular musical genre like synthpop or synthwave with a touch of&nbsp; lyrical and cynical humor and formant processed vocoder.</p>\r\n<p>Supported by crystal-clear production, Chnasons is definitely one of the most condensed work of the genre.<br /> <br /> <span id=\"yui_3_7_2_1_1381184761487_7373\" style=\"background-color: #000000; color: #ffffff;\">Limited 75 hand-numbered tapes edition on Third Type Tapes, released on January 15, 2014.<br style=\"clear: none;\" /> Artwork by <a href=\"https://www.facebook.com/CCCPu/\" target=\"_blank\">CCCPu</a>, silkprinted by Bruce Silkscreen.</span></p>', 'https://bandcamp.com/EmbeddedPlayer/album=3888322515/size=large/bgcol=ffffff/linkcol=0687f5/tracklist=false/artwork=small/transparent=true/', 'https://w.soundcloud.com/player/?url=https\\\\\\\\\\\\\\\\%3A//api.soundcloud.com/tracks/133690982&amp;color=0066cc&amp;auto_play=false&amp;hide_related=false&amp;show_comments=true&amp;show_user=true&amp;show_reposts=false', 'https://www.youtube.com/embed/BY64vKGIUtc', '2014-01-15', 'le_matin_chnasons.jpg', 'le_matin_chnasons.rar', 19, '6.00', 1, 0, 1, 75),
+(8, 'Rate - Beach Block', 'TTT07', 'C60', '<p><strong>Side A / N\'ALOV : Rate</strong><br /> <br /> We hypostatize information into objects. Rearrangement of objects is change in the content of the information ; the message has changed. This is a language which we have lost the ability to read. We ourselves are a part of this language ; changes in us are changes in the content of the information. We ourselves are information-rich ; information enters us, is processed and is then projected outward once more, now in an altered form. We are not aware that we are doing this, that in fact this is all we are doing.</p>\r\n<p><strong>Side B / YOGIDATA : Beach Block</strong><br /> <br /> Hectic nuclearized sonic environment with custom hardware and acid-coded software inspired by raw data.</p>\r\n<p><br /> <span id=\"yui_3_7_2_1_1381184761487_7373\" style=\"background-color: #000000; color: #ffffff;\">Limited 75 hand-numbered tapes edition on Third Type Tapes, released on February 19, 2014.<br style=\"clear: none;\" /> Artwork by <a href=\"https://www.facebook.com/CCCPu/\" target=\"_blank\">CCCPu</a></span></p>', 'https://bandcamp.com/EmbeddedPlayer/album=1837195674/size=large/bgcol=ffffff/linkcol=0687f5/tracklist=false/artwork=small/transparent=true/', 'https://w.soundcloud.com/player/?url=https\\\\\\\\\\\\%3A//api.soundcloud.com/tracks/138178399&amp;color=0066cc&amp;auto_play=false&amp;hide_related=false&amp;show_comments=true&amp;show_user=true&amp;show_reposts=false', '', '2014-02-19', 'nalov_yogidata_rate_beach_block.jpg', 'nalov_yogidata.rar', 16, '5.00', 1, 0, 1, 75),
+(9, 'Nalov - Cyclope', 'TTT08', 'C80', '<p><strong>Side A : N\'ALOV - Nalov</strong><br />nalov<br /><br /><strong>Side B : ilill - cyclope</strong><br />1.d&eacute;chets<br />2.collages<br />3.marelle<br />4.rayures<br />5.d&eacute;coll&eacute;<br />6.blop</p>\r\n<p><span id=\"yui_3_7_2_1_1381184761487_7373\" style=\"background-color: #000000; color: #ffffff;\">Limited 75 hand-numbered tapes edition on Third Type Tapes, released on April 06, 2014.<br style=\"clear: none;\" /> Artwork by <a href=\"https://www.facebook.com/CCCPu/\" target=\"_blank\">CCCpu</a></span></p>', '', 'https://w.soundcloud.com/player/?url=https\\\\\\\\\\\\%3A//api.soundcloud.com/tracks/143504183&amp;color=0066cc&amp;auto_play=false&amp;hide_related=false&amp;show_comments=true&amp;show_user=true&amp;show_reposts=false', '', '2014-04-06', 'nalov_ilill_nalov_cyclope.jpg', 'ilill_Nalov.rar', 32, '5.00', 1, 0, 1, 75),
+(10, 'Brutalist Mantras - Manner of Speaking', 'TTT09', 'C60', '<p><strong>SIDE A :</strong><br /><strong> Brutalist Mantras</strong></p>\r\n<p>a/etheric surgery<br /> b/the cumming of the cosmic christ<br /> c/fuck the rolling stones</p>\r\n<p><strong>SIDE B :</strong><br /><strong> Manner of Speaking</strong></p>\r\n<p>a/turkey cop <br />b/actual hard knocks&nbsp; <br />c/searching for a<br />license to have fun&nbsp; <br />d/off-duty cop</p>\r\n<p>Limited 75 hand-numbered tapes edition on Third Type Tapes, released on april 19, 2014.<br /> <span id=\"yui_3_7_2_1_1381184761487_7373\" style=\"background-color: #000000; color: #ffffff;\">Artwork by <a href=\"https://www.facebook.com/CCCPu/\" target=\"_blank\">CCCPu</a></span>.</p>', '', 'https://w.soundcloud.com/player/?url=https\\\\\\\\\\\\\\\\%3A//api.soundcloud.com/tracks/146049002&amp;color=0066cc&amp;auto_play=false&amp;hide_related=false&amp;show_comments=true&amp;show_user=true&amp;show_reposts=false', '', '2014-04-19', 'holzkopf_brutalist_mantras.jpg', 'holzkopf_brutalist_manner.rar', 25, '5.00', 1, 0, 1, 75),
+(11, 'Schizophrenia', 'TTT10', 'C60', '<p><strong>Side A :</strong><br /> Schizophrenia part1<br /> <br /> <strong>Side B :</strong><br /> Schizophrenia part2<br /> <br /> <br /> Limited 75 hand-numbered tapes edition on Third Type Tapes, released on june 10, 2014.<br /> Artwork by <a href=\"https://www.facebook.com/CCCPu/\" target=\"_blank\">CCCPu</a>.</p>', 'https://bandcamp.com/EmbeddedPlayer/album=2970894435/size=large/bgcol=ffffff/linkcol=0687f5/tracklist=false/artwork=small/transparent=true/', 'https://w.soundcloud.com/player/?url=https\\\\\\%3A//api.soundcloud.com/tracks/151636527&amp;color=0066cc&amp;auto_play=false&amp;hide_related=false&amp;show_comments=true&amp;show_user=true&amp;show_reposts=false', 'https://www.youtube.com/embed/PveN_7-Wl_g', '2014-06-10', 'g4z_schizophrenia.jpg', 'g4z_schizophrenia.rar', 14, '5.00', 1, 0, 1, 75),
+(12, 'EU Mixtape1', 'TTT11', 'C50', '<p><strong>Side A</strong><br /><strong> Side B</strong><br /> <br /> Limited 75 hand-numbered tapes edition on Third Type Tapes, released on oct 10, 2014.<br /> Artwork by <a href=\"https://www.facebook.com/CCCPu/\" target=\"_blank\">CCCPu</a>.</p>', 'https://bandcamp.com/EmbeddedPlayer/album=565850426/size=large/bgcol=ffffff/linkcol=0687f5/tracklist=false/artwork=small/transparent=true/', 'https://w.soundcloud.com/player/?url=https\\\\\\%3A//api.soundcloud.com/tracks/170303738&amp;color=0066cc&amp;auto_play=false&amp;hide_related=false&amp;show_comments=true&amp;show_user=true&amp;show_reposts=false', 'https://www.youtube.com/embed/FX8xp2eDMU0', '2014-10-10', 'nah_EU_mixtape1.jpg', 'nah_EU_mixtape1.rar', 54, '5.00', 1, 0, 1, 75),
+(13, 'RA DUE: Metallum Gravis', 'TTT12', 'C25', '<p><strong>Side A</strong><br /> 1. Annunciation<br /> 2. P. Melank<br /> 3. Mini Vamp<br /> 4. Sal Ammoniac</p>\r\n<p><strong>Side B</strong><br /> 5. BLX RX<br /> 6. Ape<br /> 7. Feriano<br /> 8. 25 cent</p>\r\n<p>Limited 75 hand-numbered tapes edition on Third Type Tapes, released on november 20, 2014.<br /> Artwork by <a href=\"http://www.cccpu.net\" target=\"_blank\">CCCPu</a>.</p>', 'https://bandcamp.com/EmbeddedPlayer/album=1280547571/size=large/bgcol=ffffff/linkcol=0687f5/tracklist=false/artwork=small/transparent=true/', 'https://w.soundcloud.com/player/?url=https\\\\%3A//api.soundcloud.com/tracks/177787577&amp;color=0066cc&amp;auto_play=false&amp;hide_related=false&amp;show_comments=true&amp;show_user=true&amp;show_reposts=false', 'https://www.youtube.com/embed/qt0BsZXdcRg', '2014-11-20', 'ra-due-metallum-gravis.jpg', 'ra-due-metallum-gravis.rar', 30, '5.00', 1, 0, 1, 75),
+(14, 'Les Voyages du Masque', 'TTT13', 'C30', '<p><strong>Side A:</strong></p>\r\n<p>1/GUIOTO<br /> 2/SAINT DEVIANT<br /> 3/POUSSIN AUX ENFERS<br /> 4/TEATRO DI MORTE<br /> 5/CHEVAL CRUCIFIE<br /> 6/UN SANTO OSCURO</p>\r\n<p><strong>Side B:</strong></p>\r\n<p>7/PENIS TRANCHES<br /> 8/ECARTEUR HURLANT<br /> 9/GOUIHT<br /> 10/AKHMATOVA<br /> 11/HUMOUR ET CRAINTE</p>\r\n<p>Les voyages du masque is a fantastic tale of distortion broken beats and violent feedbacks.<br /> <br /> Warm bass saturations, accompanied by hypnotic drones over an obscure and enigmatic wave, bursting detailed frequencies inside your mind, transcending the movements of Yann Lefeuvre. His infinite stream of live improvised flow betrays his past affinity with dub and hip hop .<br /> <br /> After releases on Nohmad, Government thirteen, and Stubenmusic, Thirdtypetapes is very proud and honoured to announce the release of a limited tapes edition of 6rme.<br /> <br /> Limited 75 hand-numbered tapes edition on Third Type Tapes, released on Mars 20, 2015.<br /> Artwork by <a href=\"https://www.facebook.com/CCCPu/\" target=\"_blank\">CCCPu</a>.</p>', 'https://bandcamp.com/EmbeddedPlayer/album=2983608040/size=large/bgcol=ffffff/linkcol=0687f5/tracklist=false/artwork=small/transparent=true/', 'https://w.soundcloud.com/player/?url=https\\\\\\\\\\%3A//api.soundcloud.com/tracks/194329177&amp;color=0066cc&amp;auto_play=false&amp;hide_related=false&amp;show_comments=true&amp;show_user=true&amp;show_reposts=false', 'https://www.youtube.com/embed/Zr5AIHv8-3I', '2015-03-20', '6-r-m-e_les_voyages_du_masque.jpg', '6RME_les_voyages_du_masque.rar', 40, '5.00', 1, 0, 1, 75),
 (15, 'Zona Nervo', 'TTT14', 'C35', '<p><strong>Side A</strong></p>\r\n<p>A66<br /> MARMARA<br /> STIMPEN<br /> SACANAS<br /> DINA</p>\r\n<p><strong>Side B</strong></p>\r\n<p>GUNU<br /> PRO PK<br /> VIL<br /> CENTRAL</p>\r\n<p><strong>Zona nervo</strong> has travelled through a vast electric net, from Porto to ThirdTypeTapes\'s catalogue.<br /> Saturated basses expanding the magnetic fields connected to our biological membranes. Distortions and precise feedback manipulation takes us through an anatomic travel of ultra sensorial dimensions.<br /> Zona nervo is an unique sound art work. A nervous system of it\'s own.<br /> <br /> Hear for yourself and be prepared to edginess.</p>\r\n<p>Limited 75 hand-numbered tapes edition on Third Type Tapes, released on 05/15, 2015.<br /> Artwork by <a href=\"https://www.facebook.com/CCCPu/\" target=\"_blank\">CCCPu</a>.</p>', 'https://bandcamp.com/EmbeddedPlayer/album=2899576088/size=large/bgcol=ffffff/linkcol=0687f5/tracklist=false/artwork=small/transparent=true/', 'https://w.soundcloud.com/player/?url=https\\\\\\\\%3A//api.soundcloud.com/tracks/204927799&amp;color=0066cc&amp;auto_play=false&amp;hide_related=false&amp;show_comments=true&amp;show_user=true&amp;show_reposts=false', 'https://www.youtube.com/embed/OPN4aALm37Y', '2015-05-15', 'sturqen_zona_nervo.jpg', NULL, 0, '5.00', 1, 0, 1, 75),
-(16, 'Lost Empire', 'TTT15', 'C45', '<p><strong>SIDE A</strong><br /> LOST EMPIRE : Part1</p>\r\n<p><strong>SIDE B</strong><br /> LOST EMPIRE : Part2</p>\r\n<p>We are very proud to announce the release of Lost Empire, from the 80\'s french legendary industrial duo Le Syndicat.<br /> Lost Empire takes us back to the early periods of jungle, noise, and industrial sounds. The freshly made tracks exclusively for TTT is not only a contemporary industrial masterpiece, but also be seen as a retrospective of what is called \"breakcore\" today.<br /> We can precisely hear from this tape why breakcore, experimental and noise music is one family strongly bounded in its spirit.<br /> <br /> Definitely a must have for all collectors in this genres.<br /> <br />Limited 75 hand-numbered tapes edition on Third Type Tapes, released on 05/22, 2015.<br /> Artwork by <a href=\"https://www.facebook.com/CCCPu/\" target=\"_blank\">CCCPu</a>.</p>', 'https://bandcamp.com/EmbeddedPlayer/album=2804408361/size=large/bgcol=ffffff/linkcol=0687f5/tracklist=false/artwork=small/transparent=true/', 'https://w.soundcloud.com/player/?url=https\\\\\\\\%3A//api.soundcloud.com/tracks/206175705&amp;color=0066cc&amp;auto_play=false&amp;hide_related=false&amp;show_comments=true&amp;show_user=true&amp;show_reposts=false', '', '2015-05-22', 'le_syndicat_lost_empire.jpg', 'le_syndicat_lost_empire.rar', 44, '5.00', 1, 0, 1, 75),
-(17, 'Lvnar Xtorxion', 'TTT16', 'C50', '<p><strong>SIDE A :</strong><br /> A1_Lvnar Xtorxion<br /> A2_Passive Self Mutilaxion<br /> A3_Corroborative Misleadead Ambixions<br /> A4_Despot Dub<br /><br /><strong>SIDE B :</strong><br /> B1_Risx Ov Reex<br /> B2_Thee Ploterz March<br /> B3_DRBRDMOT17thNZRGC<br /> B4_Dope Hi Curling Instructor In Purple Bath Suit<br /><br /><span id=\"yui_3_16_0_1_1445867272494_6506\" style=\"font-size: 12.8px;\">LVNARxTORXION is the soundtrack of a sacrificial murder, the manifestation of a sabath of birth and death simultaneously. Like a resurection after psychic suicide through the inner-core of a snake nest, executed by Ripit the slaughterman.</span><br /> <br /> Limited 75 hand-numbered tapes edition on Third Type Tapes, released on 10/15, 2015.<br /> Artwork by <a href=\"https://www.facebook.com/CCCPu/\" target=\"_blank\">CCCPu</a></p>', 'https://bandcamp.com/EmbeddedPlayer/album=2872737805/size=large/bgcol=ffffff/linkcol=0687f5/tracklist=false/artwork=small/transparent=true/', 'https://w.soundcloud.com/player/?url=https\\\\\\\\\\%3A//api.soundcloud.com/tracks/230156277&amp;color=0066cc&amp;auto_play=false&amp;hide_related=false&amp;show_comments=true&amp;show_user=true&amp;show_reposts=false', 'https://www.youtube.com/embed/G3zjMudhfMM', '2015-10-15', 'ripit.jpg', 'Ripit_Lunar_xtorsion.rar', 63, '5.00', 1, 0, 1, 75),
-(18, 'Schadelfrost', 'TTT17', 'C50', '<p><strong>Side A</strong><br /><br />A1 human ruins<br />A2 grgrggg<br />A3 abk&ouml;nnen<br />A4 gangrene II<br />A5 goo<br />A6 lycidhyl<br />A7 labour II<br /><br /><strong>Side B</strong><br /><br />B1 dbd<br />B2 fights<br />B3 gangrene III<br />B4 alles voll stahl und idioten<br />B5 ich zerbarst<br />B6 run<br />B7 concrete floor</p>\r\n<p>Sch&auml;delfrost is Grindmaster Flesh\'s aka ZombieFleshEater\'s original cold cut. A powerful blend of experimental noise breakcore, guaranteed to put you in a harsh climate, freezing your veins, skull and bones. Thermal shock is inevitable. <br />Influenced by some of his favorite releases and tapes from the late 90s. Sch&auml;delfrost is also a statement against the aseptic sound characteristics which are predominant and widely accepted in many parts of current hardcore and breakcore.<br />Don\'t wait too long, only 75 icicled tapes are made.</p>\r\n<p>Limited 75 hand-numbered tapes edition on Third Type Tapes, released on 04/05, 2016.<br /> Artwork by <a href=\"https://www.facebook.com/CCCPu/\" target=\"_blank\">CCCPu</a></p>', 'https://bandcamp.com/EmbeddedPlayer/album=1471248070/size=large/bgcol=ffffff/linkcol=0687f5/tracklist=false/artwork=small/transparent=true/', 'https://w.soundcloud.com/player/?url=https\\\\\\\\%3A//api.soundcloud.com/tracks/257770370&amp;color=0066cc&amp;auto_play=false&amp;hide_related=false&amp;show_comments=true&amp;show_user=true&amp;show_reposts=false', '', '2016-04-04', 'GMF_SchadelFrost.jpg', 'GMF_Schadelfrost.rar', 23, '5.00', 1, 0, 1, 75),
-(19, 'Star Breaker', 'TTT18', 'C40', '<p><strong>Side A</strong><br />Star Breaker 1<br /><strong>Side B</strong><br />Star Breaker 2</p>\r\n<p>Star breaker has escaped, from his creator Kishino Kazuyuki&nbsp; aka KK Null into TTT\'s universe. <br />This speedcore power noise masterpiece is one of our most angry, in your face release. <br />Powerfull energies, with electroacoustic sound designs, a transcending experience from side A to an even angrier side B. <br />Mean and spiritual at the same time. Definitely an anti-hero villain who will drain you to deaf.</p>\r\n<p><span class=\"detail\">Limited 75 hand-numbered tapes edition on Third Type Tapes, released on 04/06, 2016.<br /> Artwork by <a href=\"https://www.facebook.com/CCCPu/\" target=\"_blank\">CCCPu</a></span></p>', 'https://bandcamp.com/EmbeddedPlayer/album=532053730/size=large/bgcol=ffffff/linkcol=0687f5/tracklist=false/artwork=small/transparent=true/', 'https://w.soundcloud.com/player/?url=https\\\\\\\\\\%3A//api.soundcloud.com/tracks/257814638&amp;color=0066cc&amp;auto_play=false&amp;hide_related=false&amp;show_comments=true&amp;show_user=true&amp;show_reposts=false', '', '2016-04-06', 'kknull_starBreaker.jpg', 'KK_null_starBreaker.rar', 45, '5.00', 1, 0, 1, 75),
-(20, 'Class A Circuitry', 'TTT19', 'C50', '<p><strong>Side A</strong><br /><br />A1 advancing robot attack<br />A2 lancet fluke<br />A3 machine head<br />A4 class Aacircuitry<br />A5 inside the oil tank<br />A6 lude<br /><br /><strong>Side B</strong><br /><br />B1 cjbs<br />B2 inverse square law<br />B3 harsh<br />B4 bz clusterbomb<br />B5 power tools</p>\r\n<p>This first release of submechanical on TTT is a collection of pieces to reflect the paranoia and fear of globalisation, terrorism, increasing military technology and automation. The soundtrack to the end of the civilised world is hard, distorted, analogue and edgy with a bedrock sub to shake all foundations.</p>\r\n<p><span class=\"detail\" style=\"font-size: 10pt;\"><span class=\"detail\">Limited 75 hand-numbered tapes edition on Third Type Tapes, released on 10/01, 2017.<br /> Artwork by <a href=\"https://www.facebook.com/CCCPu/\" target=\"_blank\">CCCPu</a></span></span></p>', 'https://bandcamp.com/EmbeddedPlayer/album=2179521478/size=large/bgcol=ffffff/linkcol=0687f5/tracklist=false/artwork=small/transparent=true/', 'https://w.soundcloud.com/player/?url=https\\\\\\\\%3A//api.soundcloud.com/tracks/334338997&amp;color=0066cc&amp;auto_play=false&amp;hide_related=false&amp;show_comments=true&amp;show_user=true&amp;show_reposts=false', 'https://www.youtube.com/embed/vOeQRyJChvw', '2017-01-09', 'pochette_submechanical.jpg', 'submechanical.rar', 30, '5.00', 0, 0, 1, 75),
-(21, 'NN SRVM 179', 'TTT20', 'C40', '<p><span id=\"yui_3_16_0_ym19_1_1486496551224_6776\" style=\"background-color: #000000;\"><span id=\"yiv3412962168yui_3_16_0_ym19_1_1486462110177_6323\">_Side A : NOTHING WILL PREVAIL<br id=\"yiv3412962168yui_3_16_0_ym19_1_1486462110177_6396\" style=\"clear: none;\" />_Side B : EXHAUST AND FEED</span></span></p>\r\n<p><span style=\"background-color: #000000;\">NN SRVM 179 is RAUM\'S first incarnation on record. Its two sides summon up and release curative energies of different natures such as melancholy and cathartic trance. While side A\'s track \"Nothing Will Prevail\" evokes a dystopian soundscape that invites the listener to contemplate the self destruction of an outdated system with distanced sorrow, side B\'s fierce \"Exhaust and Feed\" invites him to look for pleasure amidst its raw currents. Per ardua ad astra.</span></p>\r\n<p><span class=\"detail\" style=\"font-size: 10pt;\"><span class=\"detail\"><span class=\"detail\">Limited 75 hand-numbered tapes edition on Third Type Tapes, released on 08/02, 2017.<br /> Artwork by <a href=\"https://www.facebook.com/CCCPu/\" target=\"_blank\">CCCPu</a></span></span></span></p>', 'https://bandcamp.com/EmbeddedPlayer/album=2326585113/size=large/bgcol=ffffff/linkcol=0687f5/tracklist=false/artwork=small/transparent=true/', 'https://w.soundcloud.com/player/?url=https\\\\\\\\%3A//api.soundcloud.com/tracks/335225183&amp;color=0066cc&amp;auto_play=false&amp;hide_related=false&amp;show_comments=true&amp;show_user=true&amp;show_reposts=false', '', '2017-02-08', 'pochette_raum.jpg', 'Raum.rar', 19, '5.00', 0, 0, 1, 75),
-(22, 'Exuviae', 'TTT21', 'C40', '<p><strong>Side A:</strong></p>\r\n<p>01 - Imago<br />02 - Ecdysis<br />03 - Auchenorrh<br />04- Late Triassic<br />05- Cyclochilia</p>\r\n<p><strong>Side B:</strong></p>\r\n<p>06 - Endemism<br />07 - Superhydrophobic coating<br />08 - Polypoid<br />09 - Prokaryote</p>\r\n<p>Exuviae is the cast-off outer skin of certain insects after moulting.</p>\r\n<p>The exoskeleton of an arthoprod.</p>\r\n<p>Parts of the older version of the codes can be found here : <a href=\"https://github.com/exoterrism/livesets\" target=\"_blank\">https://github.com/exoterrism/livesets</a></p>\r\n<p>while the latest codes have vanished into nihilist oblivion.</p>\r\n<p>Limited 75 hand-numbered tapes edition on Third Type Tapes, released on 8th august 2017.<br />Artwork by CCCPu.</p>', 'https://bandcamp.com/EmbeddedPlayer/album=3997202073/size=large/bgcol=ffffff/linkcol=0687f5/tracklist=false/artwork=small/transparent=true/', 'https://w.soundcloud.com/player/?url=https\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\%3A//api.soundcloud.com/tracks/336972515&amp;color=0066cc&amp;auto_play=false&amp;hide_related=false&amp;show_comments=true&amp;show_user=true&amp;show_reposts=false', 'https://www.youtube.com/embed/OIo99xNHODw', '2017-08-08', 'exoterrism_exuviae.jpg', 'exoterrism-exuviae.rar', 42, '5.00', 1, 0, 1, 75),
-(23, 'Dubt Al Ghubar', 'TTT22', 'C30', '<p><strong>Side A</strong></p>\r\n<p>01 - Muqadima / مقدمة<br />02 - Al-ma\'raka Al-uwla / المعركة الأولى<br />03 - Asfal Masloob / أسفل مسلوب<br />04 - Haswet Phalasipha / حصوة الفلاسفة<br />05 - Suqoot Hor / سقوط حر<br />06 - Shahiq Al-insijam / شهيق الإنسجام</p>\r\n<p><strong>Side B</strong></p>\r\n<p>07 - Thakirat Al-ma\' / ذاكرة الماء<br />08 - \'Isyan Tiqani / عصيان تقني<br />09 - Al-tahaluf / التحالف<br />10 - Al-ma\'raka Al-thaniya / المعركة الثانية<br />11 - Khalal 432 / خلل ٤٣٢ </p>\r\n<p><span class=\"_5yl5\">Dubt Al-Ghubar (adjust the dust in arabic), is a metaphor of the coming or even the current era. The era where artificial intelligence is dominating all aspects of life by manipulating matter on an unseen scale, and decides that it no longer has any use for the human species. After a long battle, humans are destroyed along with their culture and civilization. A new world is being built. But a small group of A.I, feeling deficient, has started to use found vocal sounds and other sonic remnants of humans, metaphoricaly transcribed from the track Shahiq Al-insijam (inhaling unison) and Thakirat Al-ma\' (water\'s memory), where they begin using tribal music in order to appropriate culture, and obtain some sort of soul. Such radical change in perception within A.I\'s has created division amongst them. Those who want to dominate nature and those who want to assimilate. \'Isyan Tiqani (Technical Disobediance) is the representation of the clash from within. What was previously not known, is that a small group of humans have survived in the underground and formed an alliance (Al Tahaluf) with some other intelligence forms. Thus another battle begins.</span></p>\r\n<p><span class=\"detail\">Limited 75 hand-numbered tapes edition on Third Type Tapes, released on 3rd september 2017.<br />Artwork by CCCPu.</span></p>', 'https://bandcamp.com/EmbeddedPlayer/album=2817810954/size=large/bgcol=ffffff/linkcol=0687f5/tracklist=false/artwork=small/transparent=true/', 'https://w.soundcloud.com/player/?url=https\\\\\\\\\\\\\\\\\\\\\\%3A//api.soundcloud.com/tracks/340119872&amp;color=0066cc&amp;auto_play=false&amp;hide_related=false&amp;show_comments=true&amp;show_user=true&amp;show_reposts=false', 'https://www.youtube.com/embed/Bg4UttRF0DU', '2017-09-03', 'muqataa.jpg', 'Muqata.rar', 105, '5.00', 1, 0, 1, 75),
-(24, 'un quart portugal', 'TTT23', 'C60', '<p><span style=\"font-family: helvetica,arial,sans-serif; font-size: 12pt;\">_Side A : CALDAS DA RINHA<br />_Side B : A, B, C, D</span></p>\r\n<p><span style=\"font-family: helvetica,arial,sans-serif; font-size: 12pt;\">\"un quart portugal\" is a reflection about the remaining tribal influence on our western society.&nbsp; Through samplers, 4 tracks magnetic tapes, singings of endothermic vertebrates and pumping compression, Raymonde takes us back to forgotten instincts, back to our primate state, to our diverse nature as an individual being. It is a shamanic experience, a voyage through the 5th dimension, a rediscovery of our inner consciousness. <br /></span></p>\r\n<p><span style=\"font-family: helvetica,arial,sans-serif; font-size: 12pt;\"><span class=\"detail\"><span class=\"detail\">Limited 75 hand-numbered tapes edition on Third Type Tapes, released on 3rd october 2017.<br />Artwork by CCCPu.</span></span></span></p>', 'https://bandcamp.com/EmbeddedPlayer/album=1117077776/size=large/bgcol=ffffff/linkcol=0687f5/tracklist=false/artwork=small/transparent=true/', 'https://w.soundcloud.com/player/?url=https\\\\\\\\\\%3A//api.soundcloud.com/tracks/345318241&amp;color=\\\\\\\\\\%230066cc&amp;auto_play=false&amp;hide_related=false&amp;show_comments=true&amp;show_user=true&amp;show_reposts=false', 'https://www.youtube.com/embed/EuM0FUQoqcM', '2017-10-03', 'raymonde_600x600.jpg', 'Raymonde.rar', 49, '5.00', 1, 0, 1, 75),
-(25, 'Dawn Of The Head - Naida', 'TTT24', 'C60', '<p>Side A : Dawn of the Head<br />1 - Chaouen &agrave; l\'envers<br />2- Killer is dead<br />3- Bunker beard<br />4- Monica<br />5- Sehrij Gnawa<br />6- Zoso HBU (Feat. Pavleisdead &amp; Gonzo pke)<br />7- Another Vermin (Feat. Bloodmouth &amp; Arnod)<br />8- No Fire (Feat. Pavleisdead)<br />9- Swinecunt (Feat. Bloodmouth &amp; Arnod)</p>\r\n<p>Side B: Na&iuml;da<br />1- Tramen<br />2- Fitoy<br />3- Daguak<br />4- Fost<br />5- Soido<br />6- Deheaazan<br />7- Space Fish</p>\r\n<p>A side is Massive Head first appearance. Massive dirty beats from K(no o), retortured through dark hands of almighty Sub-Altern, processed and blessed by&nbsp; Bob&eacute; Van J&eacute;zu precisely placing soundscapes and field recordings to it. The result is a loud, demented and tormented ,instrumental dub hiphop. Last tracks features Arnod, Gonzo pke, MC Pavleisdead, and BloodMouth, .&nbsp;</p>\r\n<p>B side is Sub-Altern on it\'s own, continuing his dub, dark hiphop path. With very metallic and creaky soundscapes and colour, just like his former albums, flirting in the dub alchemy, and with his confrontational, socially-conscious style of performing and producing he dirtied, distorted, obscured everything.<br />A mixture of strident dubs recorded during nights of obscure insomnia. Born of a light fog that licks like a cat that divests itself of its dreams. Doomed to disappear. They finally remained ... what has been understood no longer exists.</p>\r\n<p><span class=\"detail\"><span style=\"font-family: helvetica,arial,sans-serif; font-size: 12pt;\"><span class=\"detail\"><span class=\"detail\">Limited 75 hand-numbered tapes edition on Third Type Tapes, released on 3rd november 2017.<br />Artwork by CCCPu.</span></span></span></span></p>', 'https://bandcamp.com/EmbeddedPlayer/album=3928850147/size=large/bgcol=ffffff/linkcol=0687f5/tracklist=false/artwork=small/transparent=true/', 'https://w.soundcloud.com/player/?url=https\\\\\\\\%3A//api.soundcloud.com/tracks/350115856&amp;color=\\\\\\\\%230945ac&amp;auto_play=false&amp;hide_related=false&amp;show_comments=true&amp;show_user=true&amp;show_reposts=false&amp;show_teaser=true', 'https://www.youtube.com/embed/iw5RtlRv9Oc', '2017-11-03', 'massive-head-subaltern.jpg', 'Massive_sub.rar', 32, '5.00', 1, 0, 1, 75),
-(26, 'Everywhere Alone', 'TTT25', 'C50', '<p><strong>_side A :</strong><br />2 sticky 4 you debut<br />margin gay<br />bolossage en r&egrave;gle dans le m&eacute;tro parisien<br />xenophile<br />un speedcoreux vraiment charmant<br />merde alors<br /><br /><strong>_side B :</strong><br />afro dance<br />haroun the world<br />the belles<br />goudron<br />les clopes du chinois<br />polichinelle</p>\r\n<p>\"maman j\'ai rater ma vie\" est le premier album de Mlacoler, enregistr&eacute; en pleurant<br /><br />Limited 75 hand-numbered tapes edition on Third Type Tapes, released on april 6 2018.<br />Artwork by CCCPu.</p>', 'https://bandcamp.com/EmbeddedPlayer/album=2923579612/size=large/bgcol=ffffff/linkcol=0687f5/tracklist=false/artwork=small/transparent=true/', '', '', '2018-04-06', 'mlacoler_culkin_site.jpg', 'mlacoler_culkin.rar', 38, '5.00', 0, 0, 1, 75),
-(27, 'Liminal Clash Console', 'TTT26', 'C60', '<p><strong>Side A</strong></p>\r\n<p>A1.Convergence Study #3<br />A2.Post Human Processor<br />A3.Hyperlove Cult</p>\r\n<p><strong>Side B</strong></p>\r\n<p>B1.Liminal Clash Console<br />B2.Washing Machine Oblivion (feat. Volsent)<br />B3.Void Simulator Unit</p>\r\n<p>&ldquo;... The Unknown appear as variables of a polynomial of degree higher than One...&rdquo;<br />The last words of Dr Naegleria Fowleri<br />Abstract noises clash with hypnotic drones. Structures turn to dust, and digital data fizzle away into decay. My cat believes the delivery guy is my owner because he keeps giving me food... Vera Spektor explores a mutated world branching out into the unknown, into places where emotions can flow. You will find with these recordings, the last data Vera harvested from one of his investigations, a universe unhabited by elephantine machines that have lost their way. Derelict mechanics wandering into no man\'s land.</p>\r\n<p>Recorded in London at Studio Subduct</p>\r\n<p><span class=\"detail\">Limited 75 hand-numbered tapes edition on Third Type Tapes, released on july 16 2018.<br />Artwork by CCCPu.</span></p>', 'https://bandcamp.com/EmbeddedPlayer/album=3064777334/size=large/bgcol=ffffff/linkcol=0687f5/tracklist=false/artwork=small/transparent=true/\"', '', 'https://www.youtube.com/embed/i5_5ltFNY7A', '2018-07-16', 'TTT26_vera_spektor.jpg', 'TTT26_VeraSpektor.rar', 35, '5.00', 0, 0, 1, 75),
-(28, 'Inverser', 'TTT27', 'C50', '<p><strong>Side A</strong><br /><br />A1 N<br />A2 PAKR<br />A3 BOTMEL<br />A4 2 6<br />A5 OLDUR<br /><br /><strong>Side B</strong><br /><br />B1 YEAST<br />B2 VIOH<br />B3 XHELL<br />B4 WHOME</p>\r\n<p>Yann Lefevre\'s new album Inverser is a compilation of selected gems from his work between 2014 and 2018. Some tracks were made way before his unique blend has been well established and inoculated around the planet, contaminating numerous locations worldwide. <br />Harmonic distortions from N and the heavy and destructive pace of Pakr and&nbsp; Botmel penetrates the body through sparkling sharp sounds. Then slowly accelerating, are coming the more techno orientated deep exploration vibe of 2_6 and&nbsp; Yeast, defining the fresh sensory characteristics of 6.R.M.E.<br />The aggressiveness of OLDUR&nbsp; and VIOH twists groovy dancefloor into a chaotic space, expanding through Xhell&rsquo;s corrosiveness&nbsp; and exploding towards Whom2\'s demonic curse. The trip keeps alive those who believe in chaos, feeding them with dark energy.<br /><br />Limited 75 hand-numbered tapes edition on Third Type Tapes, released on december 14 2018.<br />Artwork by CCCPu.</p>', 'https://bandcamp.com/EmbeddedPlayer/album=833365896/size=large/bgcol=ffffff/linkcol=0687f5/tracklist=false/artwork=small/transparent=true/', '', 'https://www.youtube.com/embed/T3e_5H7Lgkg', '2018-12-14', '6rme_inverser_website.jpg', 'TTT27_6RME.rar', 43, '5.00', 0, 0, 1, 75),
-(29, '171214', 'TTT28', 'C44', '<p><strong>Side A</strong><br />Tiny Tramp live 171214<br /><br /><strong>Side B</strong><br />Dave Phillips live action 171214<br /><br />Tiny Tramp and Dave Phillips first met in tel aviv in 2012, invoked by insect voodoo, then in z&uuml;rich in 2015, summoned by eb.erian magic. something was in the air ever since, but had to wait until am&eacute;lie, an engaged organisational force with a knack for special locations, brought them together to tour five french cities at the end of 2017. these here live-sets were recorded on a farm, somewhere on the outskirts of rennes, on a cold december night.<br /><br />Limited 75 hand-numbered tapes edition on Third Type Tapes, released on march 28 2019.<br />Artwork by CCCPu.</p>', 'https://bandcamp.com/EmbeddedPlayer/album=2523797766/size=large/bgcol=ffffff/linkcol=0687f5/tracklist=false/artwork=small/transparent=true/', '', '', '2019-03-28', 'TTT28_TTDP-600x600.jpg', 'TTT28_DavePhillips_TinyTramp.rar', 35, '5.00', 0, 0, 1, 75),
-(30, 'La pieuvre', 'TTT29', 'C30', '<p><span style=\"font-size: 11pt; font-family: Arial; color: #000000; background-color: #ffffff; font-weight: 400; font-style: normal; font-variant: normal; text-decoration: none; vertical-align: baseline; white-space: pre-wrap;\"><span style=\"background-color: #000000; color: #ffffff;\"><strong>Side A :</strong><br />La pieuvre pt.1<br />La pieuvre pt.2<br /><br /><strong>Side B :</strong><br />SplinterItIntoAThousandPieces<br />AndScatterItIntoTheWinds</span></span></p>\r\n<p><span id=\"docs-internal-guid-cb7790e8-7fff-5294-e065-5fec81850dd5\" style=\"font-size: 11pt; font-family: Arial; color: #000000; background-color: #ffffff; font-weight: 400; font-style: normal; font-variant: normal; text-decoration: none; vertical-align: baseline; white-space: pre-wrap;\"><span style=\"background-color: #000000; color: #ffffff;\">\" SplinterItIntoAThousandPiecesAndScatterItIntoTheWinds\" tel fut le mot de passe d&eacute;couvert par wikileaks en 2017 qui permettait d&rsquo;acc&eacute;der &agrave; une s&eacute;rie de logiciels de surveillance de la CIA. Ces logiciels permettent entre autres de transformer les smartphones ou les &eacute;crans plats en appareil d\'&eacute;coute &agrave; l\'insu de ses utilisateurs.Le mot de passe hack&eacute; est une citation suppos&eacute; de Kennedy suite &agrave; l&rsquo;&eacute;chec de la baie des cochons, quelques mois avant son assassinat.</span><br /></span></p>\r\n<p><span style=\"font-size: 11pt; font-family: Arial; color: #000000; background-color: #ffffff; font-weight: 400; font-style: normal; font-variant: normal; text-decoration: none; vertical-align: baseline; white-space: pre-wrap;\"><span style=\"background-color: #000000; color: #ffffff;\">(Musicians + instruments used) :<br />Sherman filterbank 2<br />EHX Flanger hoax<br />WMD Geiger Counter<br />Jomox T Resonator<br />EHX LPB 2 Tube<br />Elektron Octatrack<br />MFB Tanzbar lite<br />Doepfer Dark Energy<br />Erebus Dreadbox<br />Tascam M208<br />Revox A77<br />Reaper</span></span></p>\r\n<p><span style=\"font-size: 11pt; font-family: Arial; color: #000000; background-color: #ffffff; font-weight: 400; font-style: normal; font-variant: normal; text-decoration: none; vertical-align: baseline; white-space: pre-wrap;\"><span style=\"background-color: #000000; color: #ffffff;\"><span class=\"detail\">Limited 75 hand-numbered tapes edition on Third Type Tapes, released on march 29 2019.<br />Artwork by CCCPu.</span></span></span></p>', 'https://bandcamp.com/EmbeddedPlayer/album=2990875738/size=large/bgcol=ffffff/linkcol=0687f5/tracklist=false/artwork=small/transparent=true/', '', 'https://www.youtube.com/embed/FidTnf92V8g', '2019-03-29', 'TTT29_somaticae_600x600.jpg', 'TTT29_Somaticae.rar', 37, '5.00', 0, 0, 1, 75),
-(31, 'Bipolar Noise', 'TTT30', 'C60', '<p><span style=\"font-size: 10pt;\"><strong>Side A :</strong> </span><br /><span style=\"font-size: 10pt;\">Far Lowness</span><br /><br /><span style=\"font-size: 10pt;\"><strong>Side B :</strong> </span><br /><span style=\"font-size: 10pt;\">Hiss Mania</span></p>\r\n<p><span style=\"font-size: 10pt;\">Generative and improvised liveset where each side illustrates a bipolar phase, this bipolarity can express in reality as a mental condition but also as a representation of Socio-economic phenomena, this condition here represented by the low part of the spectrum and a slow tempo for the depressive episode (Far Lowness) or more fast and higher tempo in the top of the spectrum for the manic episode (Hiss Mania).</span></p>\r\n<p><span class=\"detail\" style=\"font-size: 10pt;\"><span style=\"font-family: Arial; color: #000000; font-style: normal; font-variant: normal; text-decoration: none; vertical-align: baseline; white-space: pre-wrap;\"><span style=\"color: #ffffff;\"><span class=\"detail\">Limited 75 hand-numbered tapes edition on Third Type Tapes, released on october 09 2019.<br />Artwork by CCCPu.</span></span></span></span></p>', 'https://bandcamp.com/EmbeddedPlayer/album=3632796910/size=large/bgcol=ffffff/linkcol=0687f5/tracklist=false/artwork=small/transparent=true/', '', '', '2019-10-06', 'TTT30_letal-ataraxia.jpg', 'TTT30_Letal_Ataraxia.rar', 39, '5.00', 0, 0, 1, 75),
-(33, 'Live Orleans 2019', 'TTT32', 'C45', '<p dir=\"ltr\" style=\"line-height: 1.38; margin-top: 0pt; margin-bottom: 0pt;\"><span style=\"font-family: Arial; background-color: transparent; font-weight: 400; font-style: normal; font-variant: normal; text-decoration: none; vertical-align: baseline; white-space: pre-wrap; font-size: 10pt;\"><strong>Side A</strong> <strong>:</strong> \"&ccedil;!hzol</span></p>\r\n<p dir=\"ltr\" style=\"line-height: 1.38; margin-top: 0pt; margin-bottom: 0pt;\"><span style=\"font-family: Arial; background-color: transparent; font-weight: 400; font-style: normal; font-variant: normal; text-decoration: none; vertical-align: baseline; white-space: pre-wrap; font-size: 10pt;\"><strong>Side B</strong> <strong>:</strong> k:b&eacute;i</span></p>\r\n<p dir=\"ltr\" style=\"line-height: 1.38; margin-top: 0pt; margin-bottom: 0pt;\"><span style=\"font-family: Arial; background-color: transparent; font-weight: 400; font-style: normal; font-variant: normal; text-decoration: none; vertical-align: baseline; white-space: pre-wrap; font-size: 10pt;\">A captivating live recording by Terrine, the female audio activist from Amiens !<br />From minimalist dry landscapes of digital bleeps and noises to cold and rough hardcore beats.<br />Expect some NUKE vibe on this tape.</span></p>\r\n<p dir=\"ltr\" style=\"line-height: 1.38; margin-top: 0pt; margin-bottom: 0pt;\"><span class=\"detail\"><span class=\"detail\" style=\"font-size: 10pt;\"><span style=\"font-family: Arial; color: #000000; font-style: normal; font-variant: normal; text-decoration: none; vertical-align: baseline; white-space: pre-wrap;\"><span style=\"color: #ffffff;\"><span class=\"detail\">Limited 75 hand-numbered tapes edition on Third Type Tapes, released on november 02 2019.<br />Artwork by CCCPu.</span></span></span></span></span></p>', 'https://bandcamp.com/EmbeddedPlayer/album=902588707/size=large/bgcol=ffffff/linkcol=0687f5/tracklist=false/artwork=small/transparent=true/', '', 'https://www.youtube.com/embed/5uiMJAfz4c8', '2019-11-02', 'TTT32_terrine.jpg', 'TTT32_Terrine.rar', 37, '5.00', 1, 0, 1, 75),
-(34, 'WTC', 'TTT31', 'C25', '<p><strong>_Side A</strong> : CANCELLLED WTC part I and II<br /><strong>_Side B</strong> : CANCELLLED WTC part III</p>\r\n<p>Recorded at Overtoon (WTC I - 25th floor) 2018</p>\r\n<p>Pure analog signals sharpened like flints for a timeless ecstasy. A collaboration between two wizards of sound : Aymeric De Tapol and Yann Leguay (Analogic sequencers , Electronic oscillators).</p>\r\n<p><span class=\"detail\"><span class=\"detail\"><span class=\"detail\" style=\"font-size: 10pt;\"><span style=\"font-family: Arial; color: #000000; font-style: normal; font-variant: normal; text-decoration: none; vertical-align: baseline; white-space: pre-wrap;\"><span style=\"color: #ffffff;\"><span class=\"detail\">Limited 75 hand-numbered tapes edition on Third Type Tapes, released on december 19 2019.<br />Artwork by CCCPu.</span></span></span></span></span></span></p>', 'https://bandcamp.com/EmbeddedPlayer/album=1021354793/size=large/bgcol=ffffff/linkcol=0687f5/tracklist=false/artwork=small/transparent=true/', '', 'https://www.youtube.com/embed/PgW-uKmm9dI', '2019-12-19', 'TTT31_cancellled_600.jpg', 'TTT31_Cancellled.rar', 39, '5.00', 0, 0, 1, 75),
-(35, 'Path to Danach', 'TTT33', 'C45', '<p>The &Aring;ngstromers is a cluster of sound artists &amp; musicians who gravitate<br />around &Aring;ngstr&ouml;m Records and its celestial twin &Aring;ngstrom Mastering.<br />This release is the post-produced live recording at Magasin 4. The artists were<br />Fr&eacute;d&eacute;ric Alstadt and Nicolas Esterle on electronics and Frederic Stader at front<br />of house and recording.<br /><br />Recorded live at Magasin 4, Brussels, BE on April 9th, 2019 by Frederic Stader.<br />Edit and Mix by Nicolas Esterle and Fr&eacute;d&eacute;ric Alstadt<br />Mastered by Fr&eacute;d&eacute;ric Alstadt at &Aring;ngstr&ouml;m Mastering<br /><br />Limited 75 hand-numbered tapes edition on Third Type Tapes, released on january 12 2020.<br />Artwork by CCCPu.</p>', 'https://bandcamp.com/EmbeddedPlayer/album=2130476002/size=large/bgcol=ffffff/linkcol=0687f5/tracklist=false/artwork=small/transparent=true', '', 'https://www.youtube.com/embed/rUNAw_aPOmQ', '2020-01-12', 'TTT33_angstromers.jpg', 'TTT33_The_Angstromers.rar', 38, '5.00', 0, 0, 1, 75);
-INSERT INTO `cassette` (`id_cassette`, `titre`, `code`, `longueur`, `description`, `lien_bandcamp`, `lien_soundcloud`, `lien_youtube`, `date_sortie`, `image_pochette`, `download`, `nombre_de_download`, `prix`, `sold_out`, `suppr`, `publier`, `nombre_exemplaire`) VALUES
-(36, 'Predatory People', 'TTT34', 'C60', '<p id=\"docs-internal-guid-71cf5653-7fff-6bec-b9e6-92f57b0177f6\" dir=\"ltr\" style=\"line-height: 1.38; margin-top: 0pt; margin-bottom: 0pt;\"><span style=\"font-size: 10pt; font-family: helvetica, arial, sans-serif; color: #ffffff; background-color: transparent; font-weight: 400; font-style: normal; font-variant: normal; text-decoration: none; vertical-align: baseline; white-space: pre-wrap;\">Predatory People deals with moral distortions and a poor knowledge of love synthesis.&nbsp;</span></p>\r\n<p dir=\"ltr\" style=\"line-height: 1.38; margin-top: 0pt; margin-bottom: 0pt;\"><span style=\"font-size: 10pt; font-family: helvetica, arial, sans-serif; color: #ffffff; background-color: transparent; font-weight: 400; font-style: normal; font-variant: normal; text-decoration: none; vertical-align: baseline; white-space: pre-wrap;\">It&rsquo;s a pure Covid 19 tape, where your instinct to dance will likely soak you in wet melancholy.</span></p>\r\n<p dir=\"ltr\" style=\"line-height: 1.38; margin-top: 0pt; margin-bottom: 0pt;\"><span style=\"font-size: 10pt; font-family: helvetica, arial, sans-serif; color: #ffffff; background-color: transparent; font-weight: 400; font-style: normal; font-variant: normal; text-decoration: none; vertical-align: baseline; white-space: pre-wrap;\">The A side is inspired by The Golovlyov family, by Mikhail Schedrin</span></p>\r\n<p dir=\"ltr\" style=\"line-height: 1.38; margin-top: 0pt; margin-bottom: 0pt;\"><span style=\"font-size: 10pt; font-family: helvetica, arial, sans-serif; color: #000000; background-color: transparent; font-weight: 400; font-style: normal; font-variant: normal; text-decoration: none; vertical-align: baseline; white-space: pre-wrap;\"><span style=\"color: #ffffff;\">The B side is inspired by El Se&ntilde;or Presidente by</span> <span style=\"color: #ffffff;\">Miguel &Aacute;ngel Asturias<br /></span></span><br /><span style=\"font-size: 10pt; font-family: helvetica, arial, sans-serif; color: #000000; background-color: transparent; font-weight: 400; font-style: normal; font-variant: normal; text-decoration: none; vertical-align: baseline; white-space: pre-wrap;\"><span style=\"color: #ffffff;\"><span class=\"detail\">Limited 75 hand-numbered tapes edition on Third Type Tapes, released on november 05 2020.<br />Artwork by CCCPu.</span></span></span></p>', 'https://bandcamp.com/EmbeddedPlayer/album=1368863369/size=large/bgcol=ffffff/linkcol=0687f5/tracklist=false/artwork=small/transparent=true/', '', 'https://www.youtube.com/embed/SNsB7AxRf9k', '2020-11-05', 'TTT34_pissassphalto_600.jpg', 'TTT34_Pissasphalto.rar', 22, '5.00', 0, 0, 1, 75),
-(37, 'Antipattern', 'TTT35', 'C50', '<p><span id=\"docs-internal-guid-9ad74841-7fff-50ab-2e56-f344164ceecf\" style=\"font-size: 11pt; font-family: Arial; color: #ffffff; background-color: #000000; font-weight: 400; font-style: normal; font-variant: normal; text-decoration: none; vertical-align: baseline; white-space: pre-wrap;\">2Mo g&eacute;n&egrave;re des patterns en temps r&eacute;el &agrave; l\'aide d\'un ordinateur, les modifie &agrave; l\'aide de diff&eacute;rents effets, ne respectant en aucun cas le signal.<br /></span><br /><span style=\"font-size: 11pt; font-family: Arial; color: #ffffff; background-color: #000000; font-weight: 400; font-style: normal; font-variant: normal; text-decoration: none; vertical-align: baseline; white-space: pre-wrap;\"><span class=\"detail\"><span style=\"font-size: 10pt; font-family: helvetica, arial, sans-serif; color: #000000; background-color: transparent; font-weight: 400; font-style: normal; font-variant: normal; text-decoration: none; vertical-align: baseline; white-space: pre-wrap;\"><span style=\"color: #ffffff;\"><span class=\"detail\">Limited 75 hand-numbered tapes edition on Third Type Tapes, released on december 05 2020.<br />Artwork by CCCPu.</span></span></span></span></span></p>', 'https://bandcamp.com/EmbeddedPlayer/album=799029387/size=large/bgcol=ffffff/linkcol=0687f5/tracklist=false/artwork=small/transparent=true/', '', 'https://www.youtube.com/embed/GGKbSnsudyo', '2020-12-05', 'TTT35_2mo_600.jpg', 'TTT35_2Mo.rar', 16, '5.00', 0, 0, 1, 75);
+(16, 'Lost Empire', 'TTT15', 'C45', '<p><strong>SIDE A</strong><br /> LOST EMPIRE : Part1</p>\r\n<p><strong>SIDE B</strong><br /> LOST EMPIRE : Part2</p>\r\n<p>We are very proud to announce the release of Lost Empire, from the 80\'s french legendary industrial duo Le Syndicat.<br /> Lost Empire takes us back to the early periods of jungle, noise, and industrial sounds. The freshly made tracks exclusively for TTT is not only a contemporary industrial masterpiece, but also be seen as a retrospective of what is called \"breakcore\" today.<br /> We can precisely hear from this tape why breakcore, experimental and noise music is one family strongly bounded in its spirit.<br /> <br /> Definitely a must have for all collectors in this genres.<br /> <br />Limited 75 hand-numbered tapes edition on Third Type Tapes, released on 05/22, 2015.<br /> Artwork by <a href=\"https://www.facebook.com/CCCPu/\" target=\"_blank\">CCCPu</a>.</p>', 'https://bandcamp.com/EmbeddedPlayer/album=2804408361/size=large/bgcol=ffffff/linkcol=0687f5/tracklist=false/artwork=small/transparent=true/', 'https://w.soundcloud.com/player/?url=https\\\\\\\\%3A//api.soundcloud.com/tracks/206175705&amp;color=0066cc&amp;auto_play=false&amp;hide_related=false&amp;show_comments=true&amp;show_user=true&amp;show_reposts=false', '', '2015-05-22', 'le_syndicat_lost_empire.jpg', 'le_syndicat_lost_empire.rar', 38, '5.00', 1, 0, 1, 75),
+(17, 'Lvnar Xtorxion', 'TTT16', 'C50', '<p><strong>SIDE A :</strong><br /> A1_Lvnar Xtorxion<br /> A2_Passive Self Mutilaxion<br /> A3_Corroborative Misleadead Ambixions<br /> A4_Despot Dub<br /><br /><strong>SIDE B :</strong><br /> B1_Risx Ov Reex<br /> B2_Thee Ploterz March<br /> B3_DRBRDMOT17thNZRGC<br /> B4_Dope Hi Curling Instructor In Purple Bath Suit<br /><br /><span id=\"yui_3_16_0_1_1445867272494_6506\" style=\"font-size: 12.8px;\">LVNARxTORXION is the soundtrack of a sacrificial murder, the manifestation of a sabath of birth and death simultaneously. Like a resurection after psychic suicide through the inner-core of a snake nest, executed by Ripit the slaughterman.</span><br /> <br /> Limited 75 hand-numbered tapes edition on Third Type Tapes, released on 10/15, 2015.<br /> Artwork by <a href=\"https://www.facebook.com/CCCPu/\" target=\"_blank\">CCCPu</a></p>', 'https://bandcamp.com/EmbeddedPlayer/album=2872737805/size=large/bgcol=ffffff/linkcol=0687f5/tracklist=false/artwork=small/transparent=true/', 'https://w.soundcloud.com/player/?url=https\\\\\\\\\\%3A//api.soundcloud.com/tracks/230156277&amp;color=0066cc&amp;auto_play=false&amp;hide_related=false&amp;show_comments=true&amp;show_user=true&amp;show_reposts=false', 'https://www.youtube.com/embed/G3zjMudhfMM', '2015-10-15', 'ripit.jpg', 'Ripit_Lunar_xtorsion.rar', 52, '5.00', 1, 0, 1, 75),
+(18, 'Schadelfrost', 'TTT17', 'C50', '<p><strong>Side A</strong><br /><br />A1 human ruins<br />A2 grgrggg<br />A3 abk&ouml;nnen<br />A4 gangrene II<br />A5 goo<br />A6 lycidhyl<br />A7 labour II<br /><br /><strong>Side B</strong><br /><br />B1 dbd<br />B2 fights<br />B3 gangrene III<br />B4 alles voll stahl und idioten<br />B5 ich zerbarst<br />B6 run<br />B7 concrete floor</p>\r\n<p>Sch&auml;delfrost is Grindmaster Flesh\'s aka ZombieFleshEater\'s original cold cut. A powerful blend of experimental noise breakcore, guaranteed to put you in a harsh climate, freezing your veins, skull and bones. Thermal shock is inevitable. <br />Influenced by some of his favorite releases and tapes from the late 90s. Sch&auml;delfrost is also a statement against the aseptic sound characteristics which are predominant and widely accepted in many parts of current hardcore and breakcore.<br />Don\'t wait too long, only 75 icicled tapes are made.</p>\r\n<p>Limited 75 hand-numbered tapes edition on Third Type Tapes, released on 04/05, 2016.<br /> Artwork by <a href=\"https://www.facebook.com/CCCPu/\" target=\"_blank\">CCCPu</a></p>', 'https://bandcamp.com/EmbeddedPlayer/album=1471248070/size=large/bgcol=ffffff/linkcol=0687f5/tracklist=false/artwork=small/transparent=true/', 'https://w.soundcloud.com/player/?url=https\\\\\\\\%3A//api.soundcloud.com/tracks/257770370&amp;color=0066cc&amp;auto_play=false&amp;hide_related=false&amp;show_comments=true&amp;show_user=true&amp;show_reposts=false', '', '2016-04-04', 'GMF_SchadelFrost.jpg', 'GMF_Schadelfrost.rar', 14, '5.00', 0, 0, 1, 75),
+(19, 'Star Breaker', 'TTT18', 'C40', '<p><strong>Side A</strong><br />Star Breaker 1<br /><strong>Side B</strong><br />Star Breaker 2</p>\r\n<p>Star breaker has escaped, from his creator Kishino Kazuyuki&nbsp; aka KK Null into TTT\'s universe. <br />This speedcore power noise masterpiece is one of our most angry, in your face release. <br />Powerfull energies, with electroacoustic sound designs, a transcending experience from side A to an even angrier side B. <br />Mean and spiritual at the same time. Definitely an anti-hero villain who will drain you to deaf.</p>\r\n<p><span class=\"detail\">Limited 75 hand-numbered tapes edition on Third Type Tapes, released on 04/06, 2016.<br /> Artwork by <a href=\"https://www.facebook.com/CCCPu/\" target=\"_blank\">CCCPu</a></span></p>', 'https://bandcamp.com/EmbeddedPlayer/album=532053730/size=large/bgcol=ffffff/linkcol=0687f5/tracklist=false/artwork=small/transparent=true/', 'https://w.soundcloud.com/player/?url=https\\\\\\\\\\%3A//api.soundcloud.com/tracks/257814638&amp;color=0066cc&amp;auto_play=false&amp;hide_related=false&amp;show_comments=true&amp;show_user=true&amp;show_reposts=false', '', '2016-04-06', 'kknull_starBreaker.jpg', 'KK_null_starBreaker.rar', 37, '5.00', 1, 0, 1, 75),
+(20, 'Class A Circuitry', 'TTT19', 'C50', '<p><strong>Side A</strong><br /><br />A1 advancing robot attack<br />A2 lancet fluke<br />A3 machine head<br />A4 class Aacircuitry<br />A5 inside the oil tank<br />A6 lude<br /><br /><strong>Side B</strong><br /><br />B1 cjbs<br />B2 inverse square law<br />B3 harsh<br />B4 bz clusterbomb<br />B5 power tools</p>\r\n<p>This first release of submechanical on TTT is a collection of pieces to reflect the paranoia and fear of globalisation, terrorism, increasing military technology and automation. The soundtrack to the end of the civilised world is hard, distorted, analogue and edgy with a bedrock sub to shake all foundations.</p>\r\n<p><span class=\"detail\" style=\"font-size: 10pt;\"><span class=\"detail\">Limited 75 hand-numbered tapes edition on Third Type Tapes, released on 10/01, 2017.<br /> Artwork by <a href=\"https://www.facebook.com/CCCPu/\" target=\"_blank\">CCCPu</a></span></span></p>', 'https://bandcamp.com/EmbeddedPlayer/album=2179521478/size=large/bgcol=ffffff/linkcol=0687f5/tracklist=false/artwork=small/transparent=true/', 'https://w.soundcloud.com/player/?url=https\\\\\\\\%3A//api.soundcloud.com/tracks/334338997&amp;color=0066cc&amp;auto_play=false&amp;hide_related=false&amp;show_comments=true&amp;show_user=true&amp;show_reposts=false', 'https://www.youtube.com/embed/vOeQRyJChvw', '2017-01-09', 'pochette_submechanical.jpg', 'submechanical.rar', 22, '5.00', 0, 0, 1, 75),
+(21, 'NN SRVM 179', 'TTT20', 'C40', '<p><span id=\"yui_3_16_0_ym19_1_1486496551224_6776\" style=\"background-color: #000000;\"><span id=\"yiv3412962168yui_3_16_0_ym19_1_1486462110177_6323\">_Side A : NOTHING WILL PREVAIL<br id=\"yiv3412962168yui_3_16_0_ym19_1_1486462110177_6396\" style=\"clear: none;\" />_Side B : EXHAUST AND FEED</span></span></p>\r\n<p><span style=\"background-color: #000000;\">NN SRVM 179 is RAUM\'S first incarnation on record. Its two sides summon up and release curative energies of different natures such as melancholy and cathartic trance. While side A\'s track \"Nothing Will Prevail\" evokes a dystopian soundscape that invites the listener to contemplate the self destruction of an outdated system with distanced sorrow, side B\'s fierce \"Exhaust and Feed\" invites him to look for pleasure amidst its raw currents. Per ardua ad astra.</span></p>\r\n<p><span class=\"detail\" style=\"font-size: 10pt;\"><span class=\"detail\"><span class=\"detail\">Limited 75 hand-numbered tapes edition on Third Type Tapes, released on 08/02, 2017.<br /> Artwork by <a href=\"https://www.facebook.com/CCCPu/\" target=\"_blank\">CCCPu</a></span></span></span></p>', 'https://bandcamp.com/EmbeddedPlayer/album=2326585113/size=large/bgcol=ffffff/linkcol=0687f5/tracklist=false/artwork=small/transparent=true/', 'https://w.soundcloud.com/player/?url=https\\\\\\\\%3A//api.soundcloud.com/tracks/335225183&amp;color=0066cc&amp;auto_play=false&amp;hide_related=false&amp;show_comments=true&amp;show_user=true&amp;show_reposts=false', '', '2017-02-08', 'pochette_raum.jpg', 'Raum.rar', 11, '5.00', 0, 0, 1, 75),
+(22, 'Exuviae', 'TTT21', 'C40', '<p><strong>Side A:</strong></p>\r\n<p>01 - Imago<br />02 - Ecdysis<br />03 - Auchenorrh<br />04- Late Triassic<br />05- Cyclochilia</p>\r\n<p><strong>Side B:</strong></p>\r\n<p>06 - Endemism<br />07 - Superhydrophobic coating<br />08 - Polypoid<br />09 - Prokaryote</p>\r\n<p>Exuviae is the cast-off outer skin of certain insects after moulting.</p>\r\n<p>The exoskeleton of an arthoprod.</p>\r\n<p>Parts of the older version of the codes can be found here : <a href=\"https://github.com/exoterrism/livesets\" target=\"_blank\">https://github.com/exoterrism/livesets</a></p>\r\n<p>while the latest codes have vanished into nihilist oblivion.</p>\r\n<p>Limited 75 hand-numbered tapes edition on Third Type Tapes, released on 8th august 2017.<br />Artwork by CCCPu.</p>', 'https://bandcamp.com/EmbeddedPlayer/album=3997202073/size=large/bgcol=ffffff/linkcol=0687f5/tracklist=false/artwork=small/transparent=true/', 'https://w.soundcloud.com/player/?url=https\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\%3A//api.soundcloud.com/tracks/336972515&amp;color=0066cc&amp;auto_play=false&amp;hide_related=false&amp;show_comments=true&amp;show_user=true&amp;show_reposts=false', 'https://www.youtube.com/embed/OIo99xNHODw', '2017-08-08', 'exoterrism_exuviae.jpg', 'exoterrism-exuviae.rar', 29, '5.00', 1, 0, 1, 75),
+(23, 'Dubt Al Ghubar', 'TTT22', 'C30', '<p><strong>Side A</strong></p>\r\n<p>01 - Muqadima / Ù…Ù‚Ø¯Ù…Ø©<br />02 - Al-ma\'raka Al-uwla / Ø§Ù„Ù…Ø¹Ø±ÙƒØ© Ø§Ù„Ø£ÙˆÙ„Ù‰<br />03 - Asfal Masloob / Ø£Ø³ÙÙ„ Ù…Ø³Ù„ÙˆØ¨<br />04 - Haswet Phalasipha / Ø­ØµÙˆØ© Ø§Ù„ÙÙ„Ø§Ø³ÙØ©<br />05 - Suqoot Hor / Ø³Ù‚ÙˆØ· Ø­Ø±<br />06 - Shahiq Al-insijam / Ø´Ù‡ÙŠÙ‚ Ø§Ù„Ø¥Ù†Ø³Ø¬Ø§Ù…</p>\r\n<p><strong>Side B</strong></p>\r\n<p>07 - Thakirat Al-ma\' / Ø°Ø§ÙƒØ±Ø© Ø§Ù„Ù…Ø§Ø¡<br />08 - \'Isyan Tiqani / Ø¹ØµÙŠØ§Ù† ØªÙ‚Ù†ÙŠ<br />09 - Al-tahaluf / Ø§Ù„ØªØ­Ø§Ù„Ù<br />10 - Al-ma\'raka Al-thaniya / Ø§Ù„Ù…Ø¹Ø±ÙƒØ© Ø§Ù„Ø«Ø§Ù†ÙŠØ©<br />11 - Khalal 432 / Ø®Ù„Ù„ Ù¤Ù£Ù¢</p>\r\n<p><span class=\"_5yl5\">Dubt Al-Ghubar (adjust the dust in arabic), is a metaphor of the coming or even the current era. The era where artificial intelligence is dominating all aspects of life by manipulating matter on an unseen scale, and decides that it no longer has any use for the human species. After a long battle, humans are destroyed along with their culture and civilization. A new world is being built. But a small group of A.I, feeling deficient, has started to use found vocal sounds and other sonic remnants of humans, metaphoricaly transcribed from the track Shahiq Al-insijam (inhaling unison) and Thakirat Al-ma\' (water\'s memory), where they begin using tribal music in order to appropriate culture, and obtain some sort of soul. Such radical change in perception within A.I\'s has created division amongst them. Those who want to dominate nature and those who want to assimilate. \'Isyan Tiqani (Technical Disobediance) is the representation of the clash from within. What was previously not known, is that a small group of humans have survived in the underground and formed an alliance (Al Tahaluf) with some other intelligence forms. Thus another battle begins.</span></p>\r\n<p><span class=\"detail\">Limited 75 hand-numbered tapes edition on Third Type Tapes, released on 3rd september 2017.<br />Artwork by CCCPu.</span></p>', 'https://bandcamp.com/EmbeddedPlayer/album=2817810954/size=large/bgcol=ffffff/linkcol=0687f5/tracklist=false/artwork=small/transparent=true/', 'https://w.soundcloud.com/player/?url=https\\\\\\\\\\\\\\\\\\\\\\%3A//api.soundcloud.com/tracks/340119872&amp;color=0066cc&amp;auto_play=false&amp;hide_related=false&amp;show_comments=true&amp;show_user=true&amp;show_reposts=false', 'https://www.youtube.com/embed/Bg4UttRF0DU', '2017-09-03', 'muqataa.jpg', 'Muqata.rar', 81, '5.00', 1, 0, 1, 75),
+(24, 'un quart portugal', 'TTT23', 'C60', '<p><span style=\"font-family: helvetica,arial,sans-serif; font-size: 12pt;\">_Side A : CALDAS DA RINHA<br />_Side B : A, B, C, D</span></p>\r\n<p><span style=\"font-family: helvetica,arial,sans-serif; font-size: 12pt;\">\"un quart portugal\" is a reflection about the remaining tribal influence on our western society.&nbsp; Through samplers, 4 tracks magnetic tapes, singings of endothermic vertebrates and pumping compression, Raymonde takes us back to forgotten instincts, back to our primate state, to our diverse nature as an individual being. It is a shamanic experience, a voyage through the 5th dimension, a rediscovery of our inner consciousness. <br /></span></p>\r\n<p><span style=\"font-family: helvetica,arial,sans-serif; font-size: 12pt;\"><span class=\"detail\"><span class=\"detail\">Limited 75 hand-numbered tapes edition on Third Type Tapes, released on 3rd october 2017.<br />Artwork by CCCPu.</span></span></span></p>', 'https://bandcamp.com/EmbeddedPlayer/album=1117077776/size=large/bgcol=ffffff/linkcol=0687f5/tracklist=false/artwork=small/transparent=true/', 'https://w.soundcloud.com/player/?url=https\\\\\\\\\\%3A//api.soundcloud.com/tracks/345318241&amp;color=\\\\\\\\\\%230066cc&amp;auto_play=false&amp;hide_related=false&amp;show_comments=true&amp;show_user=true&amp;show_reposts=false', 'https://www.youtube.com/embed/EuM0FUQoqcM', '2017-10-03', 'raymonde_600x600.jpg', 'Raymonde.rar', 39, '5.00', 1, 0, 1, 75),
+(25, 'Dawn Of The Head - Naida', 'TTT24', 'C60', '<p>Side A : Dawn of the Head<br />1 - Chaouen &agrave; l\'envers<br />2- Killer is dead<br />3- Bunker beard<br />4- Monica<br />5- Sehrij Gnawa<br />6- Zoso HBU (Feat. Pavleisdead &amp; Gonzo pke)<br />7- Another Vermin (Feat. Bloodmouth &amp; Arnod)<br />8- No Fire (Feat. Pavleisdead)<br />9- Swinecunt (Feat. Bloodmouth &amp; Arnod)</p>\r\n<p>Side B: Na&iuml;da<br />1- Tramen<br />2- Fitoy<br />3- Daguak<br />4- Fost<br />5- Soido<br />6- Deheaazan<br />7- Space Fish</p>\r\n<p>A side is Massive Head first appearance. Massive dirty beats from K(no o), retortured through dark hands of almighty Sub-Altern, processed and blessed by&nbsp; Bob&eacute; Van J&eacute;zu precisely placing soundscapes and field recordings to it. The result is a loud, demented and tormented ,instrumental dub hiphop. Last tracks features Arnod, Gonzo pke, MC Pavleisdead, and BloodMouth, .&nbsp;</p>\r\n<p>B side is Sub-Altern on it\'s own, continuing his dub, dark hiphop path. With very metallic and creaky soundscapes and colour, just like his former albums, flirting in the dub alchemy, and with his confrontational, socially-conscious style of performing and producing he dirtied, distorted, obscured everything.<br />A mixture of strident dubs recorded during nights of obscure insomnia. Born of a light fog that licks like a cat that divests itself of its dreams. Doomed to disappear. They finally remained ... what has been understood no longer exists.</p>\r\n<p><span class=\"detail\"><span style=\"font-family: helvetica,arial,sans-serif; font-size: 12pt;\"><span class=\"detail\"><span class=\"detail\">Limited 75 hand-numbered tapes edition on Third Type Tapes, released on 3rd november 2017.<br />Artwork by CCCPu.</span></span></span></span></p>', 'https://bandcamp.com/EmbeddedPlayer/album=3928850147/size=large/bgcol=ffffff/linkcol=0687f5/tracklist=false/artwork=small/transparent=true/', 'https://w.soundcloud.com/player/?url=https\\\\\\\\%3A//api.soundcloud.com/tracks/350115856&amp;color=\\\\\\\\%230945ac&amp;auto_play=false&amp;hide_related=false&amp;show_comments=true&amp;show_user=true&amp;show_reposts=false&amp;show_teaser=true', 'https://www.youtube.com/embed/iw5RtlRv9Oc', '2017-11-03', 'massive-head-subaltern.jpg', 'Massive_sub.rar', 22, '5.00', 0, 0, 1, 75),
+(26, 'Everywhere Alone', 'TTT25', 'C50', '<p><strong>_side A :</strong><br />2 sticky 4 you debut<br />margin gay<br />bolossage en r&egrave;gle dans le m&eacute;tro parisien<br />xenophile<br />un speedcoreux vraiment charmant<br />merde alors<br /><br /><strong>_side B :</strong><br />afro dance<br />haroun the world<br />the belles<br />goudron<br />les clopes du chinois<br />polichinelle</p>\r\n<p>\"maman j\'ai rater ma vie\" est le premier album de Mlacoler, enregistr&eacute; en pleurant<br /><br />Limited 75 hand-numbered tapes edition on Third Type Tapes, released on april 6 2018.<br />Artwork by CCCPu.</p>', 'https://bandcamp.com/EmbeddedPlayer/album=2923579612/size=large/bgcol=ffffff/linkcol=0687f5/tracklist=false/artwork=small/transparent=true/', '', '', '2018-04-06', 'mlacoler_culkin_site.jpg', 'mlacoler_culkin.rar', 24, '5.00', 0, 0, 1, 75),
+(27, 'Liminal Clash Console', 'TTT26', 'C60', '<p><strong>Side A</strong></p>\r\n<p>A1.Convergence Study #3<br />A2.Post Human Processor<br />A3.Hyperlove Cult</p>\r\n<p><strong>Side B</strong></p>\r\n<p>B1.Liminal Clash Console<br />B2.Washing Machine Oblivion (feat. Volsent)<br />B3.Void Simulator Unit</p>\r\n<p>&ldquo;... The Unknown appear as variables of a polynomial of degree higher than One...&rdquo;<br />The last words of Dr Naegleria Fowleri<br />Abstract noises clash with hypnotic drones. Structures turn to dust, and digital data fizzle away into decay. My cat believes the delivery guy is my owner because he keeps giving me food... Vera Spektor explores a mutated world branching out into the unknown, into places where emotions can flow. You will find with these recordings, the last data Vera harvested from one of his investigations, a universe unhabited by elephantine machines that have lost their way. Derelict mechanics wandering into no man\'s land.</p>\r\n<p>Recorded in London at Studio Subduct</p>\r\n<p><span class=\"detail\">Limited 75 hand-numbered tapes edition on Third Type Tapes, released on july 16 2018.<br />Artwork by CCCPu.</span></p>', 'https://bandcamp.com/EmbeddedPlayer/album=3064777334/size=large/bgcol=ffffff/linkcol=0687f5/tracklist=false/artwork=small/transparent=true/\"', '', 'https://www.youtube.com/embed/i5_5ltFNY7A', '2018-07-16', 'TTT26_vera_spektor.jpg', 'TTT26_VeraSpektor.rar', 27, '5.00', 0, 0, 1, 75),
+(28, 'Inverser', 'TTT27', 'C50', '<p><strong>Side A</strong><br /><br />A1 N<br />A2 PAKR<br />A3 BOTMEL<br />A4 2 6<br />A5 OLDUR<br /><br /><strong>Side B</strong><br /><br />B1 YEAST<br />B2 VIOH<br />B3 XHELL<br />B4 WHOME</p>\r\n<p>Yann Lefevre\'s new album Inverser is a compilation of selected gems from his work between 2014 and 2018. Some tracks were made way before his unique blend has been well established and inoculated around the planet, contaminating numerous locations worldwide. <br />Harmonic distortions from N and the heavy and destructive pace of Pakr and&nbsp; Botmel penetrates the body through sparkling sharp sounds. Then slowly accelerating, are coming the more techno orientated deep exploration vibe of 2_6 and&nbsp; Yeast, defining the fresh sensory characteristics of 6.R.M.E.<br />The aggressiveness of OLDUR&nbsp; and VIOH twists groovy dancefloor into a chaotic space, expanding through Xhell&rsquo;s corrosiveness&nbsp; and exploding towards Whom2\'s demonic curse. The trip keeps alive those who believe in chaos, feeding them with dark energy.<br /><br />Limited 75 hand-numbered tapes edition on Third Type Tapes, released on december 14 2018.<br />Artwork by CCCPu.</p>', 'https://bandcamp.com/EmbeddedPlayer/album=833365896/size=large/bgcol=ffffff/linkcol=0687f5/tracklist=false/artwork=small/transparent=true/', '', 'https://www.youtube.com/embed/T3e_5H7Lgkg', '2018-12-14', '6rme_inverser_website.jpg', 'TTT27_6RME.rar', 31, '5.00', 0, 0, 1, 75),
+(29, '171214', 'TTT28', 'C44', '<p><strong>Side A</strong><br />Tiny Tramp live 171214<br /><br /><strong>Side B</strong><br />Dave Phillips live action 171214<br /><br />Tiny Tramp and Dave Phillips first met in tel aviv in 2012, invoked by insect voodoo, then in z&uuml;rich in 2015, summoned by eb.erian magic. something was in the air ever since, but had to wait until am&eacute;lie, an engaged organisational force with a knack for special locations, brought them together to tour five french cities at the end of 2017. these here live-sets were recorded on a farm, somewhere on the outskirts of rennes, on a cold december night.<br /><br />Limited 75 hand-numbered tapes edition on Third Type Tapes, released on march 28 2019.<br />Artwork by CCCPu.</p>', 'https://bandcamp.com/EmbeddedPlayer/album=2523797766/size=large/bgcol=ffffff/linkcol=0687f5/tracklist=false/artwork=small/transparent=true/', '', '', '2019-03-28', 'TTT28_TTDP-600x600.jpg', 'TTT28_DavePhillips_TinyTramp.rar', 27, '5.00', 0, 0, 1, 75),
+(30, 'La pieuvre', 'TTT29', 'C30', '<p><span style=\"font-size: 11pt; font-family: Arial; color: #000000; background-color: #ffffff; font-weight: 400; font-style: normal; font-variant: normal; text-decoration: none; vertical-align: baseline; white-space: pre-wrap;\"><span style=\"background-color: #000000; color: #ffffff;\"><strong>Side A :</strong><br />La pieuvre pt.1<br />La pieuvre pt.2<br /><br /><strong>Side B :</strong><br />SplinterItIntoAThousandPieces<br />AndScatterItIntoTheWinds</span></span></p>\r\n<p><span id=\"docs-internal-guid-cb7790e8-7fff-5294-e065-5fec81850dd5\" style=\"font-size: 11pt; font-family: Arial; color: #000000; background-color: #ffffff; font-weight: 400; font-style: normal; font-variant: normal; text-decoration: none; vertical-align: baseline; white-space: pre-wrap;\"><span style=\"background-color: #000000; color: #ffffff;\">\" SplinterItIntoAThousandPiecesAndScatterItIntoTheWinds\" tel fut le mot de passe d&eacute;couvert par wikileaks en 2017 qui permettait d&rsquo;acc&eacute;der &agrave; une s&eacute;rie de logiciels de surveillance de la CIA. Ces logiciels permettent entre autres de transformer les smartphones ou les &eacute;crans plats en appareil d\'&eacute;coute &agrave; l\'insu de ses utilisateurs.Le mot de passe hack&eacute; est une citation suppos&eacute; de Kennedy suite &agrave; l&rsquo;&eacute;chec de la baie des cochons, quelques mois avant son assassinat.</span><br /></span></p>\r\n<p><span style=\"font-size: 11pt; font-family: Arial; color: #000000; background-color: #ffffff; font-weight: 400; font-style: normal; font-variant: normal; text-decoration: none; vertical-align: baseline; white-space: pre-wrap;\"><span style=\"background-color: #000000; color: #ffffff;\">(Musicians + instruments used) :<br />Sherman filterbank 2<br />EHX Flanger hoax<br />WMD Geiger Counter<br />Jomox T Resonator<br />EHX LPB 2 Tube<br />Elektron Octatrack<br />MFB Tanzbar lite<br />Doepfer Dark Energy<br />Erebus Dreadbox<br />Tascam M208<br />Revox A77<br />Reaper</span></span></p>\r\n<p><span style=\"font-size: 11pt; font-family: Arial; color: #000000; background-color: #ffffff; font-weight: 400; font-style: normal; font-variant: normal; text-decoration: none; vertical-align: baseline; white-space: pre-wrap;\"><span style=\"background-color: #000000; color: #ffffff;\"><span class=\"detail\">Limited 75 hand-numbered tapes edition on Third Type Tapes, released on march 29 2019.<br />Artwork by CCCPu.</span></span></span></p>', 'https://bandcamp.com/EmbeddedPlayer/album=2990875738/size=large/bgcol=ffffff/linkcol=0687f5/tracklist=false/artwork=small/transparent=true/', '', 'https://www.youtube.com/embed/FidTnf92V8g', '2019-03-29', 'TTT29_somaticae_600x600.jpg', 'TTT29_Somaticae.rar', 27, '5.00', 0, 0, 1, 75),
+(31, 'Bipolar Noise', 'TTT30', 'C60', '<p><span style=\"font-size: 10pt;\"><strong>Side A :</strong> </span><br /><span style=\"font-size: 10pt;\">Far Lowness</span><br /><br /><span style=\"font-size: 10pt;\"><strong>Side B :</strong> </span><br /><span style=\"font-size: 10pt;\">Hiss Mania</span></p>\r\n<p><span style=\"font-size: 10pt;\">Generative and improvised liveset where each side illustrates a bipolar phase, this bipolarity can express in reality as a mental condition but also as a representation of Socio-economic phenomena, this condition here represented by the low part of the spectrum and a slow tempo for the depressive episode (Far Lowness) or more fast and higher tempo in the top of the spectrum for the manic episode (Hiss Mania).</span></p>\r\n<p><span class=\"detail\" style=\"font-size: 10pt;\"><span style=\"font-family: Arial; color: #000000; font-style: normal; font-variant: normal; text-decoration: none; vertical-align: baseline; white-space: pre-wrap;\"><span style=\"color: #ffffff;\"><span class=\"detail\">Limited 75 hand-numbered tapes edition on Third Type Tapes, released on october 09 2019.<br />Artwork by CCCPu.</span></span></span></span></p>', 'https://bandcamp.com/EmbeddedPlayer/album=3632796910/size=large/bgcol=ffffff/linkcol=0687f5/tracklist=false/artwork=small/transparent=true/', '', '', '2019-10-06', 'TTT30_letal-ataraxia.jpg', 'TTT30_Letal_Ataraxia.rar', 25, '5.00', 0, 0, 1, 75),
+(33, 'Live Orleans 2019', 'TTT32', 'C45', '<p dir=\"ltr\" style=\"line-height: 1.38; margin-top: 0pt; margin-bottom: 0pt;\"><span style=\"font-family: Arial; background-color: transparent; font-weight: 400; font-style: normal; font-variant: normal; text-decoration: none; vertical-align: baseline; white-space: pre-wrap; font-size: 10pt;\"><strong>Side A</strong> <strong>:</strong> \"&ccedil;!hzol</span></p>\r\n<p dir=\"ltr\" style=\"line-height: 1.38; margin-top: 0pt; margin-bottom: 0pt;\"><span style=\"font-family: Arial; background-color: transparent; font-weight: 400; font-style: normal; font-variant: normal; text-decoration: none; vertical-align: baseline; white-space: pre-wrap; font-size: 10pt;\"><strong>Side B</strong> <strong>:</strong> k:b&eacute;i</span></p>\r\n<p dir=\"ltr\" style=\"line-height: 1.38; margin-top: 0pt; margin-bottom: 0pt;\"><span style=\"font-family: Arial; background-color: transparent; font-weight: 400; font-style: normal; font-variant: normal; text-decoration: none; vertical-align: baseline; white-space: pre-wrap; font-size: 10pt;\">A captivating live recording by Terrine, the female audio activist from Amiens !<br />From minimalist dry landscapes of digital bleeps and noises to cold and rough hardcore beats.<br />Expect some NUKE vibe on this tape.</span></p>\r\n<p dir=\"ltr\" style=\"line-height: 1.38; margin-top: 0pt; margin-bottom: 0pt;\"><span class=\"detail\"><span class=\"detail\" style=\"font-size: 10pt;\"><span style=\"font-family: Arial; color: #000000; font-style: normal; font-variant: normal; text-decoration: none; vertical-align: baseline; white-space: pre-wrap;\"><span style=\"color: #ffffff;\"><span class=\"detail\">Limited 75 hand-numbered tapes edition on Third Type Tapes, released on november 02 2019.<br />Artwork by CCCPu.</span></span></span></span></span></p>', 'https://bandcamp.com/EmbeddedPlayer/album=902588707/size=large/bgcol=ffffff/linkcol=0687f5/tracklist=false/artwork=small/transparent=true/', '', 'https://www.youtube.com/embed/5uiMJAfz4c8', '2019-11-02', 'TTT32_terrine.jpg', 'TTT32_Terrine.rar', 26, '5.00', 0, 0, 1, 75),
+(34, 'WTC', 'TTT31', 'C25', '<p><strong>_Side A</strong> : CANCELLLED WTC part I and II<br /><strong>_Side B</strong> : CANCELLLED WTC part III</p>\r\n<p>Recorded at Overtoon (WTC I - 25th floor) 2018</p>\r\n<p>Pure analog signals sharpened like flints for a timeless ecstasy. A collaboration between two wizards of sound : Aymeric De Tapol and Yann Leguay (Analogic sequencers , Electronic oscillators).</p>\r\n<p><span class=\"detail\"><span class=\"detail\"><span class=\"detail\" style=\"font-size: 10pt;\"><span style=\"font-family: Arial; color: #000000; font-style: normal; font-variant: normal; text-decoration: none; vertical-align: baseline; white-space: pre-wrap;\"><span style=\"color: #ffffff;\"><span class=\"detail\">Limited 75 hand-numbered tapes edition on Third Type Tapes, released on december 19 2019.<br />Artwork by CCCPu.</span></span></span></span></span></span></p>', 'https://bandcamp.com/EmbeddedPlayer/album=1021354793/size=large/bgcol=ffffff/linkcol=0687f5/tracklist=false/artwork=small/transparent=true/', '', 'https://www.youtube.com/embed/PgW-uKmm9dI', '2019-12-19', 'TTT31_cancellled_600.jpg', 'TTT31_Cancellled.rar', 27, '5.00', 0, 0, 1, 75),
+(35, 'Path to Danach', 'TTT33', 'C45', '<p>The &Aring;ngstromers is a cluster of sound artists &amp; musicians who gravitate<br />around &Aring;ngstr&ouml;m Records and its celestial twin &Aring;ngstrom Mastering.<br />This release is the post-produced live recording at Magasin 4. The artists were<br />Fr&eacute;d&eacute;ric Alstadt and Nicolas Esterle on electronics and Frederic Stader at front<br />of house and recording.<br /><br />Recorded live at Magasin 4, Brussels, BE on April 9th, 2019 by Frederic Stader.<br />Edit and Mix by Nicolas Esterle and Fr&eacute;d&eacute;ric Alstadt<br />Mastered by Fr&eacute;d&eacute;ric Alstadt at &Aring;ngstr&ouml;m Mastering<br /><br />Limited 75 hand-numbered tapes edition on Third Type Tapes, released on january 12 2020.<br />Artwork by CCCPu.</p>', 'https://bandcamp.com/EmbeddedPlayer/album=2130476002/size=large/bgcol=ffffff/linkcol=0687f5/tracklist=false/artwork=small/transparent=true', '', 'https://www.youtube.com/embed/rUNAw_aPOmQ', '2020-01-12', 'TTT33_angstromers.jpg', 'TTT33_The_Angstromers.rar', 25, '5.00', 0, 0, 1, 75);
 
 -- --------------------------------------------------------
 
@@ -179,13 +181,15 @@ INSERT INTO `cassette` (`id_cassette`, `titre`, `code`, `longueur`, `description
 -- Structure de la table `client`
 --
 
-CREATE TABLE `client` (
-  `id_client` int(11) NOT NULL,
+DROP TABLE IF EXISTS `client`;
+CREATE TABLE IF NOT EXISTS `client` (
+  `id_client` int(11) NOT NULL AUTO_INCREMENT,
   `adresse_client` varchar(255) DEFAULT NULL,
   `mail_client` varchar(50) DEFAULT NULL,
   `nom_client` varchar(50) DEFAULT NULL,
-  `suppr` int(1) NOT NULL DEFAULT 0
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  `suppr` int(1) NOT NULL DEFAULT 0,
+  PRIMARY KEY (`id_client`)
+) ENGINE=InnoDB AUTO_INCREMENT=146 DEFAULT CHARSET=utf8;
 
 --
 -- Déchargement des données de la table `client`
@@ -332,16 +336,7 @@ INSERT INTO `client` (`id_client`, `adresse_client`, `mail_client`, `nom_client`
 (142, 'alexandre chanoine\r\n6 Grande Baleyte\r\n23140 Pionnat\r\nFrance', 'alexandrechanoine@gmail.com', 'alexandre chanoine', 0),
 (143, 'Adrian Deineka\r\nSandstuveien 52 D\r\n410\r\n1184 Oslo\r\nNorvège', 'Bostik28@yandex.com', 'Adrian Deineka', 0),
 (144, 'Amélie Taillard\r\nchez Robin Poligné et Margaux Parillaud\r\n26 rue Couteanceau\r\n35000 RENNES\r\nFrance', 'amelie.taillard@yahoo.fr', 'Amélie Taillard', 0),
-(145, 'Eric De Oliveira\r\n7 rue Paul Dupin\r\n31500 Toulouse\r\nFrance', 'newedo1@gmail.com', 'Eric De Oliveira', 0),
-(146, 'IVAN MEDEK\r\nTRNOV 6\r\nTRNOV,KRÁLOVÉHRADECKÝ KRAJ\r\n517 33\r\nRépublique tchèque', 'devote22@seznam.cz', 'Ivan Medek', 0),
-(147, 'Yann Griboval\r\nAppartement 104 - Bâtiment A - Les jardins de la somme 28 Boulevard du Port\r\n80000 Amiens 80\r\nFrance', 'yanng_10@hotmail.com', 'Yann Griboval', 0),
-(148, 'Julia Alabed\r\n20 rue Monadey\r\n33800 Bordeaux ', 'dzou.lia@gmail.com', 'Julia Alabed', 0),
-(149, 'Mme Mathys Julie\r\n9 rue danton\r\nL-69003 LYON\r\nFrance', 'julye.m@orange.fr', 'julie mathys', 0),
-(150, '5 rue d\'alsace\r\nL-72000 le mans\r\nFrance', 'sfeirnicolas@wanadoo.fr', 'Nicolas Sfeir', 0),
-(151, 'Hall 3\r\n137 rue Oberkampf\r\n75011 Paris', 'ruelgo@orange.fr', 'Jean Marie Onni', 0),
-(152, '11 rue de l\'Industrie\r\nL-1201 Genève\r\nGE\r\nSuisse', 'renaud@wildrfid.net', 'Renaud Marchand', 0),
-(153, 'MANN\r\n1 rue d\'Alsace\r\nL-63000 CLERMONT-FERRAND\r\nFrance', 'mann_vivien@yahoo.fr', 'vivien Mann', 0),
-(154, '9, La Magdeleine\r\nL-35600 SAINTE-MARIE\r\nFrance', 'mael-lm@hotmail.fr', 'Maël LE MOIGNE', 0);
+(145, 'Eric De Oliveira\r\n7 rue Paul Dupin\r\n31500 Toulouse\r\nFrance', 'newedo1@gmail.com', 'Eric De Oliveira', 0);
 
 -- --------------------------------------------------------
 
@@ -349,10 +344,12 @@ INSERT INTO `client` (`id_client`, `adresse_client`, `mail_client`, `nom_client`
 -- Structure de la table `etat_exemplaire`
 --
 
-CREATE TABLE `etat_exemplaire` (
-  `id_etat_exemplaire` int(11) NOT NULL,
-  `description_etat` varchar(30) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+DROP TABLE IF EXISTS `etat_exemplaire`;
+CREATE TABLE IF NOT EXISTS `etat_exemplaire` (
+  `id_etat_exemplaire` int(11) NOT NULL AUTO_INCREMENT,
+  `description_etat` varchar(30) DEFAULT NULL,
+  PRIMARY KEY (`id_etat_exemplaire`)
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
 
 --
 -- Déchargement des données de la table `etat_exemplaire`
@@ -371,15 +368,17 @@ INSERT INTO `etat_exemplaire` (`id_etat_exemplaire`, `description_etat`) VALUES
 -- Structure de la table `event`
 --
 
-CREATE TABLE `event` (
-  `id_event` int(11) NOT NULL,
+DROP TABLE IF EXISTS `event`;
+CREATE TABLE IF NOT EXISTS `event` (
+  `id_event` int(11) NOT NULL AUTO_INCREMENT,
   `date_event` date DEFAULT NULL,
   `lieu` varchar(255) DEFAULT NULL,
   `titre_event` varchar(255) DEFAULT NULL,
   `description_event` longtext DEFAULT NULL,
-  `image_event` varchar(255) DEFAULT NULL,
-  `suppr` int(1) NOT NULL DEFAULT 0
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  `image_event` varchar(50) DEFAULT NULL,
+  `suppr` int(1) NOT NULL DEFAULT 0,
+  PRIMARY KEY (`id_event`)
+) ENGINE=InnoDB AUTO_INCREMENT=47 DEFAULT CHARSET=utf8;
 
 --
 -- Déchargement des données de la table `event`
@@ -434,7 +433,7 @@ INSERT INTO `event` (`id_event`, `date_event`, `lieu`, `titre_event`, `descripti
 (43, '2018-07-31', 'Plage De Montrelais - Aire Naturelle De Loisirs', 'DIVISION', '<p><span style=\"font-size: 12pt;\"><strong>TTT se met au vert&nbsp;</strong><strong>Dans la D&eacute;pendance&nbsp;</strong></span><strong style=\"font-size: 12pt;\">et invite des ami-e-s pour deux jours de f&ecirc;te&nbsp;en bord de Loire les 31 juillet&nbsp;et 1 ao&ucirc;t.</strong></p>\r\n<p>En vrac : des concerts, des mixes, des projections sur la Loire, des installations sonores, une d&eacute;gustation de vins naturels (yen aura au bar aussi bien s&ucirc;r), une cantine v&eacute;gan, un atelier de gravure de plexidisques, une &eacute;clade de moules g&eacute;ante, des distros.&nbsp;</p>\r\n<p><a href=\"https://blingxblang.tumblr.com/\">10 lignes de Blings, 10 lignes de Blangs</a></p>\r\n<p><a href=\"cassettes/view/14/TTT13/6\\\\\\\\\\\\\\\\\\\\\\\\\\%20R-M-E/Les\\\\\\\\\\\\\\\\\\\\\\\\\\%20Voyages\\\\\\\\\\\\\\\\\\\\\\\\\\%20du\\\\\\\\\\\\\\\\\\\\\\\\\\%20Masque\">6RME</a></p>\r\n<p><a href=\"https://soundcloud.com/lapostepointnet\">Accou</a></p>\r\n<p><a href=\"https://atenyearwinter.bandcamp.com/\">A Ten Year Winter</a></p>\r\n<p>&agrave;&nbsp;travers</p>\r\n<p><a href=\"https://www.youtube.com/watch?v=PUaszzEdqtY\" target=\"_blank\">BaBa YaGe</a></p>\r\n<p><a href=\"https://soundcloud.com/bearboneslaylow\">Bear Bones Lay Low</a></p>\r\n<p><a href=\"http://diewurstbrucke.blogspot.com/\" target=\"_blank\">Blenno Die WurstBrucke</a></p>\r\n<p><a href=\"https://lostdogsentertainment.bandcamp.com/\" target=\"_blank\">Bobb de Lost Dogs</a></p>\r\n<p><a href=\"https://soundcloud.com/bobevanjezu\">Bob&eacute; Van J&eacute;zu</a></p>\r\n<p><a href=\"https://soundcloud.com/c_c\">c_c</a></p>\r\n<p><a href=\"https://soundcloud.com/user-27831370\" target=\"_blank\">Cabine Volcan</a></p>\r\n<p><a href=\"https://soundcloud.com/carrageenan\">Carrageenan</a></p>\r\n<p><a href=\"https://www.youtube.com/watch?v=6oZnaNp6brc\">Le Compas Dans L\'Oeil</a></p>\r\n<p><a href=\"https://soundcloud.com/arno-bruil\">Descendeur</a></p>\r\n<p><a href=\"https://www.mixcloud.com/Sainte-Rita/stream/\" target=\"_blank\">Dj Sainte Rita</a></p>\r\n<p><strong>Goz Pan Zoo</strong></p>\r\n<p><a href=\"https://soundcloud.com/guilhem-all\">Guilhem All</a></p>\r\n<p>Henry D&egrave;che</p>\r\n<p><a href=\"https://www.mixcloud.com/cheloutonson/\">IlEstChelouTonSon</a></p>\r\n<p><a href=\"http://jeanbender.blogspot.com/\">Jean Bender</a></p>\r\n<p><a href=\"https://www.youtube.com/watch?v=TinfGiKgRFI\" target=\"_blank\">Juste Oreilles</a></p>\r\n<p><a href=\"https://soundcloud.com/overclockheadz\" target=\"_blank\">Letal Ataraxia</a></p>\r\n<p><a href=\"https://medonner.bandcamp.com/\" target=\"_blank\">Me Donner</a></p>\r\n<p><a href=\"cassettes/view/26/TTT25/Mlacoler\\\\\\\\\\\\\\\\\\\\\\\\\\%20Culkin/Everywhere\\\\\\\\\\\\\\\\\\\\\\\\\\%20Alone\">Mlacoler Culkin</a></p>\r\n<p><a href=\"https://nuancesdengrais.bandcamp.com/\">Nuances D\'Engrais</a></p>\r\n<p><a href=\"https://soundcloud.com/nureonna\">NuR</a></p>\r\n<p><a href=\"https://soundcloud.com/ananal/odium-decoy-untitled-seven\">Odium Decoy (aka Unas BM)</a></p>\r\n<p><a href=\"https://soundcloud.com/paolotecon\">Paolo T&eacute;con</a></p>\r\n<p><a href=\"https://www.youtube.com/watch?v=KFpbMk0hOUo\">Pierre Gordeeff</a></p>\r\n<p><a href=\"https://soundcloud.com/user-757727559\">Ponge</a></p>\r\n<p><a href=\"cassettes/view/17/TTT16/Ripit/Lvnar\\\\\\\\\\\\\\\\\\\\\\\\\\%20Xtorxion\">Ripit</a></p>\r\n<p>Rosa Canina</p>\r\n<p><a href=\"https://soundcloud.com/tabasserumba\" target=\"_blank\">Tabasse Rumba</a></p>\r\n<p><a href=\"http://thomas.tilly.free.fr/tohome.html\">Thomas Tilly</a></p>\r\n<p><a href=\"https://tzii.bandcamp.com/\">Tzii</a></p>\r\n<p><a href=\"https://soundcloud.com/somaticae\">Somaticae</a></p>\r\n<p><strong>Sudr&euml;</strong></p>\r\n<p><a href=\"https://50hz.club/zeropixel/\" target=\"_blank\">Zero Pixel</a></p>\r\n<p><a href=\"https://soundcloud.com/zohastre\">Zohastre</a></p>\r\n<p>&nbsp;</p>\r\n<p>Une plage, des arbres, deux sonos.</p>\r\n<p>Participation Au Frais : 10 balles par jour, 20 balles les deux jours</p>\r\n<p>Bar prix sympas</p>\r\n<p>Cantine vegan prix libre</p>\r\n<p>Possibilit&eacute; de camper sur place</p>\r\n<p>Acc&egrave;s en voiture</p>\r\n<p>&nbsp;</p>\r\n<p>&nbsp;</p>\r\n<p>&nbsp;</p>\r\n<p>&nbsp;</p>\r\n<p>&nbsp;</p>', 'divisionlogonb.jpg', 0),
 (44, '2018-12-14', '53 bis avenue du port, 1000 RÃ©gion de Bruxelles-capitale', 'TTT27 Release Party', '<p>TTT27 - 6RME - Inverser <br />Release Party<br /><br />Skrapez<br />6rme<br />Carrageenan<br />Refurinn Kitsune<br />RAE<br />Bob&eacute;<br /><br />Prix libre (5E conseill&eacute;)</p>', 'TTT27_release_Party.jpg', 0),
 (45, '2019-03-29', 'bis, Avenue du Port 53, 1000 Bruxelles, Belgique', 'TTT & Silken Tofu_TTT28 & 29 Release Party', '<p><span style=\"color: #ffffff; font-family: Helvetica, Arial, sans-serif; font-size: 14px; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: 400; letter-spacing: normal; text-align: start; text-indent: 0px; text-transform: none; white-space: pre-wrap; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: #000000; display: inline !important; float: none;\">Silken Tofu &amp; Third Type Tapes presents a night of heavy Industrial / Noise / Hip Hop / Electronics on Third Type Tapes Sound System !!!!!</span><br style=\"color: #1d2129; font-family: Helvetica, Arial, sans-serif; font-size: 14px; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: 400; letter-spacing: normal; text-align: start; text-indent: 0px; text-transform: none; white-space: pre-wrap; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: #ffffff;\" /><br style=\"color: #1d2129; font-family: Helvetica, Arial, sans-serif; font-size: 14px; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: 400; letter-spacing: normal; text-align: start; text-indent: 0px; text-transform: none; white-space: pre-wrap; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: #ffffff;\" /><span style=\"color: #ffffff; font-family: Helvetica, Arial, sans-serif; font-size: 14px; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: 400; letter-spacing: normal; text-align: start; text-indent: 0px; text-transform: none; white-space: pre-wrap; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: #000000; display: inline !important; float: none;\">Line up:</span><br style=\"color: #1d2129; font-family: Helvetica, Arial, sans-serif; font-size: 14px; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: 400; letter-spacing: normal; text-align: start; text-indent: 0px; text-transform: none; white-space: pre-wrap; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: #ffffff;\" /><br style=\"color: #1d2129; font-family: Helvetica, Arial, sans-serif; font-size: 14px; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: 400; letter-spacing: normal; text-align: start; text-indent: 0px; text-transform: none; white-space: pre-wrap; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: #ffffff;\" /><span style=\"color: #ffffff; font-family: Helvetica, Arial, sans-serif; font-size: 14px; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: 400; letter-spacing: normal; text-align: start; text-indent: 0px; text-transform: none; white-space: pre-wrap; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: #000000; display: inline !important; float: none;\">- Tiny Tramp (Live)</span><br style=\"color: #1d2129; font-family: Helvetica, Arial, sans-serif; font-size: 14px; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: 400; letter-spacing: normal; text-align: start; text-indent: 0px; text-transform: none; white-space: pre-wrap; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: #ffffff;\" /><span style=\"background-color: #000000; color: #0000ff;\"><a style=\"color: #0000ff; cursor: pointer; text-decoration: none; font-family: Helvetica, Arial, sans-serif; font-size: 14px; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: 400; letter-spacing: normal; text-align: start; text-indent: 0px; text-transform: none; white-space: pre-wrap; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: #000000;\" href=\"https://tinytramp.bandcamp.com/releases\" target=\"_blank\" rel=\"nofollow noopener\">https://tinytramp.bandcamp.com/releases</a></span><br style=\"color: #1d2129; font-family: Helvetica, Arial, sans-serif; font-size: 14px; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: 400; letter-spacing: normal; text-align: start; text-indent: 0px; text-transform: none; white-space: pre-wrap; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: #ffffff;\" /><br style=\"color: #1d2129; font-family: Helvetica, Arial, sans-serif; font-size: 14px; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: 400; letter-spacing: normal; text-align: start; text-indent: 0px; text-transform: none; white-space: pre-wrap; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: #ffffff;\" /><span style=\"color: #ffffff; font-family: Helvetica, Arial, sans-serif; font-size: 14px; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: 400; letter-spacing: normal; text-align: start; text-indent: 0px; text-transform: none; white-space: pre-wrap; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: #000000; display: inline !important; float: none;\">- Dave Phillips (Live)</span><br style=\"color: #1d2129; font-family: Helvetica, Arial, sans-serif; font-size: 14px; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: 400; letter-spacing: normal; text-align: start; text-indent: 0px; text-transform: none; white-space: pre-wrap; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: #ffffff;\" /><span style=\"background-color: #000000; color: #0000ff;\"><a style=\"color: #0000ff; cursor: pointer; text-decoration: none; font-family: Helvetica, Arial, sans-serif; font-size: 14px; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: 400; letter-spacing: normal; text-align: start; text-indent: 0px; text-transform: none; white-space: pre-wrap; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: #000000;\" href=\"https://dave-phillips.bandcamp.com/\" target=\"_blank\" rel=\"nofollow noopener\">https://dave-phillips.bandcamp.com/</a></span><br style=\"color: #1d2129; font-family: Helvetica, Arial, sans-serif; font-size: 14px; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: 400; letter-spacing: normal; text-align: start; text-indent: 0px; text-transform: none; white-space: pre-wrap; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: #ffffff;\" /><br style=\"color: #1d2129; font-family: Helvetica, Arial, sans-serif; font-size: 14px; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: 400; letter-spacing: normal; text-align: start; text-indent: 0px; text-transform: none; white-space: pre-wrap; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: #ffffff;\" /><span style=\"color: #ffffff; font-family: Helvetica, Arial, sans-serif; font-size: 14px; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: 400; letter-spacing: normal; text-align: start; text-indent: 0px; text-transform: none; white-space: pre-wrap; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: #000000; display: inline !important; float: none;\">- Ripit (Live)</span><br style=\"color: #1d2129; font-family: Helvetica, Arial, sans-serif; font-size: 14px; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: 400; letter-spacing: normal; text-align: start; text-indent: 0px; text-transform: none; white-space: pre-wrap; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: #ffffff;\" /><span style=\"background-color: #000000; color: #0000ff;\"><a style=\"color: #0000ff; cursor: pointer; text-decoration: none; font-family: Helvetica, Arial, sans-serif; font-size: 14px; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: 400; letter-spacing: normal; text-align: start; text-indent: 0px; text-transform: none; white-space: pre-wrap; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: #000000;\" href=\"https://soundcloud.com/ripit\" target=\"_blank\" rel=\"nofollow noopener\">https://soundcloud.com/ripit</a></span><br style=\"color: #1d2129; font-family: Helvetica, Arial, sans-serif; font-size: 14px; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: 400; letter-spacing: normal; text-align: start; text-indent: 0px; text-transform: none; white-space: pre-wrap; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: #ffffff;\" /><br style=\"color: #1d2129; font-family: Helvetica, Arial, sans-serif; font-size: 14px; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: 400; letter-spacing: normal; text-align: start; text-indent: 0px; text-transform: none; white-space: pre-wrap; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: #ffffff;\" /><span style=\"color: #ffffff; font-family: Helvetica, Arial, sans-serif; font-size: 14px; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: 400; letter-spacing: normal; text-align: start; text-indent: 0px; text-transform: none; white-space: pre-wrap; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: #000000; display: inline !important; float: none;\">- Onrust (Live)</span><br style=\"color: #1d2129; font-family: Helvetica, Arial, sans-serif; font-size: 14px; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: 400; letter-spacing: normal; text-align: start; text-indent: 0px; text-transform: none; white-space: pre-wrap; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: #ffffff;\" /><span style=\"background-color: #000000; color: #0000ff;\"><a style=\"color: #0000ff; cursor: pointer; text-decoration: none; font-family: Helvetica, Arial, sans-serif; font-size: 14px; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: 400; letter-spacing: normal; text-align: start; text-indent: 0px; text-transform: none; white-space: pre-wrap; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: #000000;\" href=\"https://silkentofu.bandcamp.com/album/tagore-luthuli\" target=\"_blank\" rel=\"nofollow noopener\">https://silkentofu.bandcamp.com/album/tagore-luthuli</a></span><br style=\"color: #1d2129; font-family: Helvetica, Arial, sans-serif; font-size: 14px; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: 400; letter-spacing: normal; text-align: start; text-indent: 0px; text-transform: none; white-space: pre-wrap; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: #ffffff;\" /><br style=\"color: #1d2129; font-family: Helvetica, Arial, sans-serif; font-size: 14px; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: 400; letter-spacing: normal; text-align: start; text-indent: 0px; text-transform: none; white-space: pre-wrap; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: #ffffff;\" /><span style=\"color: #ffffff; font-family: Helvetica, Arial, sans-serif; font-size: 14px; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: 400; letter-spacing: normal; text-align: start; text-indent: 0px; text-transform: none; white-space: pre-wrap; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: #000000; display: inline !important; float: none;\">- Somaticae (Live)</span><br style=\"color: #1d2129; font-family: Helvetica, Arial, sans-serif; font-size: 14px; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: 400; letter-spacing: normal; text-align: start; text-indent: 0px; text-transform: none; white-space: pre-wrap; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: #ffffff;\" /><span style=\"background-color: #000000; color: #0000ff;\"><a style=\"color: #0000ff; cursor: pointer; text-decoration: none; font-family: Helvetica, Arial, sans-serif; font-size: 14px; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: 400; letter-spacing: normal; text-align: start; text-indent: 0px; text-transform: none; white-space: pre-wrap; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: #000000;\" href=\"https://somaticae.bandcamp.com/\" target=\"_blank\" rel=\"nofollow noopener\">https://somaticae.bandcamp.com/</a></span><br style=\"color: #1d2129; font-family: Helvetica, Arial, sans-serif; font-size: 14px; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: 400; letter-spacing: normal; text-align: start; text-indent: 0px; text-transform: none; white-space: pre-wrap; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: #ffffff;\" /><br style=\"color: #1d2129; font-family: Helvetica, Arial, sans-serif; font-size: 14px; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: 400; letter-spacing: normal; text-align: start; text-indent: 0px; text-transform: none; white-space: pre-wrap; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: #ffffff;\" /><span style=\"color: #ffffff; font-family: Helvetica, Arial, sans-serif; font-size: 14px; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: 400; letter-spacing: normal; text-align: start; text-indent: 0px; text-transform: none; white-space: pre-wrap; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: #000000; display: inline !important; float: none;\">- Illia Gorovitz (Live)</span><br style=\"color: #1d2129; font-family: Helvetica, Arial, sans-serif; font-size: 14px; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: 400; letter-spacing: normal; text-align: start; text-indent: 0px; text-transform: none; white-space: pre-wrap; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: #ffffff;\" /><span style=\"background-color: #000000; color: #0000ff;\"><a style=\"color: #0000ff; cursor: pointer; text-decoration: none; font-family: Helvetica, Arial, sans-serif; font-size: 14px; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: 400; letter-spacing: normal; text-align: start; text-indent: 0px; text-transform: none; white-space: pre-wrap; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: #000000;\" href=\"https://iliagorovitz.bandcamp.com/\" target=\"_blank\" rel=\"nofollow noopener\">https://iliagorovitz.bandcamp.com/</a></span><br style=\"color: #1d2129; font-family: Helvetica, Arial, sans-serif; font-size: 14px; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: 400; letter-spacing: normal; text-align: start; text-indent: 0px; text-transform: none; white-space: pre-wrap; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: #ffffff;\" /><br style=\"color: #1d2129; font-family: Helvetica, Arial, sans-serif; font-size: 14px; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: 400; letter-spacing: normal; text-align: start; text-indent: 0px; text-transform: none; white-space: pre-wrap; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: #ffffff;\" /><span style=\"color: #ffffff; font-family: Helvetica, Arial, sans-serif; font-size: 14px; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: 400; letter-spacing: normal; text-align: start; text-indent: 0px; text-transform: none; white-space: pre-wrap; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: #000000; display: inline !important; float: none;\">- Bob&eacute; Van J&eacute;zu (Set)</span><br style=\"color: #1d2129; font-family: Helvetica, Arial, sans-serif; font-size: 14px; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: 400; letter-spacing: normal; text-align: start; text-indent: 0px; text-transform: none; white-space: pre-wrap; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: #ffffff;\" /><span style=\"background-color: #000000; color: #0000ff;\"><a style=\"color: #0000ff; cursor: pointer; text-decoration: none; font-family: Helvetica, Arial, sans-serif; font-size: 14px; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: 400; letter-spacing: normal; text-align: start; text-indent: 0px; text-transform: none; white-space: pre-wrap; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: #000000;\" href=\"https://soundcloud.com/bobevanjezu2\" target=\"_blank\" rel=\"nofollow noopener\">https://soundcloud.com/bobevanjezu2</a></span><br style=\"color: #1d2129; font-family: Helvetica, Arial, sans-serif; font-size: 14px; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: 400; letter-spacing: normal; text-align: start; text-indent: 0px; text-transform: none; white-space: pre-wrap; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: #ffffff;\" /><br style=\"color: #1d2129; font-family: Helvetica, Arial, sans-serif; font-size: 14px; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: 400; letter-spacing: normal; text-align: start; text-indent: 0px; text-transform: none; white-space: pre-wrap; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: #ffffff;\" /><span style=\"color: #ffffff; font-family: Helvetica, Arial, sans-serif; font-size: 14px; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: 400; letter-spacing: normal; text-align: start; text-indent: 0px; text-transform: none; white-space: pre-wrap; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: #000000; display: inline !important; float: none;\">Come early / Leave late!!</span><br style=\"color: #1d2129; font-family: Helvetica, Arial, sans-serif; font-size: 14px; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: 400; letter-spacing: normal; text-align: start; text-indent: 0px; text-transform: none; white-space: pre-wrap; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: #ffffff;\" /><span style=\"color: #ffffff; font-family: Helvetica, Arial, sans-serif; font-size: 14px; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: 400; letter-spacing: normal; text-align: start; text-indent: 0px; text-transform: none; white-space: pre-wrap; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: #000000; display: inline !important; float: none;\">Entrance on donation for the artists!! Suggested price: 6&euro;</span></p>', 'TTT_SilkenTofu_29-03.jpg', 0),
-(46, '2020-01-17', 'pin\r\n	\r\nVK vaartkapoen\r\nManchesterstraat 13-15, 1080 Molenbeek-Saint-Jean', 'Distomobile TTT night at VK _ Low Frequencies & Hi Noise', '<p>iii 17 / 01 / 2020 !!!</p>\r\n<p>The party at VK is the occasion to celebrate with the Distomobile Sound System the 3 last releases of Third Type Tapes with live acts by Terrine, Cancellled and The Angstromers. To dance all night, more live acts are joining in : Hypnoskull, Fiesta En El Vacio and OD Bongo, introduced by Dj BobeVanJezu. <br />Cold pumping grooves, dark industrial techno, abstract experimental pulses, eery vocals, heavy dubs, psychedelic distorted beats&hellip; <br />The sound vibrations will travel all night long from one style to another, for the pleasure of ears, chests and feets !!<br /><br />THE &Aring;NGSTR&Ouml;MERS / Release Party for Path to Danache<br />The &Aring;ngstromers (Fr&eacute;d&eacute;ric Alstadt &amp; Nico \'Ripit\' Esterle) return from their ritualistic collab with Haiti\'s Chouk Bwa to play with the spirits that continue to haunt the machinic wetware. Bending postindustrial timbres echo\'d out on rhythmic pulses that take time to settle in, The &Aring;ngstromers offer laser-precision sound design coated with a silver lining of distortion. These modular grooves burn slow.<br />The party will be the official release for their tape : Path to Danache, as TTT33 !<br /><a href=\"https://l.facebook.com/l.php?u=https\\\\\\\\%3A\\\\\\\\%2F\\\\\\\\%2Fsoundcloud.com\\\\\\\\%2Fangstrom-records\\\\\\\\%2Fsets\\\\\\\\%2Fthe-angstromers-live-at-magasin-4-brussels\\\\\\\\%2Fs-1AoKI\\\\\\\\%3Ffbclid\\\\\\\\%3DIwAR04piY1U9EficFTi_EG3L2xEUKcreNfRf7eHH8fCX5D3RRktQZS2XR6h6A&amp;h=AT15MXR6w5CgqH22Nxk78KCqGIm8e0cBOSbpaqYeuDCjMMzUsAO9MLLpIR7p9HxcnlxxbyqTnqt9i71T_S69mxLLJN4F13qrKCWpMq7yk91nJZjC9S-UOPnRfYp8nyao\" target=\"_blank\" rel=\"nofollow noopener\">https://soundcloud.com/angstrom-records/sets/the-angstromers-live-at-magasin-4-brussels/s-1AoKI</a><br /><br />CANCELLLED<br />Aymeric de Tapol and Yann Leguay are two hyperactive Brussels based sound wizards. Together as Cancellled, they sculpts non binary waves like rough electronic flints using pure analogic sequencers signals. Cutting edge techno-ish minimalistic grooves.<br />Their WTC tape as TTT32 is just released on december 19, 2019 !<br /><a href=\"https://soundcloud.com/cancelled404?fbclid=IwAR1CjNN1MxXy0S9Y5dSf9auRohusImbSi8TZARNxjJ_iEbhpUFIKTENHR8I\" target=\"_blank\" rel=\"nofollow noopener\">https://soundcloud.com/cancelled404</a><br /><br />TERRINE <br />The seriously don\'t care and hedonist Claire Gapenne\'s solo project. She was performing with the french band Headwar and also right now with her duet Me Donner. Terrine is the field for a freeform improvisation, mixing industrial and electronic experimentations sometimes almost dub techno, with a super restrained but perfectly mastered setup.<br />She released the TTT31 last november : Live Orl&eacute;ans 2019 !<br /><a href=\"https://l.facebook.com/l.php?u=https\\\\\\\\%3A\\\\\\\\%2F\\\\\\\\%2Fterrine.bandcamp.com\\\\\\\\%2F\\\\\\\\%3Ffbclid\\\\\\\\%3DIwAR1SAAmZ24SQGIx5HeDva_MGHId6UUQuIQBzypas7xdZeXCbi28ds4vPRCc&amp;h=AT2x5-z10w2iT4D5JRfaf2rX7QnqCk6mKCFIAtr7bnDA2uqRNjHLu2X2RjnJ5ulaQ8pgfPFlt0cf3TEoxeRwnULxhjtiKPO-ZWarAXYmkPFYnoKGICAlTo4ynLU8tWvv\" target=\"_blank\" rel=\"nofollow noopener\">https://terrine.bandcamp.com/</a> <br /><br />HYPNOSKULL<br />Hypnoskull emerged as a project of Patrick Stevens (also former member of Sonar) in 1992, who combines the power of pure analog electronics with harsh rhythm structures to form an anarchic assault of noise and techno-industrial. A true master of the genre !<br /><a href=\"https://l.facebook.com/l.php?u=https\\\\\\\\%3A\\\\\\\\%2F\\\\\\\\%2Fsoundcloud.com\\\\\\\\%2Fhypnoskull\\\\\\\\%3Ffbclid\\\\\\\\%3DIwAR2SSeG1PrTajkj5DQIvkR7NN_iW7o1bDS0CJ8n4nvM1w8nBB4hwF4ofmow&amp;h=AT0CdGfnzA7Mus80PdhFdc4aHK8Cfg6kWAmbKsTb5t82sCgLF73cXVK0k99CjPCRmhyOVry-tpZxBDpkeavTAZpyTkB26F5PNnjUJagVmR8sXM4H6W7ykOp0vKFIcZTy\" target=\"_blank\" rel=\"nofollow noopener\">https://soundcloud.com/hypnoskull</a><br /><br />FIESTA EN EL VACIO<br />Using various synths and eery vocals, Fiesta en el Vacio merges her musical background from flamenco to trap, from french punk and noise to underground club sounds. A strange world of its own : dark, fragile and poetic. <br /><a href=\"https://l.facebook.com/l.php?u=https\\\\\\\\%3A\\\\\\\\%2F\\\\\\\\%2Fsoundcloud.com\\\\\\\\%2Ffiesta-en-el-vacio\\\\\\\\%3Ffbclid\\\\\\\\%3DIwAR2UZ9nPZvHTnDixc4GQIipacLYAFQi3OfTaA1Dj_-PfPQ3p2vZyvTcEJzg&amp;h=AT3gkEveQcmpeMVRkoE9NhUJGHKnwrXO-X5Ux9YVcKT-ZAkVSWMtE3jeaANId9UCdlfzpOd_qW_dNkh4HNtSEA6GG2kYddwTinOxPBZ9AG4E-OSmkCrxUgPa5bwjPLIL\" target=\"_blank\" rel=\"nofollow noopener\">https://soundcloud.com/fiesta-en-el-vacio</a><br /><br />OD BONGO<br />A meeting between Somaticae&rsquo;s solid beats and C_C&rsquo;s noisy grooves. Using various drum machines, the duo blend genres such as techno, dub, noise and industrial. These Brussels and Lyon-based musicians build a soundscape of continuous rhythms and immerse crowds in a wild bass music bubble. <br /><a href=\"https://l.facebook.com/l.php?u=https\\\\\\\\%3A\\\\\\\\%2F\\\\\\\\%2Fskrecords.bandcamp.com\\\\\\\\%2Falbum\\\\\\\\%2Fniobium-beats\\\\\\\\%3Ffbclid\\\\\\\\%3DIwAR0FXXsiVQZlKovOZ1VOC41aZMsE_Uk4fl0qLMECgVtIWpWo0cVlg1P5EiQ&amp;h=AT1uIYOxz62xS4sIvHq3iaG90EavwuRdZZ3r4gyvpBGrVpct3oOBvCOaB6e_99LrCS1bWE_XqI_RozQoUBcgN4gNsnyjAhUmnhwVszleh-O0_qOBQV9FY03SRQg6miAM\" target=\"_blank\" rel=\"nofollow noopener\">https://skrecords.bandcamp.com/album/niobium-beats</a><br /><br />BOBEVANJEZU<br />Member of Third Type Tapes, formerly of the FAST collective, this music digger will bring an opening dj set to warm up the speakers ! Expect a subtle combination, from new hits of the underworld to hip hop &amp; noise classics.<br /><a href=\"https://soundcloud.com/bobevanjezu2?fbclid=IwAR1CjNN1MxXy0S9Y5dSf9auRohusImbSi8TZARNxjJ_iEbhpUFIKTENHR8I\" target=\"_blank\" rel=\"nofollow noopener\">https://soundcloud.com/bobevanjezu2</a><br /><br />Distomobile sound system is an outgrowth of the Third Type Tapes label activities. Still in its infancy, it started its life in 2018 in the label events in Brussels, involving label artists but also more largely friends who share the same love for sound&rsquo;s physical effects and experiments. Constantly growing and evolving, its purpose is to push deep, loud and clear the music of this community of artists, in Belgium and beyond. <br /><br />8&euro; at the door for full night of noise !<br /><br /><br /></p>', 'v5-petit.jpg', 0);
+(46, '2020-01-17', 'pin\r\n	\r\nVK vaartkapoen\r\nManchesterstraat 13-15, 1080 Molenbeek-Saint-Jean', 'Distomobile TTT night at VK _ Low Frequencies & Hi Noise', '<p>iii 17 / 01 / 2020 !!!</p>\r\n<p>The party at VK is the occasion to celebrate with the Distomobile Sound System the 3 last releases of Third Type Tapes with live acts by Terrine, Cancellled and The Angstromers. To dance all night, more live acts are joining in : Hypnoskull, Fiesta En El Vacio and OD Bongo, introduced by Dj BobeVanJezu. <br />Cold pumping grooves, dark industrial techno, abstract experimental pulses, eery vocals, heavy dubs, psychedelic distorted beats&hellip; <br />The sound vibrations will travel all night long from one style to another, for the pleasure of ears, chests and feets !!<br /><br />THE &Aring;NGSTR&Ouml;MERS / Release Party for Path to Danache<br />The &Aring;ngstromers (Fr&eacute;d&eacute;ric Alstadt &amp; Nico \'Ripit\' Esterle) return from their ritualistic collab with Haiti\'s Chouk Bwa to play with the spirits that continue to haunt the machinic wetware. Bending postindustrial timbres echo\'d out on rhythmic pulses that take time to settle in, The &Aring;ngstromers offer laser-precision sound design coated with a silver lining of distortion. These modular grooves burn slow.<br />The party will be the official release for their tape : Path to Danache, as TTT33 !<br /><a href=\"https://l.facebook.com/l.php?u=https\\\\\\\\\\\\\\%3A\\\\\\\\\\\\\\%2F\\\\\\\\\\\\\\%2Fsoundcloud.com\\\\\\\\\\\\\\%2Fangstrom-records\\\\\\\\\\\\\\%2Fsets\\\\\\\\\\\\\\%2Fthe-angstromers-live-at-magasin-4-brussels\\\\\\\\\\\\\\%2Fs-1AoKI\\\\\\\\\\\\\\%3Ffbclid\\\\\\\\\\\\\\%3DIwAR04piY1U9EficFTi_EG3L2xEUKcreNfRf7eHH8fCX5D3RRktQZS2XR6h6A&amp;h=AT15MXR6w5CgqH22Nxk78KCqGIm8e0cBOSbpaqYeuDCjMMzUsAO9MLLpIR7p9HxcnlxxbyqTnqt9i71T_S69mxLLJN4F13qrKCWpMq7yk91nJZjC9S-UOPnRfYp8nyao\" target=\"_blank\" rel=\"nofollow noopener\">https://soundcloud.com/angstrom-records/sets/the-angstromers-live-at-magasin-4-brussels/s-1AoKI</a><br /><br />CANCELLLED<br />Aymeric de Tapol and Yann Leguay are two hyperactive Brussels based sound wizards. Together as Cancellled, they sculpts non binary waves like rough electronic flints using pure analogic sequencers signals. Cutting edge techno-ish minimalistic grooves.<br />Their WTC tape as TTT32 is just released on december 19, 2019 !<br /><a href=\"https://soundcloud.com/cancelled404?fbclid=IwAR1CjNN1MxXy0S9Y5dSf9auRohusImbSi8TZARNxjJ_iEbhpUFIKTENHR8I\" target=\"_blank\" rel=\"nofollow noopener\">https://soundcloud.com/cancelled404</a><br /><br />TERRINE <br />The seriously don\'t care and hedonist Claire Gapenne\'s solo project. She was performing with the french band Headwar and also right now with her duet Me Donner. Terrine is the field for a freeform improvisation, mixing industrial and electronic experimentations sometimes almost dub techno, with a super restrained but perfectly mastered setup.<br />She released the TTT31 last november : Live Orl&eacute;ans 2019 !<br /><a href=\"https://l.facebook.com/l.php?u=https\\\\\\\\\\\\\\%3A\\\\\\\\\\\\\\%2F\\\\\\\\\\\\\\%2Fterrine.bandcamp.com\\\\\\\\\\\\\\%2F\\\\\\\\\\\\\\%3Ffbclid\\\\\\\\\\\\\\%3DIwAR1SAAmZ24SQGIx5HeDva_MGHId6UUQuIQBzypas7xdZeXCbi28ds4vPRCc&amp;h=AT2x5-z10w2iT4D5JRfaf2rX7QnqCk6mKCFIAtr7bnDA2uqRNjHLu2X2RjnJ5ulaQ8pgfPFlt0cf3TEoxeRwnULxhjtiKPO-ZWarAXYmkPFYnoKGICAlTo4ynLU8tWvv\" target=\"_blank\" rel=\"nofollow noopener\">https://terrine.bandcamp.com/</a> <br /><br />HYPNOSKULL<br />Hypnoskull emerged as a project of Patrick Stevens (also former member of Sonar) in 1992, who combines the power of pure analog electronics with harsh rhythm structures to form an anarchic assault of noise and techno-industrial. A true master of the genre !<br /><a href=\"https://l.facebook.com/l.php?u=https\\\\\\\\\\\\\\%3A\\\\\\\\\\\\\\%2F\\\\\\\\\\\\\\%2Fsoundcloud.com\\\\\\\\\\\\\\%2Fhypnoskull\\\\\\\\\\\\\\%3Ffbclid\\\\\\\\\\\\\\%3DIwAR2SSeG1PrTajkj5DQIvkR7NN_iW7o1bDS0CJ8n4nvM1w8nBB4hwF4ofmow&amp;h=AT0CdGfnzA7Mus80PdhFdc4aHK8Cfg6kWAmbKsTb5t82sCgLF73cXVK0k99CjPCRmhyOVry-tpZxBDpkeavTAZpyTkB26F5PNnjUJagVmR8sXM4H6W7ykOp0vKFIcZTy\" target=\"_blank\" rel=\"nofollow noopener\">https://soundcloud.com/hypnoskull</a><br /><br />FIESTA EN EL VACIO<br />Using various synths and eery vocals, Fiesta en el Vacio merges her musical background from flamenco to trap, from french punk and noise to underground club sounds. A strange world of its own : dark, fragile and poetic. <br /><a href=\"https://l.facebook.com/l.php?u=https\\\\\\\\\\\\\\%3A\\\\\\\\\\\\\\%2F\\\\\\\\\\\\\\%2Fsoundcloud.com\\\\\\\\\\\\\\%2Ffiesta-en-el-vacio\\\\\\\\\\\\\\%3Ffbclid\\\\\\\\\\\\\\%3DIwAR2UZ9nPZvHTnDixc4GQIipacLYAFQi3OfTaA1Dj_-PfPQ3p2vZyvTcEJzg&amp;h=AT3gkEveQcmpeMVRkoE9NhUJGHKnwrXO-X5Ux9YVcKT-ZAkVSWMtE3jeaANId9UCdlfzpOd_qW_dNkh4HNtSEA6GG2kYddwTinOxPBZ9AG4E-OSmkCrxUgPa5bwjPLIL\" target=\"_blank\" rel=\"nofollow noopener\">https://soundcloud.com/fiesta-en-el-vacio</a><br /><br />OD BONGO<br />A meeting between Somaticae&rsquo;s solid beats and C_C&rsquo;s noisy grooves. Using various drum machines, the duo blend genres such as techno, dub, noise and industrial. These Brussels and Lyon-based musicians build a soundscape of continuous rhythms and immerse crowds in a wild bass music bubble. <br /><a href=\"https://l.facebook.com/l.php?u=https\\\\\\\\\\\\\\%3A\\\\\\\\\\\\\\%2F\\\\\\\\\\\\\\%2Fskrecords.bandcamp.com\\\\\\\\\\\\\\%2Falbum\\\\\\\\\\\\\\%2Fniobium-beats\\\\\\\\\\\\\\%3Ffbclid\\\\\\\\\\\\\\%3DIwAR0FXXsiVQZlKovOZ1VOC41aZMsE_Uk4fl0qLMECgVtIWpWo0cVlg1P5EiQ&amp;h=AT1uIYOxz62xS4sIvHq3iaG90EavwuRdZZ3r4gyvpBGrVpct3oOBvCOaB6e_99LrCS1bWE_XqI_RozQoUBcgN4gNsnyjAhUmnhwVszleh-O0_qOBQV9FY03SRQg6miAM\" target=\"_blank\" rel=\"nofollow noopener\">https://skrecords.bandcamp.com/album/niobium-beats</a><br /><br />BOBEVANJEZU<br />Member of Third Type Tapes, formerly of the FAST collective, this music digger will bring an opening dj set to warm up the speakers ! Expect a subtle combination, from new hits of the underworld to hip hop &amp; noise classics.<br /><a href=\"https://soundcloud.com/bobevanjezu2?fbclid=IwAR1CjNN1MxXy0S9Y5dSf9auRohusImbSi8TZARNxjJ_iEbhpUFIKTENHR8I\" target=\"_blank\" rel=\"nofollow noopener\">https://soundcloud.com/bobevanjezu2</a><br /><br />Distomobile sound system is an outgrowth of the Third Type Tapes label activities. Still in its infancy, it started its life in 2018 in the label events in Brussels, involving label artists but also more largely friends who share the same love for sound&rsquo;s physical effects and experiments. Constantly growing and evolving, its purpose is to push deep, loud and clear the music of this community of artists, in Belgium and beyond. <br /><br />8&euro; at the door for full night of noise !<br /><br /><br /></p>', 'v5-petit.jpg', 0);
 
 -- --------------------------------------------------------
 
@@ -442,8 +441,9 @@ INSERT INTO `event` (`id_event`, `date_event`, `lieu`, `titre_event`, `descripti
 -- Structure de la table `exemplaire`
 --
 
-CREATE TABLE `exemplaire` (
-  `id_exemplaire` int(11) NOT NULL,
+DROP TABLE IF EXISTS `exemplaire`;
+CREATE TABLE IF NOT EXISTS `exemplaire` (
+  `id_exemplaire` int(11) NOT NULL AUTO_INCREMENT,
   `numero_exemplaire` int(11) DEFAULT NULL,
   `prix_vente_euros` decimal(4,2) DEFAULT NULL,
   `vente_remboursee` int(1) NOT NULL DEFAULT 0,
@@ -455,8 +455,12 @@ CREATE TABLE `exemplaire` (
   `id_vendeur` int(11) DEFAULT NULL,
   `id_cassette` int(11) NOT NULL,
   `id_etat` int(11) NOT NULL,
-  `id_client` int(11) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  `id_client` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id_exemplaire`),
+  KEY `id_cassette` (`id_cassette`),
+  KEY `id_etat` (`id_etat`),
+  KEY `id_client` (`id_client`)
+) ENGINE=InnoDB AUTO_INCREMENT=2749 DEFAULT CHARSET=utf8;
 
 --
 -- Déchargement des données de la table `exemplaire`
@@ -1459,7 +1463,7 @@ INSERT INTO `exemplaire` (`id_exemplaire`, `numero_exemplaire`, `prix_vente_euro
 (993, 18, '6.50', 0, '2017-05-17', 'Xavier Rene\r\n16 rue ThÃ©odore Botrel\r\n22580 Plouha\r\nFrance', 'Paypal', '1.50', 0, 1, 14, 2, 103),
 (994, 19, '5.00', 0, '2018-04-07', 'Bruxelles ILM', '', '0.00', 0, 1, 14, 2, 32),
 (995, 20, '0.00', 0, NULL, '', '', '0.00', 0, 0, 14, 3, 32),
-(996, 21, '5.00', 0, '2021-06-05', 'NDDL', '', '0.00', 0, 4, 14, 2, 32),
+(996, 21, '0.00', 0, NULL, 'Fabien (Pantin)', '', '0.00', 0, 0, 14, 3, 32),
 (997, 22, '11.50', 0, NULL, 'Alex Murray', 'Paypal', '5.50', 0, 1, 14, 2, 88),
 (998, 23, '0.00', 0, NULL, '', '', '0.00', 0, 0, 14, 3, 32),
 (999, 24, '0.00', 0, NULL, '', '', '0.00', 0, 0, 14, 3, 32),
@@ -1469,10 +1473,10 @@ INSERT INTO `exemplaire` (`id_exemplaire`, `numero_exemplaire`, `prix_vente_euro
 (1003, 28, '0.00', 0, NULL, 'GenÃ¨ve', '', '0.00', 0, 4, 14, 4, 32),
 (1004, 29, '5.00', 0, NULL, 'Ruelgo', '', '0.00', 0, 1, 14, 2, 60),
 (1005, 30, '0.00', 0, NULL, 'Xavier', '', '0.00', 0, 0, 14, 3, 32),
-(1006, 31, '0.00', 0, NULL, 'Claire Terrine', '', '0.00', 0, 0, 14, 5, 32),
+(1006, 31, '0.00', 0, NULL, 'Claire Terrine', '', '0.00', 0, 2, 14, 5, 32),
 (1007, 32, '0.00', 0, NULL, 'Xavier', '', '0.00', 0, 0, 14, 3, 32),
 (1008, 33, '0.00', 0, NULL, 'Xavier', '', '0.00', 0, 0, 14, 3, 32),
-(1009, 34, '5.00', 0, '2016-06-30', '', '', '4.35', 0, 0, 14, 2, 32),
+(1009, 34, '5.00', 0, '2016-06-30', '', '', '4.35', 0, 2, 14, 2, 32),
 (1010, 35, '0.00', 0, NULL, 'Xavier', '', '0.00', 0, 0, 14, 3, 32),
 (1011, 36, '0.00', 0, NULL, 'Fabien', '', '0.00', 0, 0, 14, 3, 32),
 (1012, 37, '0.00', 0, NULL, '', '', '0.00', 0, 3, 14, 5, 32),
@@ -1481,25 +1485,25 @@ INSERT INTO `exemplaire` (`id_exemplaire`, `numero_exemplaire`, `prix_vente_euro
 (1015, 40, '0.00', 0, NULL, 'Xavier', '', '0.00', 0, 0, 14, 3, 32),
 (1016, 41, '0.00', 0, NULL, 'Edouard (Paris)', '', '0.00', 0, 0, 14, 3, 32),
 (1017, 42, '5.00', 0, NULL, 'Edouard (Paris)', '', '0.00', 0, 0, 14, 2, 32),
-(1018, 43, '5.00', 0, NULL, 'Marianne', '', '0.00', 0, 0, 14, 2, 89),
+(1018, 43, '5.00', 0, NULL, 'Marianne', '', '0.00', 0, 2, 14, 2, 89),
 (1019, 44, '0.00', 0, NULL, 'Edouard (Paris)', '', '0.00', 0, 0, 14, 3, 32),
 (1020, 45, '0.00', 0, NULL, 'Edouard (Paris)', '', '0.00', 0, 0, 14, 3, 32),
 (1021, 46, '0.00', 0, NULL, 'Blindspot', '', '0.00', 0, 4, 14, 4, 32),
 (1022, 47, '0.00', 0, NULL, 'Blindspot', '', '0.00', 0, 4, 14, 4, 32),
 (1023, 48, '0.00', 0, NULL, 'Blindspot', '', '0.00', 0, 4, 14, 4, 32),
 (1024, 49, '0.00', 0, NULL, 'Blindspot', '', '0.00', 0, 4, 14, 4, 32),
-(1025, 50, '0.00', 0, NULL, '', 'Avril', '0.00', 0, 0, 14, 2, 63),
-(1026, 51, '0.00', 0, NULL, '', 'Avril', '0.00', 0, 0, 14, 2, 8),
+(1025, 50, '0.00', 0, NULL, '', 'Avril', '0.00', 0, 2, 14, 2, 63),
+(1026, 51, '0.00', 0, NULL, '', 'Avril', '0.00', 0, 2, 14, 2, 8),
 (1027, 52, '0.00', 0, NULL, 'Edouard (Paris)', '', '0.00', 0, 0, 14, 3, 32),
 (1028, 53, '0.00', 0, NULL, 'Edouard (Paris)', '', '0.00', 0, 0, 14, 3, 32),
 (1029, 54, '0.00', 0, NULL, '', '', '0.00', 0, 0, 14, 3, 32),
 (1030, 55, '0.00', 0, NULL, 'Edouard (Paris)', '', '0.00', 0, 0, 14, 3, 32),
 (1031, 56, '0.00', 0, NULL, '', '', '0.00', 0, 4, 14, 5, 32),
 (1032, 57, '0.00', 0, NULL, '', '', '0.00', 0, 0, 14, 3, 32),
-(1033, 58, '5.00', 0, '2016-04-25', '', '', '0.00', 0, 0, 14, 2, 32),
-(1034, 59, '5.00', 1, '2016-04-14', 'CCL', '', '0.00', 0, 0, 14, 2, 32),
+(1033, 58, '5.00', 0, '2016-04-25', '', '', '0.00', 0, 2, 14, 2, 32),
+(1034, 59, '5.00', 1, '2016-04-14', 'CCL', '', '0.00', 0, 2, 14, 2, 32),
 (1035, 60, '0.00', 0, NULL, '', '', '0.00', 0, 0, 14, 3, 32),
-(1036, 61, '5.00', 1, '2016-06-30', '', '', '0.00', 0, 0, 14, 2, 32),
+(1036, 61, '5.00', 1, '2016-06-30', '', '', '0.00', 0, 2, 14, 2, 32),
 (1037, 62, '0.00', 0, NULL, '', '', '0.00', 0, 0, 14, 3, 32),
 (1038, 63, '0.00', 0, NULL, '', '', '0.00', 0, 0, 14, 3, 32),
 (1039, 64, '5.00', 0, NULL, '', '', '0.00', 0, 4, 14, 2, 32),
@@ -1507,13 +1511,13 @@ INSERT INTO `exemplaire` (`id_exemplaire`, `numero_exemplaire`, `prix_vente_euro
 (1041, 66, '5.00', 0, '2018-04-07', 'Bruxelles ILM', '', '0.00', 0, 1, 14, 2, 32),
 (1042, 67, '0.00', 0, NULL, '', '', '0.00', 0, 0, 14, 3, 32),
 (1043, 68, '5.00', 0, NULL, '', '', '0.00', 0, 4, 14, 2, 32),
-(1044, 69, '5.00', 0, '2016-07-11', 'Fred MMC', '', '0.00', 0, 0, 14, 2, 32),
-(1045, 70, '5.00', 0, '2016-04-25', '', '', '0.00', 0, 0, 14, 2, 32),
+(1044, 69, '5.00', 0, '2016-07-11', 'Fred MMC', '', '0.00', 0, 2, 14, 2, 32),
+(1045, 70, '5.00', 0, '2016-04-25', '', '', '0.00', 0, 2, 14, 2, 32),
 (1046, 71, '0.00', 0, NULL, '', '', '0.00', 0, 0, 14, 3, 32),
-(1047, 72, '4.00', 1, NULL, '', '', '0.00', 0, 0, 14, 2, 69),
+(1047, 72, '4.00', 1, NULL, '', '', '0.00', 0, 2, 14, 2, 69),
 (1048, 73, '0.00', 0, NULL, '', '', '0.00', 0, 0, 14, 3, 32),
 (1049, 74, '0.00', 0, NULL, '', '', '0.00', 0, 0, 14, 3, 32),
-(1050, 75, '5.00', 1, '2016-04-14', 'CCL', '', '0.00', 0, 0, 14, 2, 32),
+(1050, 75, '5.00', 1, '2016-04-14', 'CCL', '', '0.00', 0, 2, 14, 2, 32),
 (1051, 1, '0.00', 0, NULL, '', '', '0.00', 0, 0, 15, 3, 32),
 (1052, 2, '0.00', 0, NULL, '', '', '0.00', 0, 0, 15, 3, 32),
 (1053, 3, '0.00', 0, NULL, '', '', '0.00', 0, 0, 15, 3, 32),
@@ -1739,63 +1743,63 @@ INSERT INTO `exemplaire` (`id_exemplaire`, `numero_exemplaire`, `prix_vente_euro
 (1273, 73, '0.00', 0, NULL, 'Ripit', '', '0.00', 0, 0, 17, 5, 32),
 (1274, 74, '0.00', 0, NULL, 'Ripit', '', '0.00', 0, 0, 17, 5, 32),
 (1275, 75, '0.00', 0, NULL, 'Ripit', '', '0.00', 0, 0, 17, 5, 32),
-(1276, 1, '0.00', 0, NULL, 'Edouard (Paris)', '', '0.00', 0, 0, 18, 3, 32),
-(1277, 2, '0.00', 0, NULL, 'Edouard (Paris)', '', '0.00', 0, 0, 18, 3, 32),
+(1276, 1, '0.00', 0, NULL, 'Edouard (Paris)', '', '0.00', 0, 0, 18, 1, 32),
+(1277, 2, '0.00', 0, NULL, 'Edouard (Paris)', '', '0.00', 0, 0, 18, 1, 32),
 (1278, 3, '5.00', 0, NULL, '', '', '0.00', 0, 4, 18, 2, 32),
 (1279, 4, '5.00', 0, NULL, 'Edouard (Paris)', '', '0.00', 0, 0, 18, 2, 32),
 (1280, 5, '5.00', 0, NULL, 'Edouard (Paris)', '', '0.00', 0, 0, 18, 2, 32),
-(1281, 6, '0.00', 0, NULL, 'Edouard (Paris)', '', '0.00', 0, 0, 18, 3, 32),
+(1281, 6, '0.00', 0, NULL, 'Edouard (Paris)', '', '0.00', 0, 0, 18, 1, 32),
 (1282, 7, '5.00', 0, NULL, 'Edouard (Paris)', '', '0.00', 0, 0, 18, 2, 32),
-(1283, 8, '0.00', 0, NULL, 'Edouard (Paris)', '', '0.00', 0, 0, 18, 3, 32),
-(1284, 9, '0.00', 0, NULL, 'Edouard (Paris)', '', '0.00', 0, 0, 18, 3, 32),
+(1283, 8, '0.00', 0, NULL, 'Edouard (Paris)', '', '0.00', 0, 0, 18, 1, 32),
+(1284, 9, '0.00', 0, NULL, 'Edouard (Paris)', '', '0.00', 0, 0, 18, 1, 32),
 (1285, 10, '5.00', 0, NULL, 'Edouard (Paris)', '', '0.00', 0, 0, 18, 2, 32),
 (1286, 11, '6.50', 0, '2016-04-07', 'Yohan Tassot\r\n40 rue de bretagne\r\n76600 le havre \r\nFrance\r\n', 'envoi Paypal', '1.50', 0, 1, 18, 2, 92),
 (1287, 12, '6.50', 0, '2016-04-07', 'Guillaume Malaret\r\n9 rue Auguste Delaune\r\n94800 Villejuif \r\nFrance\r\n', 'envoi Paypal', '1.50', 0, 1, 18, 2, 93),
 (1288, 13, '6.50', 0, '2016-04-07', 'Gilles Vignes\r\nmaison tÃ©oulÃ©\r\n331 route d\'Arsague\r\n40330 Castel Sarrazin \r\nFrance', 'envoi Paypal', '1.50', 0, 1, 18, 2, 94),
-(1289, 14, '0.00', 0, NULL, 'Edouard (Paris)', '', '0.00', 0, 0, 18, 3, 32),
-(1290, 15, '0.00', 0, NULL, 'Edouard (Paris)', '', '0.00', 0, 0, 18, 3, 32),
+(1289, 14, '0.00', 0, NULL, 'Edouard (Paris)', '', '0.00', 0, 0, 18, 1, 32),
+(1290, 15, '0.00', 0, NULL, 'Edouard (Paris)', '', '0.00', 0, 0, 18, 1, 32),
 (1291, 16, '5.00', 0, '2016-04-16', 'Rue Des Gardes (Paris)', '', '0.00', 0, 0, 18, 4, 32),
 (1292, 17, '5.00', 0, '2016-04-16', 'Rue Des Gardes (Paris)', '', '0.00', 0, 0, 18, 4, 32),
 (1293, 18, '5.00', 0, '2016-04-16', 'Rue Des Gardes (Paris)', '', '0.00', 0, 0, 18, 4, 32),
 (1294, 19, '5.00', 0, '2016-04-16', 'Rue Des Gardes (Paris)', '', '0.00', 0, 0, 18, 4, 32),
 (1295, 20, '5.00', 0, '2016-04-16', 'Aron Olah', '', '0.00', 0, 1, 18, 2, 3),
-(1296, 21, '5.00', 0, '2021-06-05', 'NDDL', '', '0.00', 0, 4, 18, 2, 32),
-(1297, 22, '0.00', 0, NULL, '', '', '0.00', 0, 0, 18, 3, 32),
-(1298, 23, '0.00', 0, NULL, '', '', '0.00', 0, 0, 18, 3, 32),
-(1299, 24, '0.00', 0, NULL, '', '', '0.00', 0, 0, 18, 3, 32),
-(1300, 25, '0.00', 0, NULL, '', '', '0.00', 0, 0, 18, 3, 32),
-(1301, 26, '0.00', 0, NULL, '', '', '0.00', 0, 0, 18, 3, 32),
+(1296, 21, '0.00', 0, NULL, '', '', '0.00', 0, 0, 18, 1, 32),
+(1297, 22, '0.00', 0, NULL, '', '', '0.00', 0, 0, 18, 1, 32),
+(1298, 23, '0.00', 0, NULL, '', '', '0.00', 0, 0, 18, 1, 32),
+(1299, 24, '0.00', 0, NULL, '', '', '0.00', 0, 0, 18, 1, 32),
+(1300, 25, '0.00', 0, NULL, '', '', '0.00', 0, 0, 18, 1, 32),
+(1301, 26, '0.00', 0, NULL, '', '', '0.00', 0, 0, 18, 1, 32),
 (1302, 27, '5.00', 1, NULL, 'Bruxelles', '', '0.00', 0, 3, 18, 2, 32),
-(1303, 28, '0.00', 0, NULL, '', '', '0.00', 0, 0, 18, 3, 32),
-(1304, 29, '0.00', 0, NULL, '', '', '0.00', 0, 0, 18, 3, 32),
-(1305, 30, '0.00', 0, NULL, '', '', '0.00', 0, 0, 18, 3, 32),
-(1306, 31, '0.00', 0, NULL, '', '', '0.00', 0, 0, 18, 3, 32),
-(1307, 32, '0.00', 0, NULL, '', '', '0.00', 0, 0, 18, 3, 32),
+(1303, 28, '0.00', 0, NULL, '', '', '0.00', 0, 0, 18, 1, 32),
+(1304, 29, '0.00', 0, NULL, '', '', '0.00', 0, 0, 18, 1, 32),
+(1305, 30, '0.00', 0, NULL, '', '', '0.00', 0, 0, 18, 1, 32),
+(1306, 31, '0.00', 0, NULL, '', '', '0.00', 0, 0, 18, 1, 32),
+(1307, 32, '0.00', 0, NULL, '', '', '0.00', 0, 0, 18, 1, 32),
 (1308, 33, '3.50', 1, '2017-03-03', 'berlin', '', '0.00', 0, 3, 18, 2, 101),
-(1309, 34, '0.00', 0, NULL, '', '', '0.00', 0, 0, 18, 3, 32),
+(1309, 34, '0.00', 0, NULL, '', '', '0.00', 0, 0, 18, 1, 32),
 (1310, 35, '5.00', 1, '2017-02-04', 'Bruxelles', '', '0.00', 0, 3, 18, 2, 32),
 (1311, 36, '3.50', 1, '2017-03-03', 'berlin', '', '0.00', 0, 3, 18, 2, 101),
-(1312, 37, '0.00', 0, NULL, '', '', '0.00', 0, 0, 18, 3, 32),
-(1313, 38, '0.00', 0, NULL, '', '', '0.00', 0, 0, 18, 3, 32),
+(1312, 37, '0.00', 0, NULL, '', '', '0.00', 0, 0, 18, 1, 32),
+(1313, 38, '0.00', 0, NULL, '', '', '0.00', 0, 0, 18, 1, 32),
 (1314, 39, '5.00', 0, '2018-06-04', 'Jennifer Warmuth\r\nKeupstr. 90\r\n51063 KÃ¶ln\r\nAllemagne', 'Paypal', '4.50', 0, 1, 18, 2, 124),
-(1315, 40, '0.00', 0, NULL, '', '', '0.00', 0, 0, 18, 3, 32),
-(1316, 41, '0.00', 0, NULL, '', '', '0.00', 0, 0, 18, 3, 32),
-(1317, 42, '0.00', 0, NULL, '', '', '0.00', 0, 0, 18, 3, 32),
+(1315, 40, '0.00', 0, NULL, '', '', '0.00', 0, 0, 18, 1, 32),
+(1316, 41, '0.00', 0, NULL, '', '', '0.00', 0, 0, 18, 1, 32),
+(1317, 42, '0.00', 0, NULL, 'Edouard (Bruxelles)', '', '0.00', 0, 0, 18, 1, 32),
 (1318, 43, '5.00', 1, '2020-02-04', 'Adrian Deineka\r\nSandstuveien 52 D\r\n410\r\n1184 Oslo\r\nNorvège', 'Paypal', '2.50', 0, 1, 18, 2, 143),
 (1319, 44, '5.00', 0, '2018-04-17', 'Arnaud\r\ndiederichs\r\nLES PLEAUX\r\n19150 ST MARTIAL DE GIMEL\r\nFrance', 'envoi Paypal', '1.54', 0, 1, 18, 2, 122),
-(1320, 45, '5.00', 1, '2020-05-21', 'IVAN MEDEK\r\nTRNOV 6\r\nTRNOV,KRÁLOVÉHRADECKÝ KRAJ\r\n517 33\r\nRépublique tchèque', 'Paypal', '3.50', 0, 1, 18, 2, 146),
-(1321, 46, '0.00', 0, NULL, 'Fabien', '', '0.00', 0, 0, 18, 3, 32),
-(1322, 47, '0.00', 0, NULL, '', '', '0.00', 0, 0, 18, 3, 32),
-(1323, 48, '0.00', 0, NULL, '', '', '0.00', 0, 0, 18, 3, 32),
+(1320, 45, '0.00', 0, NULL, 'Fabien', '', '0.00', 0, 0, 18, 1, 32),
+(1321, 46, '0.00', 0, NULL, 'Fabien', '', '0.00', 0, 0, 18, 1, 32),
+(1322, 47, '0.00', 0, NULL, '', '', '0.00', 0, 0, 18, 1, 32),
+(1323, 48, '0.00', 0, NULL, '', '', '0.00', 0, 0, 18, 1, 32),
 (1324, 49, '6.50', 0, '2017-09-12', 'Guillaume Malaret', 'envoi Paypal', '1.50', 0, 1, 18, 2, 93),
-(1325, 50, '0.00', 0, NULL, 'Edouard (Bruxelles)', '', '0.00', 0, 0, 18, 3, 32),
-(1326, 51, '0.00', 0, NULL, 'Edouard (Bruxelles)', '', '0.00', 0, 0, 18, 3, 32),
+(1325, 50, '0.00', 0, NULL, 'Edouard (Bruxelles)', '', '0.00', 0, 0, 18, 1, 32),
+(1326, 51, '0.00', 0, NULL, 'Edouard (Bruxelles)', '', '0.00', 0, 0, 18, 1, 32),
 (1327, 52, '5.00', 0, '2016-11-20', 'Pierre Studievic', '', '0.00', 0, 1, 18, 2, 100),
-(1328, 53, '0.00', 0, NULL, 'Fabien (Pantin)', '', '0.00', 0, 0, 18, 3, 32),
+(1328, 53, '0.00', 0, NULL, 'Fabien (Pantin)', '', '0.00', 0, 0, 18, 1, 32),
 (1329, 54, '6.50', 0, '2016-09-13', 'Thomas Fradin\r\n7 Grand rue\r\n86600 ClouÃ© \r\nFrance', 'envoi Paypal', '1.36', 0, 1, 18, 2, 98),
-(1330, 55, '0.00', 0, NULL, '', '', '0.00', 0, 0, 18, 3, 32),
-(1331, 56, '0.00', 0, NULL, '', '', '0.00', 0, 0, 18, 3, 32),
-(1332, 57, '0.00', 0, NULL, '', '', '0.00', 0, 0, 18, 3, 32),
+(1330, 55, '0.00', 0, NULL, '', '', '0.00', 0, 0, 18, 1, 32),
+(1331, 56, '0.00', 0, NULL, '', '', '0.00', 0, 0, 18, 1, 32),
+(1332, 57, '0.00', 0, NULL, '', '', '0.00', 0, 0, 18, 1, 32),
 (1333, 58, '0.00', 0, '2016-06-30', '', 'PayPal', '4.35', 0, 0, 18, 2, 32),
 (1334, 59, '3.50', 0, '2016-04-26', 'Praxis', '', '0.00', 0, 0, 18, 4, 32),
 (1335, 60, '5.00', 0, '2016-07-01', '', '', '0.00', 0, 0, 18, 2, 32),
@@ -1808,12 +1812,12 @@ INSERT INTO `exemplaire` (`id_exemplaire`, `numero_exemplaire`, `prix_vente_euro
 (1342, 67, '5.00', 0, '2016-04-25', '', '', '0.00', 0, 0, 18, 2, 32),
 (1343, 68, '0.00', 0, '2016-06-30', '', 'PayPal', '4.35', 0, 0, 18, 2, 32),
 (1344, 69, '5.00', 0, '2016-06-30', '', '', '0.00', 0, 0, 18, 2, 32),
-(1345, 70, '0.00', 0, NULL, '', '', '0.00', 0, 0, 18, 3, 32),
+(1345, 70, '0.00', 0, NULL, '', '', '0.00', 0, 0, 18, 1, 32),
 (1346, 71, '5.00', 0, '2016-06-30', '', '', '0.00', 0, 0, 18, 2, 32),
-(1347, 72, '0.00', 0, NULL, '', '', '0.00', 0, 0, 18, 3, 32),
-(1348, 73, '0.00', 0, NULL, '', '', '0.00', 0, 0, 18, 3, 32),
+(1347, 72, '0.00', 0, NULL, '', '', '0.00', 0, 0, 18, 1, 32),
+(1348, 73, '0.00', 0, NULL, '', '', '0.00', 0, 0, 18, 1, 32),
 (1349, 74, '5.00', 0, '2016-06-30', '', '', '0.00', 0, 0, 18, 2, 32),
-(1350, 75, '0.00', 0, NULL, '', '', '0.00', 0, 0, 18, 3, 32),
+(1350, 75, '0.00', 0, NULL, '', '', '0.00', 0, 0, 18, 1, 32),
 (1351, 1, '0.00', 0, NULL, 'kk null', '', '0.00', 0, 0, 19, 5, 32),
 (1352, 2, '0.00', 0, NULL, 'kk null', '', '0.00', 0, 0, 19, 5, 32),
 (1353, 3, '0.00', 0, NULL, 'kk null', '', '0.00', 0, 0, 19, 5, 32),
@@ -1895,9 +1899,9 @@ INSERT INTO `exemplaire` (`id_exemplaire`, `numero_exemplaire`, `prix_vente_euro
 (1429, 4, '0.00', 0, NULL, '', '', '0.00', 0, 0, 20, 5, 32),
 (1430, 5, '0.00', 0, NULL, '', '', '0.00', 0, 0, 20, 5, 32),
 (1431, 6, '0.00', 0, NULL, '', '', '0.00', 0, 0, 20, 5, 32),
-(1432, 7, '0.00', 0, NULL, '', '', '0.00', 0, 0, 20, 5, 32);
+(1432, 7, '0.00', 0, NULL, '', '', '0.00', 0, 0, 20, 5, 32),
+(1433, 8, '0.00', 0, NULL, '', '', '0.00', 0, 0, 20, 5, 32);
 INSERT INTO `exemplaire` (`id_exemplaire`, `numero_exemplaire`, `prix_vente_euros`, `vente_remboursee`, `date_vente`, `localite_exemplaire`, `commentaire`, `montant_frais_de_port`, `frais_de_port_rembourses`, `id_vendeur`, `id_cassette`, `id_etat`, `id_client`) VALUES
-(1433, 8, '0.00', 0, NULL, '', '', '0.00', 0, 0, 20, 5, 32),
 (1434, 9, '0.00', 0, NULL, '', '', '0.00', 0, 0, 20, 5, 32),
 (1435, 10, '0.00', 0, NULL, '', '', '0.00', 0, 0, 20, 5, 32),
 (1436, 11, '5.00', 1, '2017-02-04', 'Bruxelles', '', '0.00', 0, 3, 20, 2, 32),
@@ -1958,7 +1962,7 @@ INSERT INTO `exemplaire` (`id_exemplaire`, `numero_exemplaire`, `prix_vente_euro
 (1491, 66, '5.00', 0, '2017-02-12', 'rue des gardes', '', '0.00', 0, 1, 20, 4, 15),
 (1492, 67, '0.00', 0, NULL, 'Fabien', '', '0.00', 0, 0, 20, 1, 32),
 (1493, 68, '0.00', 0, NULL, 'Fabien', '', '0.00', 0, 0, 20, 1, 32),
-(1494, 69, '5.00', 1, '2021-04-05', 'Thomas Fradin\r\nChez Mr et Madame Fradin, numéro 4 La Gautherie\r\nL-79600 ST LOUP LAMAIRÉ\r\nFrance', 'Paypal', '2.50', 0, 1, 20, 2, 98),
+(1494, 69, '0.00', 0, NULL, 'Fabien', '', '0.00', 0, 0, 20, 1, 32),
 (1495, 70, '5.00', 1, '2019-06-19', '236-0005\r\nKANAGAWA, Yokohama-shi\r\nNamiki, Kanazawa-ku\r\n2-1-7-802\r\nJapon\r\nTsuyoshi Kubota', 'Paypal', '3.25', 0, 1, 20, 2, 135),
 (1496, 71, '0.00', 0, NULL, 'Fabien', '', '0.00', 0, 0, 20, 1, 32),
 (1497, 72, '5.00', 0, '2017-02-12', 'rue des gardes', '', '0.00', 0, 1, 20, 4, 15),
@@ -2286,60 +2290,60 @@ INSERT INTO `exemplaire` (`id_exemplaire`, `numero_exemplaire`, `prix_vente_euro
 (1819, 19, '0.00', 0, NULL, 'ARTISTE', '', '0.00', 0, 0, 25, 5, 32),
 (1820, 20, '0.00', 0, NULL, 'ARTISTE', '', '0.00', 0, 0, 25, 5, 32),
 (1821, 21, '5.00', 1, '2019-01-19', '', '', '0.00', 0, 1, 25, 2, 32),
-(1822, 22, '0.00', 0, NULL, '', '', '0.00', 0, 0, 25, 3, 32),
-(1823, 23, '0.00', 0, NULL, '', '', '0.00', 0, 0, 25, 3, 32),
-(1824, 24, '0.00', 0, NULL, '', '', '0.00', 0, 0, 25, 3, 32),
-(1825, 25, '0.00', 0, NULL, '', '', '0.00', 0, 0, 25, 3, 32),
-(1826, 26, '0.00', 0, NULL, '', '', '0.00', 0, 0, 25, 3, 32),
-(1827, 27, '0.00', 0, NULL, '', '', '0.00', 0, 0, 25, 3, 32),
-(1828, 28, '0.00', 0, NULL, '', '', '0.00', 0, 0, 25, 3, 32),
-(1829, 29, '0.00', 0, NULL, '', '', '0.00', 0, 0, 25, 3, 32),
-(1830, 30, '0.00', 0, NULL, '', '', '0.00', 0, 0, 25, 3, 32),
-(1831, 31, '0.00', 0, NULL, '', '', '0.00', 0, 0, 25, 3, 32),
-(1832, 32, '0.00', 0, NULL, '', '', '0.00', 0, 0, 25, 3, 32),
-(1833, 33, '0.00', 0, NULL, '', '', '0.00', 0, 0, 25, 3, 32),
-(1834, 34, '0.00', 0, NULL, '', '', '0.00', 0, 0, 25, 3, 32),
-(1835, 35, '0.00', 0, NULL, '', '', '0.00', 0, 0, 25, 3, 32),
-(1836, 36, '0.00', 0, NULL, '', '', '0.00', 0, 0, 25, 3, 32),
-(1837, 37, '0.00', 0, NULL, '', '', '0.00', 0, 0, 25, 3, 32),
-(1838, 38, '0.00', 0, NULL, '', '', '0.00', 0, 0, 25, 3, 32),
-(1839, 39, '0.00', 0, NULL, '', '', '0.00', 0, 0, 25, 3, 32),
+(1822, 22, '0.00', 0, NULL, '', '', '0.00', 0, 0, 25, 1, 32),
+(1823, 23, '0.00', 0, NULL, '', '', '0.00', 0, 0, 25, 1, 32),
+(1824, 24, '0.00', 0, NULL, '', '', '0.00', 0, 0, 25, 1, 32),
+(1825, 25, '0.00', 0, NULL, '', '', '0.00', 0, 0, 25, 1, 32),
+(1826, 26, '0.00', 0, NULL, '', '', '0.00', 0, 0, 25, 1, 32),
+(1827, 27, '0.00', 0, NULL, '', '', '0.00', 0, 0, 25, 1, 32),
+(1828, 28, '0.00', 0, NULL, '', '', '0.00', 0, 0, 25, 1, 32),
+(1829, 29, '0.00', 0, NULL, '', '', '0.00', 0, 0, 25, 1, 32),
+(1830, 30, '0.00', 0, NULL, '', '', '0.00', 0, 0, 25, 1, 32),
+(1831, 31, '0.00', 0, NULL, '', '', '0.00', 0, 0, 25, 1, 32),
+(1832, 32, '0.00', 0, NULL, '', '', '0.00', 0, 0, 25, 1, 32),
+(1833, 33, '0.00', 0, NULL, '', '', '0.00', 0, 0, 25, 1, 32),
+(1834, 34, '0.00', 0, NULL, '', '', '0.00', 0, 0, 25, 1, 32),
+(1835, 35, '0.00', 0, NULL, '', '', '0.00', 0, 0, 25, 1, 32),
+(1836, 36, '0.00', 0, NULL, '', '', '0.00', 0, 0, 25, 1, 32),
+(1837, 37, '0.00', 0, NULL, '', '', '0.00', 0, 0, 25, 1, 32),
+(1838, 38, '0.00', 0, NULL, '', '', '0.00', 0, 0, 25, 1, 32),
+(1839, 39, '0.00', 0, NULL, '', '', '0.00', 0, 0, 25, 1, 32),
 (1840, 40, '5.00', 0, '2018-04-07', 'Bruxelles ILM', '', '0.00', 0, 5, 25, 2, 32),
 (1841, 41, '5.00', 0, '2018-04-07', 'Bruxelles ILM', '', '0.00', 0, 3, 25, 2, 32),
 (1842, 42, '5.00', 0, '2018-04-07', 'Bruxelles ILM', '', '0.00', 0, 1, 25, 2, 32),
 (1843, 43, '5.00', 0, '2018-04-07', 'Bruxelles ILM', '', '0.00', 0, 4, 25, 2, 32),
 (1844, 44, '5.00', 0, '2018-04-07', 'Bruxelles ILM', '', '0.00', 0, 5, 25, 2, 32),
-(1845, 45, '0.00', 0, NULL, '', '', '0.00', 0, 0, 25, 3, 32),
-(1846, 46, '0.00', 0, NULL, '', '', '0.00', 0, 0, 25, 3, 32),
-(1847, 47, '5.00', 0, '2020-05-21', 'IVAN MEDEK\r\nTRNOV 6\r\nTRNOV,KRÁLOVÉHRADECKÝ KRAJ\r\n517 33\r\nRépublique tchèque', 'Paypal', '3.50', 0, 1, 25, 2, 146),
-(1848, 48, '0.00', 0, NULL, '', '', '0.00', 0, 0, 25, 3, 32),
-(1849, 49, '0.00', 0, NULL, '', '', '0.00', 0, 0, 25, 3, 32),
-(1850, 50, '0.00', 0, NULL, '', '', '0.00', 0, 0, 25, 3, 32),
-(1851, 51, '0.00', 0, NULL, '', '', '0.00', 0, 0, 25, 3, 32),
-(1852, 52, '0.00', 0, NULL, '', '', '0.00', 0, 0, 25, 3, 32),
-(1853, 53, '0.00', 0, NULL, '', '', '0.00', 0, 0, 25, 3, 32),
-(1854, 54, '0.00', 0, NULL, '', '', '0.00', 0, 0, 25, 3, 32),
-(1855, 55, '0.00', 0, NULL, '', '', '0.00', 0, 0, 25, 3, 32),
-(1856, 56, '0.00', 0, NULL, '', '', '0.00', 0, 0, 25, 3, 32),
+(1845, 45, '0.00', 0, NULL, '', '', '0.00', 0, 0, 25, 1, 32),
+(1846, 46, '0.00', 0, NULL, '', '', '0.00', 0, 0, 25, 1, 32),
+(1847, 47, '0.00', 0, NULL, '', '', '0.00', 0, 0, 25, 1, 32),
+(1848, 48, '0.00', 0, NULL, '', '', '0.00', 0, 0, 25, 1, 32),
+(1849, 49, '0.00', 0, NULL, '', '', '0.00', 0, 0, 25, 1, 32),
+(1850, 50, '0.00', 0, NULL, '', '', '0.00', 0, 0, 25, 1, 32),
+(1851, 51, '0.00', 0, NULL, '', '', '0.00', 0, 0, 25, 1, 32),
+(1852, 52, '0.00', 0, NULL, '', '', '0.00', 0, 0, 25, 1, 32),
+(1853, 53, '0.00', 0, NULL, '', '', '0.00', 0, 0, 25, 1, 32),
+(1854, 54, '0.00', 0, NULL, '', '', '0.00', 0, 0, 25, 1, 32),
+(1855, 55, '0.00', 0, NULL, '', '', '0.00', 0, 0, 25, 1, 32),
+(1856, 56, '0.00', 0, NULL, '', '', '0.00', 0, 0, 25, 1, 32),
 (1857, 57, '5.00', 0, '2018-06-04', 'Jennifer Warmuth\r\nKeupstr. 90\r\n51063 KÃ¶ln\r\nAllemagne', 'paypal', '4.50', 0, 1, 25, 2, 124),
 (1858, 58, '5.00', 0, '2020-01-29', 'Clément Salmon\r\n57 rue Parmentier\r\n94210 Saint Maur des Fossés\r\nFrance', 'paypal', '2.00', 0, 1, 25, 2, 102),
-(1859, 59, '0.00', 0, NULL, '', '', '0.00', 0, 0, 25, 3, 32),
-(1860, 60, '0.00', 0, NULL, '', '', '0.00', 0, 0, 25, 3, 32),
-(1861, 61, '0.00', 0, NULL, '', '', '0.00', 0, 0, 25, 3, 32),
-(1862, 62, '0.00', 0, NULL, '', '', '0.00', 0, 0, 25, 3, 32),
-(1863, 63, '0.00', 0, NULL, '', '', '0.00', 0, 0, 25, 3, 32),
-(1864, 64, '0.00', 0, NULL, '', '', '0.00', 0, 0, 25, 3, 32),
-(1865, 65, '0.00', 0, NULL, '', '', '0.00', 0, 0, 25, 3, 32),
+(1859, 59, '0.00', 0, NULL, '', '', '0.00', 0, 0, 25, 1, 32),
+(1860, 60, '0.00', 0, NULL, '', '', '0.00', 0, 0, 25, 1, 32),
+(1861, 61, '0.00', 0, NULL, '', '', '0.00', 0, 0, 25, 1, 32),
+(1862, 62, '0.00', 0, NULL, '', '', '0.00', 0, 0, 25, 1, 32),
+(1863, 63, '0.00', 0, NULL, '', '', '0.00', 0, 0, 25, 1, 32),
+(1864, 64, '0.00', 0, NULL, '', '', '0.00', 0, 0, 25, 1, 32),
+(1865, 65, '0.00', 0, NULL, '', '', '0.00', 0, 0, 25, 1, 32),
 (1866, 66, '5.00', 0, '2017-11-29', 'ANTHONY BARON\r\n91 RUE DU PRESSOIR AUBRY\r\n45160 OLIVET\r\nFrance', 'Paypal', '1.50', 0, 1, 25, 2, 117),
 (1867, 67, '5.00', 0, '2018-04-30', 'Chez un cheper', '', '0.00', 0, 1, 25, 2, 32),
 (1868, 68, '5.00', 0, '2018-04-17', 'diederichs\r\nLES PLEAUX\r\n19150 ST MARTIAL DE GIMEL\r\nFrance', 'Paypal', '1.54', 0, 1, 25, 2, 122),
 (1869, 69, '5.00', 1, '2019-02-12', 'Thomas Fradin 79600 St Loup LamairÃ©', 'Paypal', '1.72', 0, 1, 25, 2, 98),
 (1870, 70, '5.00', 1, '2020-02-04', 'Adrian Deineka\r\nSandstuveien 52 D\r\n410\r\n1184 Oslo\r\nNorvège', 'Paypal', '2.50', 0, 1, 25, 2, 143),
-(1871, 71, '0.00', 0, NULL, '', '', '0.00', 0, 0, 25, 3, 32),
-(1872, 72, '0.00', 0, NULL, '', '', '0.00', 0, 0, 25, 3, 32),
-(1873, 73, '0.00', 0, NULL, '', '', '0.00', 0, 0, 25, 3, 32),
-(1874, 74, '0.00', 0, NULL, '', '', '0.00', 0, 0, 25, 3, 32),
-(1875, 75, '0.00', 0, NULL, '', '', '0.00', 0, 0, 25, 3, 32),
+(1871, 71, '0.00', 0, NULL, 'FABIEN', '', '0.00', 0, 0, 25, 1, 32),
+(1872, 72, '0.00', 0, NULL, 'FABIEN', '', '0.00', 0, 0, 25, 1, 32),
+(1873, 73, '0.00', 0, NULL, 'FABIEN', '', '0.00', 0, 0, 25, 1, 32),
+(1874, 74, '0.00', 0, NULL, 'FABIEN', '', '0.00', 0, 0, 25, 1, 32),
+(1875, 75, '0.00', 0, NULL, 'FABIEN', '', '0.00', 0, 0, 25, 1, 32),
 (1876, 1, '0.00', 0, NULL, 'Charles Torris Rennes', '', '0.00', 0, 0, 26, 5, 32),
 (1877, 2, '0.00', 0, NULL, 'Charles Torris Rennes', '', '0.00', 0, 0, 26, 5, 32),
 (1878, 3, '0.00', 0, NULL, 'Charles Torris Rennes', '', '0.00', 0, 0, 26, 5, 32),
@@ -2428,11 +2432,11 @@ INSERT INTO `exemplaire` (`id_exemplaire`, `numero_exemplaire`, `prix_vente_euro
 (1961, 11, '5.00', 1, '2018-12-14', 'Barlock Bruxelles', '', '0.00', 0, 1, 27, 2, 32),
 (1962, 12, '5.00', 1, '2018-12-14', 'Barlock Bruxelles', '', '0.00', 0, 1, 27, 2, 32),
 (1963, 13, '5.00', 1, '2018-12-14', 'Barlock Bruxelles', '', '0.00', 0, 1, 27, 2, 32),
-(1964, 14, '5.00', 0, '2021-06-05', 'NDDL', '', '0.00', 0, 4, 27, 2, 32),
+(1964, 14, '0.00', 0, NULL, '', '', '0.00', 0, 0, 27, 1, 32),
 (1965, 15, '0.00', 0, NULL, '', '', '0.00', 0, 0, 27, 1, 32),
 (1966, 16, '0.00', 0, NULL, '', '', '0.00', 0, 0, 27, 1, 32),
 (1967, 17, '0.00', 0, NULL, '', '', '0.00', 0, 0, 27, 1, 32),
-(1968, 18, '5.00', 1, '2021-03-30', 'VIVIEN MANN\r\n1 rue d\'Alsace\r\nL-63000 CLERMONT-FERRAND\r\nFrance', 'Paypal', '2.50', 0, 1, 27, 2, 153),
+(1968, 18, '0.00', 0, NULL, '', '', '0.00', 0, 0, 27, 1, 32),
 (1969, 19, '0.00', 0, NULL, '', '', '0.00', 0, 0, 27, 1, 32),
 (1970, 20, '0.00', 0, NULL, '', '', '0.00', 0, 0, 27, 1, 32),
 (1971, 21, '0.00', 0, NULL, '', '', '0.00', 0, 0, 27, 1, 32),
@@ -2468,7 +2472,7 @@ INSERT INTO `exemplaire` (`id_exemplaire`, `numero_exemplaire`, `prix_vente_euro
 (2001, 51, '0.00', 0, NULL, '', '', '0.00', 0, 0, 27, 1, 32),
 (2002, 52, '0.00', 0, NULL, '', '', '0.00', 0, 0, 27, 1, 32),
 (2003, 53, '0.00', 0, NULL, '', '', '0.00', 0, 0, 27, 1, 32),
-(2004, 54, '5.00', 1, '2021-02-19', 'Thomas Fradin\r\nChez Mr et Madame Fradin, numéro 4 La Gautherie\r\nL-79600 ST LOUP LAMAIRÉ\r\nFrance', 'Paypal', '2.40', 0, 1, 27, 2, 98),
+(2004, 54, '0.00', 0, NULL, '', '', '0.00', 0, 0, 27, 1, 32),
 (2005, 55, '0.00', 0, NULL, '', '', '0.00', 0, 0, 27, 1, 32),
 (2006, 56, '0.00', 0, NULL, '', '', '0.00', 0, 0, 27, 1, 32),
 (2007, 57, '0.00', 0, NULL, '', '', '0.00', 0, 0, 27, 1, 32),
@@ -2483,7 +2487,7 @@ INSERT INTO `exemplaire` (`id_exemplaire`, `numero_exemplaire`, `prix_vente_euro
 (2016, 66, '5.00', 1, '2020-02-18', 'Eric De Oliveira\r\n7 rue Paul Dupin\r\n31500 Toulouse\r\nFrance', 'Commande Paypal', '2.00', 0, 1, 27, 2, 145),
 (2017, 67, '5.00', 1, '2018-07-14', 'Pierre Studevic', '', '0.00', 0, 1, 27, 2, 100),
 (2018, 68, '0.00', 0, NULL, '', '', '0.00', 0, 0, 27, 1, 32),
-(2019, 69, '5.00', 1, '2021-05-11', 'Maël LE MOIGNE\r\n9, La Magdeleine\r\nL-35600 SAINTE-MARIE\r\nFrance', 'Commande Paypal', '2.50', 0, 1, 27, 2, 154),
+(2019, 69, '0.00', 1, NULL, 'Fabien (Pantin)', '', '0.00', 0, 1, 27, 1, 32),
 (2020, 70, '5.00', 1, '2019-03-26', 'Jesse Gass\r\n623 Conner Creek Dr.\r\nFishers, IN 46038\r\nÃ‰tats-Unis', 'Commande Paypal', '2.60', 0, 1, 27, 2, 126),
 (2021, 71, '0.00', 0, NULL, '', '', '0.00', 0, 0, 27, 1, 32),
 (2022, 72, '0.00', 0, NULL, '', '', '0.00', 0, 0, 27, 1, 32),
@@ -2510,14 +2514,14 @@ INSERT INTO `exemplaire` (`id_exemplaire`, `numero_exemplaire`, `prix_vente_euro
 (2043, 18, '5.00', 1, '2018-12-14', 'Barlock Bruxelles', '', '0.00', 0, 1, 28, 2, 32),
 (2044, 19, '5.00', 1, '2018-12-14', 'Barlock Bruxelles', '', '0.00', 0, 1, 28, 2, 32),
 (2045, 20, '5.00', 1, '2018-12-03', '', 'vente paypal', '5.00', 0, 4, 28, 2, 32),
-(2046, 21, '5.00', 1, '2021-05-11', 'Maël LE MOIGNE\r\n9, La Magdeleine\r\nL-35600 SAINTE-MARIE\r\nFrance', 'Commande Paypal', '2.50', 0, 1, 28, 2, 154),
+(2046, 21, '0.00', 0, NULL, '', '', '0.00', 0, 0, 28, 1, 32),
 (2047, 22, '0.00', 0, NULL, '', '', '0.00', 0, 0, 28, 1, 32),
 (2048, 23, '0.00', 0, NULL, '', '', '0.00', 0, 0, 28, 1, 32),
 (2049, 24, '0.00', 0, NULL, '', '', '0.00', 0, 0, 28, 1, 32),
 (2050, 25, '5.00', 1, '2019-06-19', '236-0005\r\nKANAGAWA, Yokohama-shi\r\nNamiki, Kanazawa-ku\r\n2-1-7-802\r\nJapon\r\nTsuyoshi Kubota', 'vente paypal', '3.25', 0, 1, 28, 2, 135),
 (2051, 26, '5.00', 1, '2020-02-04', 'Adrian Deineka\r\nSandstuveien 52 D\r\n410\r\n1184 Oslo\r\nNorvège', 'vente paypal', '2.50', 0, 1, 28, 2, 143),
 (2052, 27, '5.00', 0, '2019-01-19', '', '', '0.00', 0, 1, 28, 2, 32),
-(2053, 28, '5.00', 1, '2021-06-28', 'Mme Mathys Julie\r\n9 rue danton\r\nL-69003 LYON\r\nFrance', 'vente paypal', '2.50', 0, 1, 28, 2, 149),
+(2053, 28, '0.00', 0, NULL, '', '', '0.00', 0, 0, 28, 1, 32),
 (2054, 29, '0.00', 0, NULL, '', '', '0.00', 0, 0, 28, 1, 32),
 (2055, 30, '0.00', 0, NULL, '', '', '0.00', 0, 0, 28, 1, 32),
 (2056, 31, '0.00', 0, NULL, '', '', '0.00', 0, 0, 28, 1, 32),
@@ -2587,15 +2591,14 @@ INSERT INTO `exemplaire` (`id_exemplaire`, `numero_exemplaire`, `prix_vente_euro
 (2120, 20, '0.00', 0, NULL, 'Tiny Tramp', '', '0.00', 0, 0, 29, 5, 32),
 (2121, 21, '5.00', 1, '2019-05-13', 'guillaume thiriet/asso L\'ALBERTINE\r\nateliers de PEYREGROSSE\r\n30570 SAINT ANDRE-de-MAJENCOULES\r\nFrance', 'Commande Paypal', '1.72', 0, 1, 29, 2, 134),
 (2122, 22, '5.00', 1, '2019-06-11', 'Pierre Stu Saint Denis', '', '0.00', 0, 1, 29, 2, 100),
-(2123, 23, '5.00', 1, '2020-05-21', 'IVAN MEDEK\r\nTRNOV 6\r\nTRNOV,KRÁLOVÉHRADECKÝ KRAJ\r\n517 33\r\nRépublique tchèque', 'Commande Paypal', '3.50', 0, 1, 29, 2, 146),
-(2124, 24, '5.00', 1, '2021-07-15', 'Thomas Fradin\r\nChez Mr et Madame Fradin, numéro 4 La Gautherie\r\nL-79600 ST LOUP LAMAIRÉ\r\nFranceThomas Fradin\r\nChez Mr et Madame Fradin, numéro 4 La Ga', 'Paypal', '1.10', 0, 1, 29, 2, 98),
+(2123, 23, '0.00', 1, NULL, 'Fabien Pantin', '', '0.00', 0, 1, 29, 1, 32),
+(2124, 24, '0.00', 1, NULL, 'Fabien Pantin', '', '0.00', 0, 1, 29, 1, 32),
 (2125, 25, '0.00', 1, NULL, 'Fabien Pantin', '', '0.00', 0, 1, 29, 1, 32),
 (2126, 26, '5.00', 1, '2019-04-11', 'Matt Evans\r\n84 Lea Road\r\nAbington\r\nNorthampton,Northamptonshire\r\nNN1 4PF\r\nRoyaume-Uni', 'Commande Paypal', '2.60', 0, 1, 29, 2, 131),
 (2127, 27, '5.00', 1, '2019-04-15', 'Gilles Vignes\r\nL\'Ombre Du Joyeux Délire\r\n331 route d\'Arsague\r\n40330 Castel Sarrazin\r\nFrance', 'Commande Paypal', '1.72', 0, 1, 29, 2, 95),
 (2128, 28, '0.00', 1, NULL, 'Fabien Pantin', '', '0.00', 0, 1, 29, 1, 32),
 (2129, 29, '0.00', 1, NULL, 'Fabien Pantin', '', '0.00', 0, 1, 29, 1, 32),
-(2130, 30, '0.00', 1, NULL, 'Fabien Pantin', '', '0.00', 0, 1, 29, 1, 32);
-INSERT INTO `exemplaire` (`id_exemplaire`, `numero_exemplaire`, `prix_vente_euros`, `vente_remboursee`, `date_vente`, `localite_exemplaire`, `commentaire`, `montant_frais_de_port`, `frais_de_port_rembourses`, `id_vendeur`, `id_cassette`, `id_etat`, `id_client`) VALUES
+(2130, 30, '0.00', 1, NULL, 'Fabien Pantin', '', '0.00', 0, 1, 29, 1, 32),
 (2131, 31, '5.00', 1, '2019-05-13', 'Stephen Cammack\r\n14 Hartop Road\r\nSaint Marychurch\r\nTorquay,Devon\r\nTQ1 4QQ\r\nRoyaume-Uni', 'Commande Paypal', '2.60', 0, 1, 29, 2, 133),
 (2132, 32, '0.00', 0, NULL, '', '', '0.00', 0, 0, 29, 1, 32),
 (2133, 33, '0.00', 0, NULL, '', '', '0.00', 0, 0, 29, 1, 32),
@@ -2609,7 +2612,8 @@ INSERT INTO `exemplaire` (`id_exemplaire`, `numero_exemplaire`, `prix_vente_euro
 (2141, 41, '0.00', 0, NULL, '', '', '0.00', 0, 0, 29, 1, 32),
 (2142, 42, '0.00', 0, NULL, '', '', '0.00', 0, 0, 29, 1, 32),
 (2143, 43, '0.00', 0, NULL, '', '', '0.00', 0, 0, 29, 1, 32),
-(2144, 44, '0.00', 0, NULL, '', '', '0.00', 0, 0, 29, 1, 32),
+(2144, 44, '0.00', 0, NULL, '', '', '0.00', 0, 0, 29, 1, 32);
+INSERT INTO `exemplaire` (`id_exemplaire`, `numero_exemplaire`, `prix_vente_euros`, `vente_remboursee`, `date_vente`, `localite_exemplaire`, `commentaire`, `montant_frais_de_port`, `frais_de_port_rembourses`, `id_vendeur`, `id_cassette`, `id_etat`, `id_client`) VALUES
 (2145, 45, '0.00', 0, NULL, '', '', '0.00', 0, 0, 29, 1, 32),
 (2146, 46, '0.00', 0, NULL, '', '', '0.00', 0, 0, 29, 1, 32),
 (2147, 47, '0.00', 0, NULL, '', '', '0.00', 0, 0, 29, 1, 32),
@@ -2669,10 +2673,10 @@ INSERT INTO `exemplaire` (`id_exemplaire`, `numero_exemplaire`, `prix_vente_euro
 (2201, 26, '5.00', 1, '2019-05-05', 'Kim Yen NGUYEN\r\n20, rue Rouvet\r\n75019 Paris\r\nFrance', '', '0.00', 0, 1, 30, 2, 132),
 (2202, 27, '5.00', 1, '2019-05-13', 'Maxime Gueugneau\r\nKiblind Magazine - 27 rue Bouteille\r\n69001 Lyon\r\nFrance', 'Commande Paypal', '1.72', 0, 1, 30, 2, 123),
 (2203, 28, '5.00', 1, '2019-12-09', 'Thomas Fradin\r\nChez Mr et Madame Fradin, numéro 4 La Gautherie\r\n79600 st loup lamairé\r\nFrance', 'Commande Paypal', '1.72', 0, 1, 30, 2, 98),
-(2204, 29, '5.00', 1, '2021-01-06', 'nicolas sfeir\r\n5 rue d\'alsace\r\nL-72000 le mans\r\nFrance', 'Commande Paypal', '2.16', 0, 1, 30, 2, 150),
+(2204, 29, '0.00', 1, NULL, 'Fabien (Pantin)', '', '0.00', 0, 1, 30, 1, 32),
 (2205, 30, '5.00', 1, '2019-04-02', 'Benoit Cavin\r\n8 rue du 8 mai 1945\r\n92250 la garenne colombes\r\nFrance', 'Commande Paypal', '1.72', 0, 1, 30, 2, 127),
-(2206, 31, '5.00', 1, '2021-05-11', 'Maël LE MOIGNE\r\n9, La Magdeleine\r\nL-35600 SAINTE-MARIE\r\nFrance', 'Commande Paypal', '2.50', 0, 1, 30, 2, 154),
-(2207, 32, '5.00', 0, '2021-06-05', 'NDDL', '', '0.00', 0, 4, 30, 2, 32),
+(2206, 31, '0.00', 1, NULL, 'Fabien (Pantin)', '', '0.00', 0, 1, 30, 1, 32),
+(2207, 32, '0.00', 1, NULL, 'Fabien (Pantin)', '', '0.00', 0, 1, 30, 1, 32),
 (2208, 33, '0.00', 1, NULL, 'Fabien (Pantin)', '', '0.00', 0, 1, 30, 1, 32),
 (2209, 34, '0.00', 1, NULL, 'Fabien (Pantin)', '', '0.00', 0, 1, 30, 1, 32),
 (2210, 35, '0.00', 1, NULL, 'Fabien (Pantin)', '', '0.00', 0, 1, 30, 1, 32),
@@ -2688,7 +2692,7 @@ INSERT INTO `exemplaire` (`id_exemplaire`, `numero_exemplaire`, `prix_vente_euro
 (2220, 45, '0.00', 0, NULL, '', '', '0.00', 0, 0, 30, 1, 32),
 (2221, 46, '0.00', 0, NULL, '', '', '0.00', 0, 0, 30, 1, 32),
 (2222, 47, '0.00', 0, NULL, '', '', '0.00', 0, 0, 30, 1, 32),
-(2223, 48, '5.00', 1, '2020-08-06', 'Yann Griboval\r\nAppartement 104 - Bâtiment A - Les jardins de la somme 28 Boulevard du Port\r\n80000 Amiens 80\r\nFrance', 'Paypal', '2.00', 0, 1, 30, 2, 147),
+(2223, 48, '0.00', 0, NULL, '', '', '0.00', 0, 0, 30, 1, 32),
 (2224, 49, '0.00', 0, NULL, '', '', '0.00', 0, 0, 30, 1, 32),
 (2225, 50, '0.00', 0, NULL, '', '', '0.00', 0, 0, 30, 1, 32),
 (2226, 51, '0.00', 0, NULL, '', '', '0.00', 0, 0, 30, 1, 32),
@@ -2729,7 +2733,7 @@ INSERT INTO `exemplaire` (`id_exemplaire`, `numero_exemplaire`, `prix_vente_euro
 (2261, 11, '5.00', 0, '2020-02-23', 'Pierre Studievic Saint Ouen', '', '0.00', 0, 1, 31, 2, 100),
 (2262, 12, '5.00', 1, '2020-02-18', 'Eric De Oliveira\r\n7 rue Paul Dupin\r\n31500 Toulouse\r\nFrance', 'envoi Paypal', '2.00', 0, 1, 31, 2, 145),
 (2263, 13, '0.00', 1, NULL, 'Fabien Pantin', '', '0.00', 0, 1, 31, 1, 32),
-(2264, 14, '5.00', 1, '2020-07-07', 'Thomas Fradin\r\nChez Mr et Madame Fradin, numéro 4 La Gautherie\r\n79600 st loup lamairé\r\nFrance', 'envoi Paypal', '2.00', 0, 1, 31, 2, 98),
+(2264, 14, '0.00', 1, NULL, 'Fabien Pantin', '', '0.00', 0, 1, 31, 1, 32),
 (2265, 15, '0.00', 1, NULL, 'Fabien Pantin', '', '0.00', 0, 1, 31, 1, 32),
 (2266, 16, '0.00', 1, NULL, 'Fabien Pantin', '', '0.00', 0, 1, 31, 1, 32),
 (2267, 17, '0.00', 1, NULL, 'Fabien Pantin', '', '0.00', 0, 1, 31, 1, 32),
@@ -2811,61 +2815,61 @@ INSERT INTO `exemplaire` (`id_exemplaire`, `numero_exemplaire`, `prix_vente_euro
 (2418, 18, '5.00', 1, '2019-11-09', 'Amiens chez Claire', '', '0.00', 0, 1, 33, 2, 32),
 (2419, 19, '5.00', 1, '2019-11-09', 'Amiens chez Claire', '', '0.00', 0, 1, 33, 2, 32),
 (2420, 20, '5.00', 1, '2019-11-09', 'Amiens chez Claire', '', '0.00', 0, 1, 33, 2, 32),
-(2421, 21, '0.00', 0, NULL, '', '', '0.00', 0, 0, 33, 3, 32),
-(2422, 22, '0.00', 0, NULL, '', '', '0.00', 0, 0, 33, 3, 32),
-(2423, 23, '0.00', 0, NULL, '', '', '0.00', 0, 0, 33, 3, 32),
-(2424, 24, '0.00', 0, NULL, '', '', '0.00', 0, 0, 33, 3, 32),
-(2425, 25, '0.00', 0, NULL, '', '', '0.00', 0, 0, 33, 3, 32),
-(2426, 26, '0.00', 0, NULL, '', '', '0.00', 0, 0, 33, 3, 32),
-(2427, 27, '0.00', 0, NULL, '', '', '0.00', 0, 0, 33, 3, 32),
-(2428, 28, '0.00', 0, NULL, '', '', '0.00', 0, 0, 33, 3, 32),
-(2429, 29, '0.00', 0, NULL, '', '', '0.00', 0, 0, 33, 3, 32),
-(2430, 30, '0.00', 0, NULL, '', '', '0.00', 0, 0, 33, 3, 32),
-(2431, 31, '0.00', 0, NULL, '', '', '0.00', 0, 0, 33, 3, 32),
-(2432, 32, '0.00', 0, NULL, '', '', '0.00', 0, 0, 33, 3, 32),
-(2433, 33, '0.00', 0, NULL, '', '', '0.00', 0, 0, 33, 3, 32),
-(2434, 34, '0.00', 0, NULL, '', '', '0.00', 0, 0, 33, 3, 32),
-(2435, 35, '0.00', 0, NULL, '', '', '0.00', 0, 0, 33, 3, 32),
-(2436, 36, '0.00', 0, NULL, '', '', '0.00', 0, 0, 33, 3, 32),
-(2437, 37, '0.00', 0, NULL, '', '', '0.00', 0, 0, 33, 3, 32),
-(2438, 38, '0.00', 0, NULL, '', '', '0.00', 0, 0, 33, 3, 32),
-(2439, 39, '5.00', 1, '2021-01-23', 'Marchand Renaud\r\n11 rue de l\'Industrie\r\nL-1201 Genève\r\nGE\r\nSuisse', 'envoi paypal', '3.75', 0, 1, 33, 2, 152),
-(2440, 40, '0.00', 0, NULL, '', '', '0.00', 0, 0, 33, 3, 32),
-(2441, 41, '0.00', 0, NULL, '', '', '0.00', 0, 0, 33, 3, 32),
-(2442, 42, '0.00', 0, NULL, '', '', '0.00', 0, 0, 33, 3, 32),
-(2443, 43, '0.00', 0, NULL, '', '', '0.00', 0, 0, 33, 3, 32),
-(2444, 44, '0.00', 0, NULL, '', '', '0.00', 0, 0, 33, 3, 32),
-(2445, 45, '0.00', 0, NULL, '', '', '0.00', 0, 0, 33, 3, 32),
-(2446, 46, '0.00', 0, NULL, '', '', '0.00', 0, 0, 33, 3, 32),
-(2447, 47, '0.00', 0, NULL, '', '', '0.00', 0, 0, 33, 3, 32),
-(2448, 48, '0.00', 0, NULL, '', '', '0.00', 0, 0, 33, 3, 32),
-(2449, 49, '0.00', 0, NULL, '', '', '0.00', 0, 0, 33, 3, 32),
-(2450, 50, '0.00', 0, NULL, '', '', '0.00', 0, 0, 33, 3, 32),
-(2451, 51, '0.00', 0, NULL, '', '', '0.00', 0, 0, 33, 3, 32),
-(2452, 52, '0.00', 0, NULL, '', '', '0.00', 0, 0, 33, 3, 32),
-(2453, 53, '5.00', 1, '2021-01-23', 'Marchand Renaud\r\n11 rue de l\'Industrie\r\nL-1201 Genève\r\nGE\r\nSuisse', 'envoi paypal', '3.75', 0, 1, 33, 2, 152),
-(2454, 54, '0.00', 0, NULL, '', '', '0.00', 0, 0, 33, 3, 32),
-(2455, 55, '0.00', 0, NULL, '', '', '0.00', 0, 0, 33, 3, 32),
-(2456, 56, '0.00', 0, NULL, '', '', '0.00', 0, 0, 33, 3, 32),
-(2457, 57, '0.00', 0, NULL, '', '', '0.00', 0, 0, 33, 3, 32),
-(2458, 58, '0.00', 0, NULL, '', '', '0.00', 0, 0, 33, 3, 32),
-(2459, 59, '0.00', 0, NULL, '', '', '0.00', 0, 0, 33, 3, 32),
-(2460, 60, '5.00', 1, '2019-12-21', 'Robin Lescouët\r\nThéâtre de Poche - 10 place de la mairie\r\n35630 Hédé-Bazouges\r\nFrance', 'Paypal', '1.72', 0, 1, 33, 2, 2),
-(2461, 61, '5.00', 1, '2020-01-26', 'Pierre Saint Ouen', '', '0.00', 0, 1, 33, 2, 100),
-(2462, 62, '5.00', 1, '2020-01-29', '57 rue Parmentier\r\n94210 Saint Maur des Fossés\r\nFrance', 'Paypal', '2.00', 0, 1, 33, 2, 102),
-(2463, 63, '0.00', 0, NULL, '', '', '0.00', 0, 0, 33, 3, 32),
-(2464, 64, '0.00', 0, NULL, '', '', '0.00', 0, 0, 33, 3, 32),
-(2465, 65, '5.00', 1, '2020-08-06', 'Yann Griboval\r\nAppartement 104 - Bâtiment A - Les jardins de la somme 28 Boulevard du Port\r\n80000 Amiens 80\r\nFrance', 'Paypal', '2.00', 0, 1, 33, 2, 147),
-(2466, 66, '5.00', 1, '2021-01-06', 'nicolas sfeir\r\n5 rue d\'alsace\r\nL-72000 le mans\r\nFrance', 'Paypal', '2.16', 0, 1, 33, 2, 150),
-(2467, 67, '0.00', 0, NULL, '', '', '0.00', 0, 0, 33, 3, 32),
-(2468, 68, '0.00', 0, NULL, '', '', '0.00', 0, 0, 33, 3, 32),
-(2469, 69, '0.00', 0, NULL, '', '', '0.00', 0, 0, 33, 3, 32),
-(2470, 70, '0.00', 0, NULL, '', '', '0.00', 0, 0, 33, 3, 32),
-(2471, 71, '0.00', 0, NULL, '', '', '0.00', 0, 0, 33, 3, 32),
-(2472, 72, '0.00', 0, NULL, '', '', '0.00', 0, 0, 33, 3, 32),
-(2473, 73, '0.00', 0, NULL, '', '', '0.00', 0, 0, 33, 3, 32),
-(2474, 74, '0.00', 0, NULL, '', '', '0.00', 0, 0, 33, 3, 32),
-(2475, 75, '0.00', 0, NULL, '', '', '0.00', 0, 0, 33, 3, 32),
+(2421, 21, '0.00', 0, NULL, '', '', '0.00', 0, 0, 33, 1, 32),
+(2422, 22, '0.00', 0, NULL, '', '', '0.00', 0, 0, 33, 1, 32),
+(2423, 23, '0.00', 0, NULL, '', '', '0.00', 0, 0, 33, 1, 32),
+(2424, 24, '0.00', 0, NULL, '', '', '0.00', 0, 0, 33, 1, 32),
+(2425, 25, '0.00', 0, NULL, '', '', '0.00', 0, 0, 33, 1, 32),
+(2426, 26, '0.00', 0, NULL, '', '', '0.00', 0, 0, 33, 1, 32),
+(2427, 27, '0.00', 0, NULL, '', '', '0.00', 0, 0, 33, 1, 32),
+(2428, 28, '0.00', 0, NULL, '', '', '0.00', 0, 0, 33, 1, 32),
+(2429, 29, '0.00', 0, NULL, '', '', '0.00', 0, 0, 33, 1, 32),
+(2430, 30, '0.00', 0, NULL, '', '', '0.00', 0, 0, 33, 1, 32),
+(2431, 31, '0.00', 0, NULL, '', '', '0.00', 0, 0, 33, 1, 32),
+(2432, 32, '0.00', 0, NULL, '', '', '0.00', 0, 0, 33, 1, 32),
+(2433, 33, '0.00', 0, NULL, '', '', '0.00', 0, 0, 33, 1, 32),
+(2434, 34, '0.00', 0, NULL, '', '', '0.00', 0, 0, 33, 1, 32),
+(2435, 35, '0.00', 0, NULL, '', '', '0.00', 0, 0, 33, 1, 32),
+(2436, 36, '0.00', 0, NULL, '', '', '0.00', 0, 0, 33, 1, 32),
+(2437, 37, '0.00', 0, NULL, '', '', '0.00', 0, 0, 33, 1, 32),
+(2438, 38, '0.00', 0, NULL, '', '', '0.00', 0, 0, 33, 1, 32),
+(2439, 39, '0.00', 0, NULL, '', '', '0.00', 0, 0, 33, 1, 32),
+(2440, 40, '0.00', 0, NULL, '', '', '0.00', 0, 0, 33, 1, 32),
+(2441, 41, '0.00', 0, NULL, '', '', '0.00', 0, 0, 33, 1, 32),
+(2442, 42, '0.00', 0, NULL, '', '', '0.00', 0, 0, 33, 1, 32),
+(2443, 43, '0.00', 0, NULL, '', '', '0.00', 0, 0, 33, 1, 32),
+(2444, 44, '0.00', 0, NULL, '', '', '0.00', 0, 0, 33, 1, 32),
+(2445, 45, '0.00', 0, NULL, '', '', '0.00', 0, 0, 33, 1, 32),
+(2446, 46, '0.00', 0, NULL, '', '', '0.00', 0, 0, 33, 1, 32),
+(2447, 47, '0.00', 0, NULL, '', '', '0.00', 0, 0, 33, 1, 32),
+(2448, 48, '0.00', 0, NULL, '', '', '0.00', 0, 0, 33, 1, 32),
+(2449, 49, '0.00', 0, NULL, '', '', '0.00', 0, 0, 33, 1, 32),
+(2450, 50, '0.00', 0, NULL, '', '', '0.00', 0, 0, 33, 1, 32),
+(2451, 51, '0.00', 0, NULL, '', '', '0.00', 0, 0, 33, 1, 32),
+(2452, 52, '0.00', 0, NULL, '', '', '0.00', 0, 0, 33, 1, 32),
+(2453, 53, '0.00', 0, NULL, '', '', '0.00', 0, 0, 33, 1, 32),
+(2454, 54, '0.00', 0, NULL, '', '', '0.00', 0, 0, 33, 1, 32),
+(2455, 55, '0.00', 0, NULL, '', '', '0.00', 0, 0, 33, 1, 32),
+(2456, 56, '0.00', 0, NULL, '', '', '0.00', 0, 0, 33, 1, 32),
+(2457, 57, '0.00', 0, NULL, '', '', '0.00', 0, 0, 33, 1, 32),
+(2458, 58, '0.00', 0, NULL, '', '', '0.00', 0, 0, 33, 1, 32),
+(2459, 59, '0.00', 0, NULL, '', '', '0.00', 0, 0, 33, 1, 32),
+(2460, 60, '5.00', 0, '2019-12-21', 'Robin Lescouët\r\nThéâtre de Poche - 10 place de la mairie\r\n35630 Hédé-Bazouges\r\nFrance', 'Paypal', '1.72', 0, 1, 33, 2, 2),
+(2461, 61, '5.00', 0, '2020-01-26', 'Pierre Saint Ouen', '', '0.00', 0, 1, 33, 2, 100),
+(2462, 62, '5.00', 0, '2020-01-29', '57 rue Parmentier\r\n94210 Saint Maur des Fossés\r\nFrance', 'Paypal', '2.00', 0, 1, 33, 2, 102),
+(2463, 63, '0.00', 0, NULL, '', '', '0.00', 0, 0, 33, 1, 32),
+(2464, 64, '0.00', 0, NULL, '', '', '0.00', 0, 0, 33, 1, 32),
+(2465, 65, '0.00', 0, NULL, '', '', '0.00', 0, 0, 33, 1, 32),
+(2466, 66, '0.00', 0, NULL, '', '', '0.00', 0, 0, 33, 1, 32),
+(2467, 67, '0.00', 0, NULL, '', '', '0.00', 0, 0, 33, 1, 32),
+(2468, 68, '0.00', 0, NULL, '', '', '0.00', 0, 0, 33, 1, 32),
+(2469, 69, '0.00', 0, NULL, '', '', '0.00', 0, 0, 33, 1, 32),
+(2470, 70, '0.00', 0, NULL, '', '', '0.00', 0, 0, 33, 1, 32),
+(2471, 71, '0.00', 0, NULL, '', '', '0.00', 0, 0, 33, 1, 32),
+(2472, 72, '0.00', 0, NULL, '', '', '0.00', 0, 0, 33, 1, 32),
+(2473, 73, '0.00', 0, NULL, '', '', '0.00', 0, 0, 33, 1, 32),
+(2474, 74, '0.00', 0, NULL, '', '', '0.00', 0, 0, 33, 1, 32),
+(2475, 75, '0.00', 0, NULL, '', '', '0.00', 0, 0, 33, 1, 32),
 (2476, 1, '0.00', 0, NULL, '', '', '0.00', 0, 0, 34, 1, 32),
 (2477, 2, '0.00', 0, NULL, '', '', '0.00', 0, 0, 34, 1, 32),
 (2478, 3, '0.00', 0, NULL, '', '', '0.00', 0, 0, 34, 1, 32),
@@ -2880,12 +2884,12 @@ INSERT INTO `exemplaire` (`id_exemplaire`, `numero_exemplaire`, `prix_vente_euro
 (2487, 12, '5.00', 1, '2020-01-07', 'le martelot\r\n7 route du chene moreau\r\n72210 chemire le gaudin\r\nFrance', 'Paypal', '1.90', 0, 1, 34, 2, 138),
 (2488, 13, '5.00', 1, '2020-01-29', 'alexandre chanoine\r\n6 Grande Baleyte\r\n23140 Pionnat\r\nFrance', 'Paypal', '2.00', 0, 1, 34, 2, 142),
 (2489, 14, '5.00', 1, '2020-01-29', '57 rue Parmentier\r\n94210 Saint Maur des Fossés\r\nFrance', 'Paypal', '2.00', 0, 1, 34, 2, 102),
-(2490, 15, '5.00', 1, '2020-02-05', 'Amélie TAILLARD\r\nchez Robin Poligné et Margaux Parillaud\r\n26 rue Couteanceau\r\n35000 RENNES', 'Paypal', '2.00', 0, 1, 34, 2, 144),
-(2491, 16, '5.00', 1, '2020-02-05', 'Amélie TAILLARD\r\nchez Robin Poligné et Margaux Parillaud\r\n26 rue Couteanceau\r\n35000 RENNES', 'Paypal', '2.00', 0, 1, 34, 2, 144),
+(2490, 15, '5.00', 1, '2020-02-05', 'Amélie TAILLARD\r\nchez Robin Poligné et Margaux Parillaud\r\n26 rue Couteanceau\r\n35000 RENNES', 'Paypal', '1.90', 0, 1, 34, 2, 144),
+(2491, 16, '5.00', 1, '2020-02-05', 'Amélie TAILLARD\r\nchez Robin Poligné et Margaux Parillaud\r\n26 rue Couteanceau\r\n35000 RENNES', 'Paypal', '1.90', 0, 1, 34, 2, 144),
 (2492, 17, '5.00', 0, '2020-02-23', 'Pierre Studievic', '', '0.00', 0, 1, 34, 2, 100),
-(2493, 18, '5.00', 1, '2020-05-21', 'IVAN MEDEK\r\nTRNOV 6\r\nTRNOV,KRÁLOVÉHRADECKÝ KRAJ\r\n517 33\r\nRépublique tchèque', 'Paypal', '3.50', 0, 1, 34, 2, 146),
-(2494, 19, '5.00', 1, '2020-09-04', 'Julia Alabed\r\n20 rue Monadey\r\n33800 Bordeaux ', 'Paypal', '2.00', 0, 1, 34, 2, 148),
-(2495, 20, '5.00', 1, '2020-12-09', 'julie mathys\r\n35 rue jules brunard\r\nL-69007 lyon\r\nFrance', 'Paypal', '2.00', 0, 1, 34, 2, 149),
+(2493, 18, '5.00', 0, NULL, 'Fabien Pantin', '', '0.00', 0, 0, 34, 1, 32),
+(2494, 19, '5.00', 0, NULL, 'Fabien Pantin', '', '0.00', 0, 0, 34, 1, 32),
+(2495, 20, '5.00', 0, NULL, 'Fabien Pantin', '', '0.00', 0, 0, 34, 1, 32),
 (2496, 21, '0.00', 0, NULL, '', '', '0.00', 0, 0, 34, 1, 32),
 (2497, 22, '0.00', 0, NULL, '', '', '0.00', 0, 0, 34, 1, 32),
 (2498, 23, '0.00', 0, NULL, '', '', '0.00', 0, 0, 34, 1, 32),
@@ -2893,7 +2897,7 @@ INSERT INTO `exemplaire` (`id_exemplaire`, `numero_exemplaire`, `prix_vente_euro
 (2500, 25, '0.00', 0, NULL, '', '', '0.00', 0, 0, 34, 1, 32),
 (2501, 26, '0.00', 0, NULL, '', '', '0.00', 0, 0, 34, 1, 32),
 (2502, 27, '0.00', 0, NULL, '', '', '0.00', 0, 0, 34, 1, 32),
-(2503, 28, '5.00', 0, '2021-01-06', 'nicolas sfeir\r\n5 rue d\'alsace\r\nL-72000 le mans\r\nFrance', 'Paypal', '2.16', 0, 1, 34, 2, 150),
+(2503, 28, '0.00', 0, NULL, '', '', '0.00', 0, 0, 34, 1, 32),
 (2504, 29, '0.00', 0, NULL, '', '', '0.00', 0, 0, 34, 1, 32),
 (2505, 30, '0.00', 0, NULL, '', '', '0.00', 0, 0, 34, 1, 32),
 (2506, 31, '0.00', 0, NULL, '', '', '0.00', 0, 0, 34, 1, 32),
@@ -2905,7 +2909,7 @@ INSERT INTO `exemplaire` (`id_exemplaire`, `numero_exemplaire`, `prix_vente_euro
 (2512, 37, '0.00', 0, NULL, '', '', '0.00', 0, 0, 34, 1, 32),
 (2513, 38, '0.00', 0, NULL, '', '', '0.00', 0, 0, 34, 1, 32),
 (2514, 39, '0.00', 0, NULL, '', '', '0.00', 0, 0, 34, 1, 32),
-(2515, 40, '5.00', 0, '2021-01-06', 'Thomas Fradin\r\nChez Mr et Madame Fradin, numéro 4 La Gautherie\r\nL-79600 st loup lamairé\r\nFrance', 'Paypal', '2.16', 0, 1, 34, 2, 98),
+(2515, 40, '0.00', 0, NULL, '', '', '0.00', 0, 0, 34, 1, 32),
 (2516, 41, '0.00', 0, NULL, '', '', '0.00', 0, 0, 34, 1, 32),
 (2517, 42, '0.00', 0, NULL, '', '', '0.00', 0, 0, 34, 1, 32),
 (2518, 43, '0.00', 0, NULL, '', '', '0.00', 0, 0, 34, 1, 32),
@@ -2975,7 +2979,7 @@ INSERT INTO `exemplaire` (`id_exemplaire`, `numero_exemplaire`, `prix_vente_euro
 (2582, 32, '0.00', 0, NULL, '', '', '0.00', 0, 0, 35, 1, 32),
 (2583, 33, '5.00', 1, '2020-01-21', 'Gowthorpe Jonathan\r\n4385, Route de Bourdeaux\r\nLe Champbeau, Quartier Souche\r\n26460 Truinas\r\nFrance', 'Paypal', '2.00', 0, 1, 35, 2, 141),
 (2584, 34, '5.00', 0, '2020-01-26', 'Pierre Saint Ouen', '', '0.00', 0, 1, 35, 2, 100),
-(2585, 35, '5.00', 1, '2020-01-29', '57 rue Parmentier\r\n94210 Saint Maur des Fossés\r\nFrance', 'Paypal', '2.00', 0, 1, 35, 2, 102),
+(2585, 35, '5.00', 0, '2020-01-29', '57 rue Parmentier\r\n94210 Saint Maur des Fossés\r\nFrance', 'Paypal', '2.00', 0, 1, 35, 2, 102),
 (2586, 36, '0.00', 0, NULL, '', '', '0.00', 0, 0, 35, 1, 32),
 (2587, 37, '0.00', 0, NULL, '', '', '0.00', 0, 0, 35, 1, 32),
 (2588, 38, '0.00', 0, NULL, '', '', '0.00', 0, 0, 35, 1, 32),
@@ -2985,7 +2989,7 @@ INSERT INTO `exemplaire` (`id_exemplaire`, `numero_exemplaire`, `prix_vente_euro
 (2592, 42, '0.00', 0, NULL, '', '', '0.00', 0, 0, 35, 1, 32),
 (2593, 43, '0.00', 0, NULL, '', '', '0.00', 0, 0, 35, 1, 32),
 (2594, 44, '0.00', 0, NULL, '', '', '0.00', 0, 0, 35, 1, 32),
-(2595, 45, '5.00', 1, '2020-06-08', 'Thomas Fradin\r\nChez Mr et Madame Fradin, numéro 4 La Gautherie\r\n79600 st loup lamairé\r\nFrance', 'Paypal', '2.00', 0, 1, 35, 2, 98),
+(2595, 45, '0.00', 0, NULL, '', '', '0.00', 0, 0, 35, 1, 32),
 (2596, 46, '0.00', 0, NULL, '', '', '0.00', 0, 0, 35, 1, 32),
 (2597, 47, '0.00', 0, NULL, '', '', '0.00', 0, 0, 35, 1, 32),
 (2598, 48, '0.00', 0, NULL, '', '', '0.00', 0, 0, 35, 1, 32),
@@ -3015,157 +3019,7 @@ INSERT INTO `exemplaire` (`id_exemplaire`, `numero_exemplaire`, `prix_vente_euro
 (2622, 72, '0.00', 0, NULL, '', '', '0.00', 0, 0, 35, 1, 32),
 (2623, 73, '0.00', 0, NULL, '', '', '0.00', 0, 0, 35, 1, 32),
 (2624, 74, '0.00', 0, NULL, '', '', '0.00', 0, 0, 35, 1, 32),
-(2625, 75, '0.00', 0, NULL, '', '', '0.00', 0, 0, 35, 1, 32),
-(2626, 1, '0.00', 0, NULL, '', '', '0.00', 0, 0, 36, 1, 32),
-(2627, 2, '0.00', 0, NULL, '', '', '0.00', 0, 0, 36, 1, 32),
-(2628, 3, '0.00', 0, NULL, '', '', '0.00', 0, 0, 36, 1, 32),
-(2629, 4, '0.00', 0, NULL, '', '', '0.00', 0, 0, 36, 1, 32),
-(2630, 5, '0.00', 0, NULL, '', '', '0.00', 0, 0, 36, 1, 32),
-(2631, 6, '0.00', 0, NULL, '', '', '0.00', 0, 0, 36, 1, 32),
-(2632, 7, '0.00', 0, NULL, '', '', '0.00', 0, 0, 36, 1, 32),
-(2633, 8, '0.00', 0, NULL, '', '', '0.00', 0, 0, 36, 1, 32),
-(2634, 9, '0.00', 0, NULL, '', '', '0.00', 0, 0, 36, 1, 32),
-(2635, 10, '0.00', 0, NULL, '', '', '0.00', 0, 0, 36, 1, 32),
-(2636, 11, '5.00', 1, '2021-01-06', 'nicolas sfeir\r\n5 rue d\'alsace\r\nL-72000 le mans\r\nFrance', 'Paypal', '2.16', 0, 1, 36, 2, 150),
-(2637, 12, '5.00', 1, '2021-01-06', 'ONNI Jean Marie\r\nHall 3\r\n137 rue Oberkampf\r\n75011 Paris', 'Paypal', '2.16', 0, 1, 36, 2, 151),
-(2638, 13, '5.00', 1, '2021-01-09', 'Mathieu Rouchon Saint - Denis', '', '0.00', 0, 1, 36, 2, 121),
-(2639, 14, '0.00', 1, NULL, 'Fabien Pantin', '', '0.00', 0, 0, 36, 1, 32),
-(2640, 15, '5.00', 1, '2021-02-06', 'Anaïs ALAUZEN \r\n2 rue Dauphine \r\n26000 Valence', 'Paypal', '2.50', 0, 1, 36, 2, 115),
-(2641, 16, '0.00', 1, NULL, 'Fabien Pantin', '', '0.00', 0, 0, 36, 1, 32),
-(2642, 17, '0.00', 1, NULL, 'Fabien Pantin', '', '0.00', 0, 0, 36, 1, 32),
-(2643, 18, '0.00', 1, NULL, 'Fabien Pantin', '', '0.00', 0, 0, 36, 1, 32),
-(2644, 19, '0.00', 1, NULL, 'Fabien Pantin', '', '0.00', 0, 0, 36, 1, 32),
-(2645, 20, '0.00', 1, NULL, 'Fabien Pantin', '', '0.00', 0, 0, 36, 1, 32),
-(2646, 21, '0.00', 0, NULL, '', '', '0.00', 0, 0, 36, 1, 32),
-(2647, 22, '0.00', 0, NULL, '', '', '0.00', 0, 0, 36, 1, 32),
-(2648, 23, '0.00', 0, NULL, '', '', '0.00', 0, 0, 36, 1, 32),
-(2649, 24, '0.00', 0, NULL, '', '', '0.00', 0, 0, 36, 1, 32),
-(2650, 25, '0.00', 0, NULL, '', '', '0.00', 0, 0, 36, 1, 32),
-(2651, 26, '0.00', 1, NULL, 'Fabien Pantin', '', '0.00', 0, 0, 36, 1, 32),
-(2652, 27, '0.00', 1, NULL, 'Fabien Pantin', '', '0.00', 0, 0, 36, 1, 32),
-(2653, 28, '5.00', 1, '2021-01-06', 'nicolas sfeir\r\n5 rue d\'alsace\r\nL-72000 le mans\r\nFrance', 'Paypal', '2.16', 0, 1, 36, 2, 150),
-(2654, 29, '5.00', 1, '2020-12-09', 'julie mathys\r\n35 rue jules brunard\r\nL-69007 lyon\r\nFrance', 'Paypal', '2.00', 0, 1, 36, 2, 149),
-(2655, 30, '0.00', 1, NULL, 'Fabien Pantin', '', '0.00', 0, 0, 36, 1, 32),
-(2656, 31, '0.00', 0, NULL, '', '', '0.00', 0, 0, 36, 1, 32),
-(2657, 32, '0.00', 0, NULL, '', '', '0.00', 0, 0, 36, 1, 32),
-(2658, 33, '0.00', 0, NULL, '', '', '0.00', 0, 0, 36, 1, 32),
-(2659, 34, '0.00', 0, NULL, '', '', '0.00', 0, 0, 36, 1, 32),
-(2660, 35, '0.00', 0, NULL, '', '', '0.00', 0, 0, 36, 1, 32),
-(2661, 36, '0.00', 0, NULL, '', '', '0.00', 0, 0, 36, 1, 32),
-(2662, 37, '0.00', 0, NULL, '', '', '0.00', 0, 0, 36, 1, 32),
-(2663, 38, '0.00', 0, NULL, '', '', '0.00', 0, 0, 36, 1, 32),
-(2664, 39, '0.00', 0, NULL, '', '', '0.00', 0, 0, 36, 1, 32),
-(2665, 40, '0.00', 0, NULL, '', '', '0.00', 0, 0, 36, 1, 32),
-(2666, 41, '0.00', 0, NULL, '', '', '0.00', 0, 0, 36, 1, 32),
-(2667, 42, '0.00', 0, NULL, '', '', '0.00', 0, 0, 36, 1, 32),
-(2668, 43, '0.00', 0, NULL, '', '', '0.00', 0, 0, 36, 1, 32),
-(2669, 44, '0.00', 0, NULL, '', '', '0.00', 0, 0, 36, 1, 32),
-(2670, 45, '0.00', 0, NULL, '', '', '0.00', 0, 0, 36, 1, 32),
-(2671, 46, '0.00', 0, NULL, '', '', '0.00', 0, 0, 36, 1, 32),
-(2672, 47, '0.00', 0, NULL, '', '', '0.00', 0, 0, 36, 1, 32),
-(2673, 48, '0.00', 0, NULL, '', '', '0.00', 0, 0, 36, 1, 32),
-(2674, 49, '0.00', 0, NULL, '', '', '0.00', 0, 0, 36, 1, 32),
-(2675, 50, '0.00', 0, NULL, '', '', '0.00', 0, 0, 36, 1, 32),
-(2676, 51, '0.00', 0, NULL, '', '', '0.00', 0, 0, 36, 1, 32),
-(2677, 52, '0.00', 0, NULL, '', '', '0.00', 0, 0, 36, 1, 32),
-(2678, 53, '0.00', 0, NULL, '', '', '0.00', 0, 0, 36, 1, 32),
-(2679, 54, '0.00', 0, NULL, '', '', '0.00', 0, 0, 36, 1, 32),
-(2680, 55, '0.00', 0, NULL, '', '', '0.00', 0, 0, 36, 1, 32),
-(2681, 56, '0.00', 0, NULL, '', '', '0.00', 0, 0, 36, 1, 32),
-(2682, 57, '0.00', 0, NULL, '', '', '0.00', 0, 0, 36, 1, 32),
-(2683, 58, '0.00', 0, NULL, '', '', '0.00', 0, 0, 36, 1, 32),
-(2684, 59, '0.00', 0, NULL, '', '', '0.00', 0, 0, 36, 1, 32),
-(2685, 60, '0.00', 0, NULL, '', '', '0.00', 0, 0, 36, 1, 32),
-(2686, 61, '0.00', 0, NULL, '', '', '0.00', 0, 0, 36, 1, 32),
-(2687, 62, '0.00', 0, NULL, '', '', '0.00', 0, 0, 36, 1, 32),
-(2688, 63, '0.00', 0, NULL, '', '', '0.00', 0, 0, 36, 1, 32),
-(2689, 64, '0.00', 0, NULL, '', '', '0.00', 0, 0, 36, 1, 32),
-(2690, 65, '0.00', 0, NULL, '', '', '0.00', 0, 0, 36, 1, 32),
-(2691, 66, '0.00', 0, NULL, '', '', '0.00', 0, 0, 36, 1, 32),
-(2692, 67, '0.00', 0, NULL, '', '', '0.00', 0, 0, 36, 1, 32),
-(2693, 68, '0.00', 0, NULL, '', '', '0.00', 0, 0, 36, 1, 32),
-(2694, 69, '0.00', 0, NULL, '', '', '0.00', 0, 0, 36, 1, 32),
-(2695, 70, '0.00', 0, NULL, '', '', '0.00', 0, 0, 36, 1, 32),
-(2696, 71, '0.00', 0, NULL, '', '', '0.00', 0, 0, 36, 1, 32),
-(2697, 72, '0.00', 0, NULL, '', '', '0.00', 0, 0, 36, 1, 32),
-(2698, 73, '0.00', 0, NULL, '', '', '0.00', 0, 0, 36, 1, 32),
-(2699, 74, '0.00', 0, NULL, '', '', '0.00', 0, 0, 36, 1, 32),
-(2700, 75, '0.00', 0, NULL, '', '', '0.00', 0, 0, 36, 1, 32),
-(2701, 1, '0.00', 0, NULL, 'Fabien Pantin', '', '0.00', 0, 0, 37, 5, 32),
-(2702, 2, '0.00', 0, NULL, 'Fabien Pantin', '', '0.00', 0, 0, 37, 5, 32),
-(2703, 3, '0.00', 0, NULL, 'Fabien Pantin', '', '0.00', 0, 0, 37, 5, 32),
-(2704, 4, '0.00', 0, NULL, 'Fabien Pantin', '', '0.00', 0, 0, 37, 5, 32),
-(2705, 5, '0.00', 0, NULL, 'Fabien Pantin', '', '0.00', 0, 0, 37, 5, 32),
-(2706, 6, '0.00', 0, NULL, 'Fabien Pantin', '', '0.00', 0, 0, 37, 5, 32),
-(2707, 7, '0.00', 0, NULL, 'Fabien Pantin', '', '0.00', 0, 0, 37, 5, 32),
-(2708, 8, '0.00', 0, NULL, 'Fabien Pantin', '', '0.00', 0, 0, 37, 5, 32),
-(2709, 9, '0.00', 0, NULL, 'Fabien Pantin', '', '0.00', 0, 0, 37, 5, 32),
-(2710, 10, '0.00', 0, NULL, 'Fabien Pantin', '', '0.00', 0, 0, 37, 5, 32),
-(2711, 11, '5.00', 0, '2021-01-09', 'Mathieu Rouchon Saint - Denis', '', '0.00', 0, 1, 37, 2, 121),
-(2712, 12, '0.00', 1, NULL, 'Fabien Pantin', '', '0.00', 0, 0, 37, 1, 32),
-(2713, 13, '0.00', 1, NULL, 'Fabien Pantin', '', '0.00', 0, 0, 37, 1, 32),
-(2714, 14, '0.00', 1, NULL, 'Fabien Pantin', '', '0.00', 0, 0, 37, 1, 32),
-(2715, 15, '0.00', 1, NULL, 'Fabien Pantin', '', '0.00', 0, 0, 37, 1, 32),
-(2716, 16, '0.00', 1, NULL, 'Fabien Pantin', '', '0.00', 0, 0, 37, 1, 32),
-(2717, 17, '5.00', 1, '2021-06-28', 'Mme Mathys Julie\r\n9 rue danton\r\nL-69003 LYON\r\nFrance', 'Paypal', '2.50', 0, 1, 37, 2, 149),
-(2718, 18, '0.00', 1, NULL, 'Fabien Pantin', '', '0.00', 0, 0, 37, 1, 32),
-(2719, 19, '5.00', 1, '2021-02-06', 'Anaïs ALAUZEN \r\n2 rue Dauphine \r\n26000 Valence', 'Paypal', '2.50', 0, 1, 37, 2, 115),
-(2720, 20, '5.00', 0, '2021-06-05', 'NDDL', '', '0.00', 0, 4, 37, 2, 32),
-(2721, 21, '0.00', 0, NULL, '', '', '0.00', 0, 0, 37, 1, 32),
-(2722, 22, '0.00', 0, NULL, '', '', '0.00', 0, 0, 37, 1, 32),
-(2723, 23, '0.00', 0, NULL, '', '', '0.00', 0, 0, 37, 1, 32),
-(2724, 24, '0.00', 0, NULL, '', '', '0.00', 0, 0, 37, 1, 32),
-(2725, 25, '0.00', 0, NULL, '', '', '0.00', 0, 0, 37, 1, 32),
-(2726, 26, '5.00', 1, '2021-03-30', 'VIVIEN MANN\r\n1 rue d\'Alsace\r\nL-63000 CLERMONT-FERRAND\r\nFrance', 'Paypal', '2.50', 0, 1, 37, 2, 153),
-(2727, 27, '5.00', 0, '2021-06-05', 'NDDL', '', '0.00', 0, 4, 37, 2, 32),
-(2728, 28, '0.00', 1, NULL, 'Fabien Pantin', '', '0.00', 0, 0, 37, 1, 32),
-(2729, 29, '0.00', 1, NULL, 'Fabien Pantin', '', '0.00', 0, 0, 37, 1, 32),
-(2730, 30, '0.00', 1, NULL, 'Fabien Pantin', '', '0.00', 0, 0, 37, 1, 32),
-(2731, 31, '0.00', 0, NULL, '', '', '0.00', 0, 0, 37, 1, 32),
-(2732, 32, '0.00', 0, NULL, '', '', '0.00', 0, 0, 37, 1, 32),
-(2733, 33, '0.00', 0, NULL, '', '', '0.00', 0, 0, 37, 1, 32),
-(2734, 34, '0.00', 0, NULL, '', '', '0.00', 0, 0, 37, 1, 32),
-(2735, 35, '0.00', 0, NULL, '', '', '0.00', 0, 0, 37, 1, 32),
-(2736, 36, '0.00', 0, NULL, '', '', '0.00', 0, 0, 37, 1, 32),
-(2737, 37, '0.00', 0, NULL, '', '', '0.00', 0, 0, 37, 1, 32),
-(2738, 38, '0.00', 0, NULL, '', '', '0.00', 0, 0, 37, 1, 32),
-(2739, 39, '0.00', 0, NULL, '', '', '0.00', 0, 0, 37, 1, 32),
-(2740, 40, '0.00', 0, NULL, '', '', '0.00', 0, 0, 37, 1, 32),
-(2741, 41, '0.00', 0, NULL, '', '', '0.00', 0, 0, 37, 1, 32),
-(2742, 42, '0.00', 0, NULL, '', '', '0.00', 0, 0, 37, 1, 32),
-(2743, 43, '0.00', 0, NULL, '', '', '0.00', 0, 0, 37, 1, 32),
-(2744, 44, '0.00', 0, NULL, '', '', '0.00', 0, 0, 37, 1, 32),
-(2745, 45, '0.00', 0, NULL, '', '', '0.00', 0, 0, 37, 1, 32),
-(2746, 46, '0.00', 0, NULL, '', '', '0.00', 0, 0, 37, 1, 32),
-(2747, 47, '0.00', 0, NULL, '', '', '0.00', 0, 0, 37, 1, 32),
-(2748, 48, '0.00', 0, NULL, '', '', '0.00', 0, 0, 37, 1, 32),
-(2749, 49, '0.00', 0, NULL, '', '', '0.00', 0, 0, 37, 1, 32),
-(2750, 50, '0.00', 0, NULL, '', '', '0.00', 0, 0, 37, 1, 32),
-(2751, 51, '0.00', 0, NULL, '', '', '0.00', 0, 0, 37, 1, 32),
-(2752, 52, '0.00', 0, NULL, '', '', '0.00', 0, 0, 37, 1, 32),
-(2753, 53, '0.00', 0, NULL, '', '', '0.00', 0, 0, 37, 1, 32),
-(2754, 54, '0.00', 0, NULL, '', '', '0.00', 0, 0, 37, 1, 32),
-(2755, 55, '0.00', 0, NULL, '', '', '0.00', 0, 0, 37, 1, 32),
-(2756, 56, '0.00', 0, NULL, '', '', '0.00', 0, 0, 37, 1, 32),
-(2757, 57, '0.00', 0, NULL, '', '', '0.00', 0, 0, 37, 1, 32),
-(2758, 58, '0.00', 0, NULL, '', '', '0.00', 0, 0, 37, 1, 32),
-(2759, 59, '0.00', 0, NULL, '', '', '0.00', 0, 0, 37, 1, 32),
-(2760, 60, '0.00', 0, NULL, '', '', '0.00', 0, 0, 37, 1, 32),
-(2761, 61, '0.00', 0, NULL, '', '', '0.00', 0, 0, 37, 1, 32),
-(2762, 62, '0.00', 0, NULL, '', '', '0.00', 0, 0, 37, 1, 32),
-(2763, 63, '0.00', 0, NULL, '', '', '0.00', 0, 0, 37, 1, 32),
-(2764, 64, '0.00', 0, NULL, '', '', '0.00', 0, 0, 37, 1, 32),
-(2765, 65, '0.00', 0, NULL, '', '', '0.00', 0, 0, 37, 1, 32),
-(2766, 66, '0.00', 0, NULL, '', '', '0.00', 0, 0, 37, 1, 32),
-(2767, 67, '0.00', 0, NULL, '', '', '0.00', 0, 0, 37, 1, 32),
-(2768, 68, '0.00', 0, NULL, '', '', '0.00', 0, 0, 37, 1, 32),
-(2769, 69, '0.00', 0, NULL, '', '', '0.00', 0, 0, 37, 1, 32),
-(2770, 70, '0.00', 0, NULL, '', '', '0.00', 0, 0, 37, 1, 32),
-(2771, 71, '0.00', 0, NULL, '', '', '0.00', 0, 0, 37, 1, 32),
-(2772, 72, '0.00', 0, NULL, '', '', '0.00', 0, 0, 37, 1, 32),
-(2773, 73, '0.00', 0, NULL, '', '', '0.00', 0, 0, 37, 1, 32),
-(2774, 74, '0.00', 0, NULL, '', '', '0.00', 0, 0, 37, 1, 32),
-(2775, 75, '0.00', 0, NULL, '', '', '0.00', 0, 0, 37, 1, 32);
+(2625, 75, '0.00', 0, NULL, '', '', '0.00', 0, 0, 35, 1, 32);
 
 -- --------------------------------------------------------
 
@@ -3173,20 +3027,22 @@ INSERT INTO `exemplaire` (`id_exemplaire`, `numero_exemplaire`, `prix_vente_euro
 -- Structure de la table `frais_de_port`
 --
 
-CREATE TABLE `frais_de_port` (
-  `id_frais_de_port` int(11) NOT NULL,
+DROP TABLE IF EXISTS `frais_de_port`;
+CREATE TABLE IF NOT EXISTS `frais_de_port` (
+  `id_frais_de_port` int(11) NOT NULL AUTO_INCREMENT,
   `nom_destination` varchar(25) DEFAULT NULL,
-  `montant_frais_de_port` decimal(4,2) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  `montant_frais_de_port` decimal(4,2) DEFAULT NULL,
+  PRIMARY KEY (`id_frais_de_port`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
 
 --
 -- Déchargement des données de la table `frais_de_port`
 --
 
 INSERT INTO `frais_de_port` (`id_frais_de_port`, `nom_destination`, `montant_frais_de_port`) VALUES
-(1, 'France/Belgique', '2.50'),
-(2, 'Europe', '6.00'),
-(3, 'World', '6.50');
+(1, 'France/Belgique', '1.50'),
+(2, 'Europe', '4.50'),
+(3, 'World', '5.50');
 
 -- --------------------------------------------------------
 
@@ -3194,9 +3050,12 @@ INSERT INTO `frais_de_port` (`id_frais_de_port`, `nom_destination`, `montant_fra
 -- Structure de la table `produire`
 --
 
-CREATE TABLE `produire` (
+DROP TABLE IF EXISTS `produire`;
+CREATE TABLE IF NOT EXISTS `produire` (
   `id_cassette` int(11) UNSIGNED NOT NULL,
-  `id_artiste` int(11) UNSIGNED NOT NULL
+  `id_artiste` int(11) UNSIGNED NOT NULL,
+  PRIMARY KEY (`id_cassette`,`id_artiste`),
+  KEY `id_artiste` (`id_artiste`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
@@ -3247,123 +3106,7 @@ INSERT INTO `produire` (`id_cassette`, `id_artiste`) VALUES
 (31, 30),
 (33, 31),
 (34, 32),
-(35, 33),
-(36, 34),
-(37, 35);
-
---
--- Index pour les tables déchargées
---
-
---
--- Index pour la table `admin`
---
-ALTER TABLE `admin`
-  ADD PRIMARY KEY (`id_admin`);
-
---
--- Index pour la table `artiste`
---
-ALTER TABLE `artiste`
-  ADD PRIMARY KEY (`id_artiste`);
-
---
--- Index pour la table `cassette`
---
-ALTER TABLE `cassette`
-  ADD PRIMARY KEY (`id_cassette`);
-
---
--- Index pour la table `client`
---
-ALTER TABLE `client`
-  ADD PRIMARY KEY (`id_client`);
-
---
--- Index pour la table `etat_exemplaire`
---
-ALTER TABLE `etat_exemplaire`
-  ADD PRIMARY KEY (`id_etat_exemplaire`);
-
---
--- Index pour la table `event`
---
-ALTER TABLE `event`
-  ADD PRIMARY KEY (`id_event`);
-
---
--- Index pour la table `exemplaire`
---
-ALTER TABLE `exemplaire`
-  ADD PRIMARY KEY (`id_exemplaire`),
-  ADD KEY `id_cassette` (`id_cassette`),
-  ADD KEY `id_etat` (`id_etat`),
-  ADD KEY `id_client` (`id_client`);
-
---
--- Index pour la table `frais_de_port`
---
-ALTER TABLE `frais_de_port`
-  ADD PRIMARY KEY (`id_frais_de_port`);
-
---
--- Index pour la table `produire`
---
-ALTER TABLE `produire`
-  ADD PRIMARY KEY (`id_cassette`,`id_artiste`),
-  ADD KEY `id_artiste` (`id_artiste`);
-
---
--- AUTO_INCREMENT pour les tables déchargées
---
-
---
--- AUTO_INCREMENT pour la table `admin`
---
-ALTER TABLE `admin`
-  MODIFY `id_admin` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
-
---
--- AUTO_INCREMENT pour la table `artiste`
---
-ALTER TABLE `artiste`
-  MODIFY `id_artiste` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=36;
-
---
--- AUTO_INCREMENT pour la table `cassette`
---
-ALTER TABLE `cassette`
-  MODIFY `id_cassette` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=38;
-
---
--- AUTO_INCREMENT pour la table `client`
---
-ALTER TABLE `client`
-  MODIFY `id_client` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=155;
-
---
--- AUTO_INCREMENT pour la table `etat_exemplaire`
---
-ALTER TABLE `etat_exemplaire`
-  MODIFY `id_etat_exemplaire` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
-
---
--- AUTO_INCREMENT pour la table `event`
---
-ALTER TABLE `event`
-  MODIFY `id_event` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=47;
-
---
--- AUTO_INCREMENT pour la table `exemplaire`
---
-ALTER TABLE `exemplaire`
-  MODIFY `id_exemplaire` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2776;
-
---
--- AUTO_INCREMENT pour la table `frais_de_port`
---
-ALTER TABLE `frais_de_port`
-  MODIFY `id_frais_de_port` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+(35, 33);
 
 --
 -- Contraintes pour les tables déchargées

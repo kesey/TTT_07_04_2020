@@ -24,7 +24,7 @@
 <!--    <link href="--><?php //echo WEBROOT; ?><!--css/sharrre.min.css" rel="stylesheet" type="text/css" media="screen">-->
 <!--    <link href="--><?php //echo WEBROOT; ?><!--css/TTT.min.css" rel="stylesheet" type="text/css" media="screen">-->
     <link href="<?php echo WEBROOT; ?>css/allCss.min.css" rel="stylesheet" type="text/css" media="screen">
-<!--    <script src="--><?php //echo WEBROOT; ?><!--js/jquery-2.1.3.min.js" type="text/javascript"></script>-->
+<!--    <script src="--><?php //echo WEBROOT; ?><!--js/jquery-3.7.1.min.js" type="text/javascript"></script>-->
 <!--    <script src="--><?php //echo WEBROOT; ?><!--plugIn/queryloader2/queryloader2.min.js" type="text/javascript"></script>-->
     <script src="<?php echo WEBROOT; ?>plugIn/tinymce/tinymce.min.js" type="text/javascript"></script>
     <script src="<?php echo WEBROOT; ?>js/allJs.min.js" type="text/javascript"></script>
