@@ -16,5 +16,7 @@
 <!--        <script src="--><?php //echo WEBROOT; ?><!--plugIn/sharrre/jquery.sharrre.min.js" type="text/javascript"></script>-->
         <script src="https://apis.google.com/js/platform.js" async defer>{lang: 'fr'}</script>
 <!--        <script src="--><?php //echo WEBROOT; ?><!--js/TTT.min.js" type="text/javascript"></script>-->
+			<script defer src="https://sibforms.com/forms/end-form/build/main.js"></script>
+			<script src="<?php echo WEBROOT; ?>js/brevoNL.js" type="text/javascript"></script>
     </body>
 </html>

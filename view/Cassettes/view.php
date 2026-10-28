@@ -60,7 +60,7 @@
           <br/>
       <!------------------------------------------------------------------------------détails frais d'envoi------------------------------------------------------------------------------------------------------------------------------------------------------------>
           <p class="detail" >
-              <strong>*Shipping :</strong>
+              <strong>*Shipping included :</strong>
               <br/>
               <?php foreach ($shipInfos as $shipInfo) { ?>
               <?php echo $shipInfo['nom_destination']; ?> : <?php echo $shipInfo['montant_frais_de_port']; ?>&euro;
