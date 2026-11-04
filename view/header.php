@@ -26,7 +26,7 @@
     <link href="<?php echo WEBROOT; ?>css/allCss.min.css" rel="stylesheet" type="text/css" media="screen">
 	<link rel="stylesheet" href="https://sibforms.com/forms/end-form/build/sib-styles.css">
 	<link href="<?php echo WEBROOT; ?>css/brevoNL.css" rel="stylesheet" type="text/css">
-<!--    <script src="--><?php //echo WEBROOT; ?><!--js/jquery-3.7.1.min.js" type="text/javascript"></script>-->
+<!--    <script src="--><?php //echo WEBROOT; ?><!--js/jquery-4.0.0.min.js" type="text/javascript"></script>-->
 <!--    <script src="--><?php //echo WEBROOT; ?><!--plugIn/queryloader2/queryloader2.min.js" type="text/javascript"></script>-->
     <script src="<?php echo WEBROOT; ?>plugIn/tinymce/tinymce.min.js" type="text/javascript"></script>
     <script src="<?php echo WEBROOT; ?>js/allJs.min.js" type="text/javascript"></script>
